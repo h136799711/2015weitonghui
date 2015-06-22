@@ -1,0 +1,167 @@
+<include file="Public/head"/>
+<include file="Businessktv:ktv_menu"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+
+<link rel="stylesheet" href="__STATIC__/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="__STATIC__/kindeditor/plugins/code/prettify.css" />
+<script src="__STATIC__/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+ <style>
+.cLine {
+    overflow: hidden;
+    padding: 5px 0;
+  color:#000000;
+}
+.alert {
+padding: 8px 35px 0 10px;
+text-shadow: none;
+-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+background-color: #f9edbe;
+border: 1px solid #f0c36d;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+color: #333333;
+margin-top: 5px;
+}
+.alert p {
+margin: 0 0 10px;
+display: block;
+}
+.alert .bold{
+font-weight:bold;
+}
+ </style>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#comment', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson : "{gr-:U('User/GFile/kindedtiropic')}",
+items : [
+'source','undo','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr']
+});
+editor = K.create('#face_desc', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson : "{gr-:U('User/GFile/kindedtiropic')}",
+items : [
+'source','undo','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr']
+});
+});
+</script>
+ <script>
+    jQuery(document).ready(function(){
+      jQuery("#formID").validationEngine();
+    });
+    </script>
+
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+  <div class="righttitle">
+    <h4>请设置KTV相关内容</h4>
+    <div >
+    <div class="alert">
+    <p><span class="bold">使用方法：</span>
+   <strong><font color='red'>请设置KTV相关内容,注意：第一次使用，请点击添KTV简介等相关设置，并点击保存</font></strong>
+    </p>
+    </div>
+   </div>
+</div>
+
+
+  <div class="">
+    <form class="form" method="post" action=""  id="formID" target="_top" enctype="multipart/form-data">
+      <table style=" margin:20px 0 0 0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tbody>
+          <tr>
+           <if condition="$comments['cid'] neq ''">
+            <input type="hidden" class="form-control" id="cid" value="{gr-$comments['cid']}" name="cid" >
+            <input type="hidden" class="form-control" id="status" value="edit" name="status" >
+        </if>
+            <input type="hidden" class="form-control" id="type" value="{gr-$type}" name="type" >
+          </tr><tr>
+            <th valign="top"><label for="title">标题：</label></th>
+            <td><input type="input" class="form-control" id="title" value="{gr-$comments['title']}" name="title" style="width:400px" data-validation-engine="validate[required,minSize[2],maxSize[20]]" data-errormessage-value-missing="必填项">
+              <br>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="name">客户姓名：</label></th>
+            <td><input type="input" class="form-control" id="name" value="{gr-$comments['name']}" name="name"  data-validation-engine="validate[required,minSize[2],maxSize[8]]" data-errormessage-value-missing="必填项">
+              <br>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="position">客户职位：</label></th>
+            <td><input type="input" class="form-control" id="position" value="{gr-$comments['position']}" name="position"  data-validation-engine="validate[required,minSize[2],maxSize[20]]" data-errormessage-value-missing="必填项">
+              <br>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="face_picurl">客户照片：</label></th>
+            <td><img class="thumb_img" id="face_picurl_src" src="{gr-$comments['face_picurl']}" style="max-height:100px;max-width: 150px;"><input type="input" class="form-control" id="face_picurl" value="{gr-$comments['face_picurl']}" name="face_picurl" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传回复图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png">
+<script src="__STATIC__/gfile.js"></script>
+<a href="###" onclick="gfilePicUpload('face_picurl',468,180,'{gr-$token}')" class="a_upload"><i class="mdi-file-file-upload"></i>上传</a>
+<a href="###" onclick="viewImg('face_picurl')"><i class="mdi-action-pageview"></i>预览</a> [468*180] </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="face_desc">客户介绍：</label></th>
+            <td>
+<textarea class="form-control" id="face_desc" name="face_desc" style="width: 605px; height: 350px;"  data-validation-engine="validate[required,minSize[2]]" data-errormessage-value-missing="必填项">{gr-$comments['face_desc']}</textarea>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="sort">显示顺序：</label></th>
+            <td><input type="input" class="form-control" id="sort" value="{gr-$comments['sort']|default=1}" name="sort"  data-validation-engine="validate[required,custom[integer],min[1]]" data-errormessage-value-missing="必填项">
+              数字越大,越在前面显示.
+              </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="bid_id">KTV:</label></th>
+            <td><select class="form-control"  name="bid_id" id="bid_id" data-validation-engine="validate[required]" data-errormessage-value-missing="必填项">
+                <option value="">请选择KTV</option>
+                <volist name="busines_list" id="vo">
+                <option value="{gr-$vo.bid}" <if condition="$vo.bid eq $comments['bid_id']">selected="selected"</if>>{gr-$vo.mtitle}</option>
+            </volist>
+            </select>
+              <br>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="comment">点评内容：</label></th>
+            <td>
+<textarea class="form-control" id="comment" name="comment" style="width: 605px; height: 350px;"  data-validation-engine="validate[required,minSize[2]]" data-errormessage-value-missing="必填项">{gr-$comments['comment']}</textarea>
+
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+              <div class="clearfix"></div></td>
+          </tr>
+        </tbody>
+      </table>
+   </form>
+  </div>
+</div>
+
+<include file="Public/footer"/>

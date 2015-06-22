@@ -1,0 +1,124 @@
+<include file="Public/head"/>
+<script src="__STATIC__/fushionCharts/JSClass/FusionCharts.js" type="text/javascript"></script>   
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+         
+          <div class="righttitle">
+              <h4 >粉丝行为统计分析</h4>
+                  
+              <div class="clearfix"></div>
+          </div>
+ <div class="cLineD">
+
+         </div>
+          <div >
+    <div class="bg-warning tip" style="margin:0 auto">高级服务号才能使用此功能</div>
+</div>
+ <div class=" form">
+<ul id="tags" class="nav nav-tabs" style="width:100%">
+		<li <if condition="$listinfo eq '1'">class="active" role="presentation"</if>>
+				<a href="{gr-:U('WechatBehavior/statistics')}">{gr-$days}日行为统计分析</a> 
+			</li>
+			<li <if condition="$listinfo neq '1'">class="active" role="presentation"</if>>
+				<a href="{gr-:U('WechatBehavior/statisticsTrend')}">趋势对比分析</a> 
+			</li>
+			<if condition="$detail eq 1">
+			<li style="float:right;background:none">
+				<a href="{gr-:U('WechatBehavior/statistics')}" style="background:none"><i class="mdi-content-reply"></i>返回</a> 
+			</li>
+			</if>
+			<div class="clearfix" style="height:1px;background:#eee;margin-bottom:20px;"></div>
+		</ul>
+</div>
+
+          <div class="" style="margin-top:50px;">
+         <div id="chartdiv1" align="center"></div>
+         <if condition="$statisticsAll eq 1">
+         <script type="text/javascript">
+					var chart = new FusionCharts("__STATIC__/fushionCharts/Charts/Pie3D.swf", "ChartId", "600", "500", "0", "1");
+					//chart.setTransparent("false");
+					chart.setDataXML('{gr-$xml}');
+					//chart.setDataURL("data.html");
+					chart.render("chartdiv1");
+					</script>
+         </if>
+         <if condition="$detail eq 1">
+					<script type="text/javascript">
+					var chart = new FusionCharts("__STATIC__/fushionCharts/Charts/Bar2D.swf", "ChartId", "600", "500", "0", "1");
+					chart.setDataXML('{gr-$xml}');
+					chart.render("chartdiv1");
+					</script>
+					</if>
+					<if condition="$statisticsTrend eq 1">
+					<script type="text/javascript">
+					var chart = new FusionCharts("__STATIC__/fushionCharts/Charts/MSArea.swf", "ChartId", "900", "500", "0", "1");
+					chart.setDataXML('{gr-$xml}');
+					chart.render("chartdiv1");
+					</script>
+					</if>
+          </div>
+<?php if (!$statisticsTrend){
+	?>
+
+           <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="90%">
+              <thead>
+                <tr>
+					<th style="width:600px;">&nbsp;模块</th>
+					<th>次数</th>
+					<if condition="$detail neq 1"><th>详情</th></if>
+                </tr>
+              </thead>
+              <tbody>
+			  <volist name="list" id="list">
+                <tr>
+                  <td>&nbsp;{gr-$list.name}</td>
+                  <td>{gr-$list.count}</td>
+                  <if condition="$detail neq 1">
+                  <td>
+						<a href="{gr-:U('WechatBehavior/statisticsOfModule',array('module'=>$list['module']))}">详情</a>　
+						
+						
+				   </td>
+				   </if>
+                </tr>
+      			</volist>
+                 <tr>
+
+                </tr>
+              </tbody>
+            </table>
+            	<?php
+}else {
+	?>
+	<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="90%">
+              <thead>
+                <tr>
+					<th style="width:600px;">&nbsp;模块</th>
+					<th align="center" style="text-align:center">上一周期</th>
+					<th align="center" style="text-align:center">本周期</th>
+					<th align="center" style="text-align:center">趋势</th>
+                </tr>
+              </thead>
+              <tbody>
+			  <volist name="list" id="list">
+                <tr>
+                  <td>&nbsp;{gr-$list.name}</td>
+                  <td align="center">{gr-$list.lastcount}</td>
+                   <td align="center">{gr-$list.count}</td>
+                 
+                  <td align="center">
+						<?php if ($list['count']>$list['lastcount']){echo '<span style="color:#f30;font-size:14px;font-weight:bold">↑</span>';}elseif ($list['count']<$list['lastcount']){echo '<span style="color:green;font-size:14px;font-weight:bold">↓</span>';}else {echo '-';}?>
+				   </td>
+				   
+                </tr>
+      			</volist>
+                 <tr>
+
+                </tr>
+              </tbody>
+            </table>
+	<?php
+}
+?>
+        </div>	
+<include file="Public/footer"/>

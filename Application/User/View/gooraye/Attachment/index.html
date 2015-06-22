@@ -1,0 +1,124 @@
+<include file="Public/basehead"/>
+<script type="text/javascript" src="__STATIC__/audioplayer/inc/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="__STATIC__/audioplayer/inc/jquery.mb.miniPlayer.js"></script>
+<link rel="stylesheet" type="text/css" href="__STATIC__/audioplayer/css/miniplayer.css" title="style" media="screen"/>
+<script type="text/javascript">
+                $(function () {
+                    $(".audio").mb_miniPlayer({
+                        width: 200,
+                        inLine: false,
+                        onEnd: playNext
+                    });
+                    function playNext(player) {
+                        var players = $(".audio");
+                        document.playerIDX = player.idx + 1 <= players.length - 1 ? player.idx + 1 : 0;
+                        players.eq(document.playerIDX).mb_miniPlayer_play();
+                    }
+                });
+</script>
+</head>
+<body style="background:#fff">
+<script>
+        function changeFolder(v){
+        window.location.href="{gr-:U('User/Attachment/index',array('type'=>$type))}"+"?folder="+v;
+        }
+</script>
+<!--tab start-->
+<div >
+    <ul class="nav nav-tabs">
+        <?php
+                                if ($type!='my'){
+        ?>
+        <if condition="$type eq 'icon'"><li class="current tabli" id="tab0"><a href="{gr-:U('Attachment/index',array('type'=>'icon'))}">图标</a></li></if>
+        <if condition="$type eq 'focus'"><li class="current tabli" id="tab0"><a href="{gr-:U('Attachment/index',array('type'=>'focus'))}">幻灯片</a></li></if>
+        <if condition="$type eq 'background'"><li class="current tabli" id="tab0"><a href="{gr-:U('Attachment/index',array('type'=>'background'))}">背景图</a></li></if>
+        <if condition="$type eq 'music'"><li class="current tabli" id="tab0"><a href="{gr-:U('Attachment/index',array('type'=>'music'))}">音乐</a></li></if>
+        <?php
+                                }else{
+        ?>
+        <li class="tabli" id="tab0"><a href="{gr-:U('Attachment/index',array('type'=>'icon'))}">图标</a></li>
+        <li class="tabli" id="tab0"><a href="{gr-:U('Attachment/index',array('type'=>'focus'))}">幻灯片</a></li>
+        <li class="tabli" id="tab0"><a href="{gr-:U('Attachment/index',array('type'=>'background'))}">背景图</a></li>
+        <li class="tabli" id="tab0"><a href="{gr-:U('Attachment/index',array('type'=>'music'))}">音乐</a></li>
+        <?php
+                                }
+        ?>
+        <li class="<if condition="$type eq 'my'">current</if> tabli" id="tab0"><a href="{gr-:U('Attachment/my',array('type'=>'my'))}">我的素材</a></li>
+    </ul>
+</div>
+<!--tab end-->
+<div>
+    <div>
+        <?php
+                                if ($type!='my'){
+        ?>
+        <div style="margin-bottom:10px;" class="form-inline"> <label for="">请选择类别：</label><div class="form-group"><select class="form-control"  onchange="changeFolder(this.value)"><volist name="folders" id="f"><option value="{gr-$f.folder}" <if condition="$f.folder eq $folder">selected</if>>{gr-$f.name}</option></volist></select></div></div>
+        <if condition="$type neq 'music'">
+        <ul class="list-unstyled">
+            <volist name="files" id="item">
+            <li style="float:left;width:{gr-$height}px;margin:1px;background:#ddd"><a href="###" onclick="returnHomepage('{gr-$siteUrl}__STATIC__/attachment/{gr-$type}/{gr-$folder}/{gr-$item}')"><img style="width:{gr-$height}px;height:{gr-$height}px;" src="__STATIC__/attachment/{gr-$type}/{gr-$folder}/{gr-$item}" /></a></li>
+            </volist>
+        </ul>
+        <else/>
+        <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+            <thead>
+                <tr>
+                    <th>播放</th>
+                    <th>选择 <span class="tooltips" ><img src="__IMG__/price_help.png" align="absmiddle" /><span>
+                        <p>点击歌名即可</p>
+                    </span></span></th>
+                </tr>
+            </thead>
+            <volist name="files" id="item">
+            <tr><td><a style="width:220px;float:left" class="audio {skin:'blue'}" href="{gr-$siteUrl}__STATIC__/attachment/{gr-$type}/{gr-$folder}/{gr-$item.file}">{gr-$item.name}</a></td><td>&nbsp;&nbsp;<a href="###" onclick="returnHomepage('{gr-$siteUrl}__STATIC__/attachment/{gr-$type}/{gr-$folder}/{gr-$item.file}')">{gr-$item.name}</a></td></tr>
+            </volist>
+        </table>
+        </if>
+        <?php
+                                }else{
+        ?>
+        <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+            <thead>
+                <tr>
+                    <th>文件</th>
+                    <th>时间</th>
+                    <th>选择</th>
+                </tr>
+            </thead>
+            <volist name="list" id="item">
+            <tr><td>
+                <?php
+                                                        $classStr="audio {skin:'blue'}";
+                                                        if (strpos($item['url'],'.mp3')){
+                                                        echo '<a style="width:220px;float:left" class="'.$classStr.'" href="'.$item['url'].'">'.$item['name'].'</a>';
+                                                        }else {
+                                                        echo '<img src="'.$item['url'].'" width="120" />';
+                                                        }
+                ?>
+                </td><td>{gr-$item.time|date='Y-m-d',###}</td><td>&nbsp;&nbsp;<a href="###" onclick="returnHomepage('{gr-$item.url}')" class="btn btn-sm btn-warning"><i class="mdi-navigation-check"></i>选中</a>&nbsp;<a class="btn btn-sm btn-danger" href="{gr-:U('Attachment/delete',array('id'=>$item['id']))}"><i class="mdi-action-delete"></i>删除</a></td></tr>
+                </volist>
+            </table>
+            <div class="footactions" style="padding-left:10px">
+                <div class="pages">{gr-$page}</div>
+            </div>
+            <?php
+                                            }
+            ?>
+        </div>
+    </div>
+    <div style="clear:both;height:30px;"></div>
+    <script>
+                    var domid=art.dialog.data('domid');
+                    // 返回数据到主页面
+                    function returnHomepage(url){
+                    var origin = artDialog.open.origin;
+                    var dom = origin.document.getElementById(domid);
+                    var domsrcid=domid+'_src';
+                    if(origin.document.getElementById(domsrcid)){
+                    origin.document.getElementById(domsrcid).src=url;
+                    }
+                    dom.value=url;
+                    setTimeout("art.dialog.close()", 100 )
+                    }
+    </script>
+    <include file="Public/basefooter"/>

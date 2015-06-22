@@ -1,0 +1,150 @@
+<include file="Public/head"/>
+<include file="Businessfitment:fitment_menu"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+
+<link rel="stylesheet" href="__STATIC__/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="__STATIC__/kindeditor/plugins/code/prettify.css" />
+<script src="__STATIC__/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+ <style>
+.cLine {
+    overflow: hidden;
+    padding: 5px 0;
+  color:#000000;
+}
+.alert {
+padding: 8px 35px 0 10px;
+text-shadow: none;
+-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+background-color: #f9edbe;
+border: 1px solid #f0c36d;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+color: #333333;
+margin-top: 5px;
+}
+.alert p {
+margin: 0 0 10px;
+display: block;
+}
+.alert .bold{
+font-weight:bold;
+}
+ </style>
+  <script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#main_desc', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson : "{gr-:U('User/GFile/kindedtiropic')}",
+items : [
+'source','undo','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr']
+});
+});
+</script>
+ <script>
+    jQuery(document).ready(function(){
+      jQuery("#formID").validationEngine();
+    });
+    </script>
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+  <div class="righttitle">
+    <h4>请设置装修相关内容</h4>
+    <div >
+    <div class="alert">
+    <p><span class="bold">使用方法：</span>
+   <strong><font color='red'>请设置装修相关内容,注意：第一次使用，请点击添加装修相关设置，并点击保存</font></strong>
+    </p>
+    </div>
+   </div>
+</div>
+
+
+  <div class="">
+    <form class="form" method="post" action="" id="formID" target="_top" enctype="multipart/form-data">
+      <table style=" margin:20px 0 0 0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tbody>
+          <tr>
+          <if condition="$busines_main['mid'] neq ''">
+            <input type="hidden" class="form-control" id="mid" value="{gr-$busines_main['mid']}" name="mid" >
+            <input type="hidden" class="form-control" id="status" value="edit" name="status" >
+        </if>
+            <input type="hidden" class="form-control" id="type" value="{gr-$type}" name="type" >
+          </tr><tr>
+            <th valign="top"><label for="keyword">分店名称：</label></th>
+            <td><input type="input" class="form-control" id="name" value="{gr-$busines_main['name']}" name="name" style="width:300px"  data-validation-engine="validate[required,minSize[2],maxSize[20]]" data-errormessage-value-missing="必填项">
+              <br>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="keyword">所属装修公司：</label></th>
+            <td><select class="form-control"  name="bid_id" id="bid_id" data-validation-engine="validate[required]" data-errormessage-value-missing="必填项">
+                <option value="">请选择所属装修公司</option>
+<volist name="busines_list" id="vo">
+<option value="{gr-$vo.bid}" <if condition="$vo.bid eq $busines_main['bid_id']">selected="selected"</if>>{gr-$vo.mtitle}</option>
+</volist>
+               </select>
+            </td>
+            <td></td>
+          </tr>
+                    <tr>
+            <th valign="top"><label for="keyword">咨询电话：</label></th>
+            <td><input type="input" class="form-control" id="name" value="{gr-$busines_main['telphone']}" name="telphone" style="width:300px"  data-validation-engine="validate[required,minSize[7],maxSize[12]]" data-errormessage-value-missing="必填项">
+              <br>
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+          <th valign="top"><label for="keyword">分店图片：</label></th>
+              <td><img class="thumb_img" id="desc_pic_src" src="{gr-$busines_main['desc_pic']}" style="max-height:100px;max-width: 150px;"><input type="input" class="form-control" id="desc_pic" value="{gr-$busines_main['desc_pic']}" name="desc_pic" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png">
+<script src="__STATIC__/gfile.js"></script>
+<a href="###" onclick="gfilePicUpload('desc_pic',180,190,'{gr-$token}')" class="btn btn-warning btn-sm" ><i class="mdi-file-file-upload"></i>上传</a>
+<a href="###" onclick="viewImg('desc_pic')" class="btn btn-warning btn-sm" ><i class="mdi-action-pageview"></i>预览</a> [180 × 190] </td>
+          </tr>
+
+          <tr>
+            <th valign="top"><label for="keyword">分店地址：</label></th>
+            <td><input type="input" class="form-control" id="maddress" value="{gr-$busines_main['maddress']}" name="maddress" style="width:300px"  data-validation-engine="validate[required,minSize[2],maxSize[50]]" data-errormessage-value-missing="必填项">
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="keyword">显示顺序：</label></th>
+            <td><input type="input" class="form-control" id="sort" value="{gr-$busines_main['sort']|default=1}" name="sort" data-validation-engine="validate[required,custom[integer],min[1]]" data-errormessage-value-missing="必填项">
+              数字越大,越在前面显示.</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th valign="top"><label for="keyword">分店介绍：</label></th>
+            <td>
+<textarea class="form-control" id="main_desc" name="main_desc" style="width: 605px; height: 350px;"  data-validation-engine="validate[required,minSize[2]]" data-errormessage-value-missing="必填项">{gr-$busines_main['main_desc']}</textarea>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+              <div class="clearfix"></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+
+</div>
+
+<include file="Public/footer"/>

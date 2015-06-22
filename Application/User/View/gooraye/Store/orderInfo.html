@@ -1,0 +1,85 @@
+<include file="Public/basehead" />
+<body id="nv_member">
+<div style="line-height:200%;padding:10px 20px;">
+支付状态：<if condition="$thisOrder.paid eq 1">已付款<else/>未付款</if><br>
+订购人：{gr-$thisOrder.truename}<br>
+电话：{gr-$thisOrder.tel}<br>
+地址：{gr-$thisOrder.address}<br>
+总数：{gr-$totalCount}<br>
+总价：<span style="color:#f30;font-size:16px;font-weight:bold">{gr-$totalFee}</span>元
+</div>
+
+<form class="form" method="post" id="form" action=""> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{gr-$set.id}" />
+</if>
+<input type="hidden" name="discount" id="discount" value="{gr-$set.discount}" />
+    <div class=" bgfc"> 
+     <table class="table" > 
+      <tbody> 
+      <tr> 
+        <th><span class="red">*</span>支付状态：</th> 
+        <td><select class="form-control"  name="paid"><option value="0" <if condition="$thisOrder.paid eq 0">selected</if>>未付款</option><option value="1" <if condition="$thisOrder.paid eq 1">selected</if>>已付款</option></select></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>发货状态：</th> 
+        <td><select class="form-control"  name="sent"><option value="0" <if condition="$thisOrder.sent eq 0">selected</if>>未发</option><option value="1" <if condition="$thisOrder.sent eq 1">selected</if>>已发</option></select></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>快递公司：</th>
+        <td><input type="text" name="logistics" value="{gr-$thisOrder.logistics}" class="form-control" style="width:200px;" /></td> 
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>快递单号：</th>
+        <td><input type="text" name="logisticsid" value="{gr-$thisOrder.logisticsid}" class="form-control" style="width:200px;" /></td> 
+       </tr>
+       
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+      <input type="hidden" name="groupon" value="1" />
+       <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button> </td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+   
+<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="120" align="center" style="text-align:center">名称</th>
+<th class="60" align="center" style="text-align:center">详情</th>
+<th width="160" align="center" style="text-align:center">单价（元）</th>
+
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="products" id="o"> 
+<tr>
+<td align="center">
+<img src="{gr-$o.logourl}"  width="100"/><br>{gr-$o.name}</td>
+<td align="center">
+<if condition="empty($o['detail']) neq true">
+<volist name="o['detail']" id="row">
+单价：￥{gr-$row.price}<br/>
+{gr-$o.colorTitle}<if condition="empty($row['colorName']) neq true">：{gr-$row.colorName}<br/></if>
+{gr-$o.formatTitle}<if condition="empty($row['formatName']) neq true">：{gr-$row.formatName}<br/></if>
+数量：{gr-$row.count}<br/>
+</volist>
+<else/>
+数量：{gr-$o.count}<br/>
+</if>
+</td>
+<if condition="empty($o['detail']) neq true">
+<td align="center"><php>{echo $o['detail'][0]['price'];}</php></td>
+<else/>
+<td align="center">{gr-$o.price}</td>
+</if>
+</tr>
+</volist>
+</tbody>
+</table>
+<include file="Public/basefoot" />

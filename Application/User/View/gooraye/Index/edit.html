@@ -1,0 +1,87 @@
+<include file="Index:header" />
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<script src="__STATIC__/gfile.js?2013"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 " style="margin: 0 auto;">
+    <div class="righttitle"><h2>编辑公众号</h2></div>
+    <form method="post" action="{gr-:U('User/Index/upsave')}" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{gr-$info.id}">
+        <div class="">
+            <table class="table" >
+                <thead>
+                    <tr>
+                        <th><span class="red">*</span>公众号名称：</th>
+                        <td><input type="text" required="" class="form-control" name="wxname" value="{gr-$info.wxname}" tabindex="1" >
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th><span class="red">*</span>公众号原始id：</th>
+                    <td><input type="text" required="" name="wxid" value="{gr-$info.wxid}"  class="form-control" tabindex="1"  >　</td>
+                </tr>
+                <tr>
+                    <th><span class="red">*</span>微信号：</th>
+                    <td><input type="text" required="" name="weixin" value="{gr-$info.weixin}" class="form-control" tabindex="1" size="25"> </td>
+                </tr>
+                <tr>
+                    <th>头像地址（url）:</th>
+                    <td><input class="form-control" name="headerpic" id="pic" value="{gr-$info.headerpic}" size="60">    <script src="__STATIC__/gfile.js?2013"></script><a href="###" onclick="gfilePicUpload('pic',200,200,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('pic')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td>
+                </tr>
+                <input type="hidden" name="token" value="{gr-$info.token}" class="form-control" tabindex="1" size="40">
+                <tr>
+                    <th><span class="red"></span>AppID：</th>
+                    <td><input type="text" name="appid" value="{gr-$info.appid}" class="form-control" tabindex="1" size="25">　<span class="help-block">用于自定义菜单等高级功能，可以不填</span> </td>
+                </tr>
+                <tr>
+                    <th><span class="red"></span>AppSecret：</th>
+                    <td><input type="text" name="appsecret" value="{gr-$info.appsecret}" class="form-control" tabindex="1" size="25"><span class="help-block">用于自定义菜单等高级功能，可以不填 </span></td>
+                </tr>
+                <tr>
+                    <th><span class="red"></span>EncodingAESKey：</th>
+                    <td><input type="text" id="encodingAESKey" name="encodingaeskey" value="{gr-$info.encodingaeskey}" class="form-control" tabindex="1" size="25"> <a href="javascript:createEncodingAESKey();" class="btn btn-primary">重新生成</a> </td>
+                </tr>
+                <tr>
+                    <th><span class="red"></span>微信号类型：</th>
+                    <td><select class="form-control"  id="winxintype" name="winxintype">
+                        <option value="1" <eq name="info.winxintype" value="1">selected</eq>>订阅号</option>
+                        <option value="2" <eq name="info.winxintype" value="2">selected</eq>>服务号</option>
+                        <option value="3" <eq name="info.winxintype" value="3">selected</eq>>高级服务号</option>
+                    </select>　
+                    <span class="help-block">高级服务号是指每年向微信官方交300元认证费的公众号</span> </td>
+                </tr>
+        
+                <tr>
+                    <th>地区</th>
+                    <td>
+                        <input type="text" class="form-control" id="province" value="{gr-$info.province}" name="province" tabindex="1" > 省  <input id="city" value="{gr-$info.city}" type="text" name="city" class="form-control" tabindex="1" > 市
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit" class="btn btn-primary" id="saveSetting"><i class="mdi-content-save"></i>保存</button>
+                    <a style="display:inline-block;"  class="btn btn-primary" href="{gr-:U('User/Index/index')}"><i class="mdi-navigation-cancel"></i>取消</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+</div>
+<script>
+    function createEncodingAESKey(){
+        var encodingAESKey  = randomString();
+        $("#encodingAESKey").val(encodingAESKey);
+    }
+    function randomString(len) {
+　　len = len || 43;
+　　var $chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+　　var maxPos = $chars.length;
+　　var pwd = '';
+　　for (i = 0; i < len; i++) {
+　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+　　}
+　　return pwd;
+}
+</script>
+
+<include file="Public/footer"/>

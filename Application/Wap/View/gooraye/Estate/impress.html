@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html><head>
+<link rel="stylesheet" type="text/css" href="__STATIC__/vhouse/wap/review.css" media="all">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/vhouse/wap/common.js"></script>
+<script type="text/javascript" src="__STATIC__/vhouse/wap/review.js"></script>
+<title>专家点评•房友印象</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<script>
+
+
+    function iswitch_panel(obj){
+        var ipm = $('#impress');
+        var pro = $('#professional');
+
+        if(obj==0){
+            ipm.show();
+            pro.hide();
+        }else{
+            ipm.hide();
+            pro.show();
+        }
+    }
+</script>
+
+</head>
+    <body onselectstart="return true;" ondragstart="return false;">
+        <style type="text/css">
+    .review_man h3{font-size:18px;}
+    #impress a{
+        overflow:hidden;
+    }
+    .review_man h3{font-size:18px;}
+    .is_1 a[style*='flex:0'], .is_2 a[style*='flex:0']{
+        display:none;
+    }
+</style>
+
+<div class="wrapper">
+    <!-- start -->
+        <ul class="nav_top" id="navTop" style="display: -webkit-box;">
+            <li><a href="javascript:void(0);" onclick="iswitch_panel(0);return false;" class="current">房友印象</a></li>
+            <li><a href="javascript:void(0);" onclick="iswitch_panel(1);return false;">专家点评</a></li>
+        </ul>
+    <!-- end -->
+    <div id="impress" class="impress" style="display: block;">
+    <h3>选择您的楼盘印象，喜欢就赞我吧</h3>
+
+ <volist name="impress" id="vo" key="k">
+
+<if condition="$k%2">
+   <div class="is_2">
+ <a href="javascript:void(0);"  id="{gr-$vo['id']}" onclick="getMyId(this,{gr-$vo['id']});return false;" class="is_22" style="-webkit-box-flex:{gr-$vo['comment']};">  {gr-$vo['title']} {gr-$vo['comment']} 人(赞)  </a>
+
+     </div>
+<else/>
+     <div class="is_2">
+     <a href="javascript:void(0);"  id="{gr-$vo['id']}" onclick="getMyId(this,{gr-$vo['id']});return false;" class="is_23" style="-webkit-box-flex:{gr-$vo['comment']};">  {gr-$vo['title']} {gr-$vo['comment']} 人(赞)  </a>
+
+     </div>
+</if>
+ </volist>
+<p><br></p>
+{gr-$page2}
+    <p><br><br><br></p>
+
+     </div>
+
+    <div id="professional" style="display: none;" jqmoldstyle="block">
+ <volist name="expert" id="exp">
+    <div class="review_box">
+    <div class="review_man"> <img src="{gr-$exp['face']}" width="70" height="70" style="width:70px!important; height:70px!important; " alt="">  <h3>{gr-$exp['name']}<em><br>{gr-$exp['position']}</em></h3><p>{gr-$exp['description']}</p></div>
+    <div class="review_word"> <h2>{gr-$exp['title']}</h2> <p>{gr-$exp['comment']}</p>    </div>
+   </div>
+</volist>
+
+    <p>{gr-$page}<br><br><br></p>
+
+  </div>
+</div>
+
+<script>
+function getMyId(obj,id){
+    var imp_id   = id;
+    var token    ="{gr-$token}";
+    var wecha_id ="{gr-$wecha_id}";
+    if (wecha_id == '') {
+        alert("请关注后再重新点赞哦。");
+        return
+    }
+   
+    var submitData ={
+        imp_id  : imp_id,
+        token   : token,
+        wecha_id:wecha_id,
+    };
+
+    var myurl="{gr-:U('Estate/impress_add',array('token'=>$token,'wecha_id'=>$wecha_id))}"; 
+    $.post(myurl,submitData,function(retuandata){
+        var xobj=eval('('+retuandata+')');
+         if(xobj.errno == 1){
+            alert(xobj.msg);
+            window.location.reload();
+         }else if(xobj.errno == 2){
+             alert(xobj.msg);
+
+         }else if(xobj.errno == 0){
+            alert(xobj.msg);
+         }
+    });
+     
+}
+</script>
+
+
+</body></html>

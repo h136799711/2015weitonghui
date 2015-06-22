@@ -1,0 +1,44 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 " >  
+<div class="righttitle">
+  <h4>{gr-$info.name}中奖名单</h4><a href="javascript:history.go(-1);"  class="btn btn-primary" data-top ><i class="mdi-content-reply"></i>返回</a>
+ </div>
+
+ <div class=" form">
+<div class="bdrcontent ">
+<div id="div_ptype">
+<table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<thead>
+<tr>
+<th style=" width:180px;">昵称</th>
+<th style=" width:180px;">手机</th>             
+<th style=" width:150px;" class="norightborder">奖项</th>
+</tr>
+</thead>
+<volist name="records" id="actinfo">
+<tr>
+<td>{gr-$actinfo.nickname}</td>
+<td>{gr-$actinfo.mp}</td>
+<td>{gr-$actinfo.prize}</td>
+</volist>
+</tr>
+
+</table>
+
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{gr-$page}</div>
+</div>
+          </div>
+  
+        </div>
+   
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div> 
+  <!--底部-->
+  	</div>
+
+<include file="Public/footer"/>

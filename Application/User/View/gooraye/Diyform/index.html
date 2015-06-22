@@ -1,0 +1,64 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4 >自定义表单 ({gr-$page}) </h4>
+    </div>
+    <div>
+        <a href="{gr-:U('Diyform/add',array('token'=>$token))}" title="新增订单商家" class="btn btn-primary">
+        <img src="__IMG__/pic.png" class="vm">新增表单</a>
+    </div>
+    <form method="post" action="" id="info">
+        <input name="delall" type="hidden" value="">
+        <input name="wxid" type="hidden" value="">
+        <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="select">选择</th>
+                    <th width="160">表单名称</th>
+                    <th width="60">关键词</th>
+                    <th width="170">地址</th>
+                    <th width="80">电话</th>
+                    <th width="130">创建时间</th>
+                    <th width="200" class="norightborder">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="Diyform">
+            <tr>
+                <td><input type="checkbox" name="del_id[{gr-$i}]" value="285" class="checkitem"></td>
+                <td>{gr-$Diyform.title}</td>
+                <td>{gr-$Diyform.keyword}</td>
+                <td>{gr-$Diyform.address}</td>
+                <td>{gr-$Diyform.tel}</td>
+                <td>{gr-$Diyform.creattime|date="Y-m-d H:i:s",###}</td>
+                <td class="norightborder">
+                    <a href="{gr-:U('Diyform/set',array('id'=>$Diyform['id'],'token'=>$token))}">表单配置</a>
+                    <a href="{gr-:U('Diyform/admin',array('id'=>$Diyform['id'],'token'=>$token))}">信息管理</a>
+                    <a href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Diyform/index_del',array('id'=>$Diyform['id'],'token'=>$token))}');"><i class="mdi-action-delete"></i>删除</a>
+                </td>
+            </tr>
+            </volist>
+        </tbody>
+    </table>
+</form>
+
+<script>
+            function checkvotethis() {
+            	var aa=document.getElementsByName('del_id[]');
+            	var mnum = aa.length;
+            	j = 0;
+            	for(i=0;i<mnum;i++){
+	            	if(aa[i].checked){
+	            		j++;
+	            	}
+           	}
+	            if(j>0) {
+	            	document.getElementById('info').submit();
+	            } else {
+	            	alert('未选中任何文章或回复！')
+	            }
+            }
+</script>
+</div>
+<div class="pages">{gr-$page}</div>
+<include file="Public/footer"/>

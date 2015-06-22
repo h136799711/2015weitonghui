@@ -1,0 +1,374 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+
+<link rel="stylesheet" href="__STATIC__/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="__STATIC__/kindeditor/plugins/code/prettify.css" />
+<script src="__STATIC__/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+ <style>
+.cLine {
+    overflow: hidden;
+    padding: 5px 0;
+  color:#000000;
+}
+.alert {
+padding: 8px 35px 0 10px;
+text-shadow: none;
+-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+background-color: #f9edbe;
+border: 1px solid #f0c36d;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+color: #333333;
+margin-top: 5px;
+}
+.alert p {
+margin: 0 0 10px;
+display: block;
+}
+.alert .bold{
+font-weight:bold;
+}
+textarea{
+    border:1px lightgrey solid;
+    width:140px;
+    height: 100px;
+};
+
+ </style>
+  <script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#business_desc', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson : '{gr-:U("User/GFile/kindedtiropic")}',
+items : [
+'source','undo','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr']
+});
+});
+</script>
+ <script>
+    jQuery(document).ready(function(){
+      jQuery("#formID").validationEngine();
+    });
+    </script>
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<include file="School/menu"/>
+  <div class="righttitle">
+    <h4>设置食谱相关内容</h4>
+    <div >
+    <div class="alert">
+    <p><span class="bold">使用方法：</span>
+   <strong><font color='red'>注意：第一次使用，请点击添加食谱，并编辑并点击保存 </font><br/>
+    复制上周食谱的时候,请先选择时间,然后保存即可.
+   </strong>
+    </p>
+    </div>
+   </div>
+</div>
+
+
+<div class="">
+  <form class="form" method="post" id="formID" action="" target="_top" enctype="multipart/form-data">
+<table style=" margin:20px 0 0 0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+ <tbody>
+<tr>
+        <if condition="$recipe['id'] neq ''">
+            <input type="hidden"  id="id" value="{gr-:$recipe['id']}" name="id" >
+            <input type="hidden"  id="status" value="edit" name="status" >
+        </if>
+        <input type="hidden"  id="type" value="school" name="type" >
+</tr>
+      <tr>
+        <th>标题</th>
+        <td colspan="4"><input type="text" name="title" id="title" class="form-control" value="{gr-:$recipe['title']}" style="width:400px;" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项"></td>
+      </tr>
+    <tr>
+        <th>关键词</th>
+        <td colspan="4"><input type="text" name="keyword"  id="keyword" value="{gr-:$recipe['keyword']}" class="form-control" style="width:400px;" data-validation-engine="validate[required,minSize[1]]"
+                    data-errormessage-value-missing="必填项"></td>
+      </tr>
+    <tr>
+        <th>图文信息描述</th>
+        <td colspan="4">
+        <textarea name="infos" id="infos" style="width:400px;height: 200px;"  data-validation-engine="validate[required,minSize[1],maxSize[200]]"
+                    data-errormessage-value-missing="必填项">{gr-:$recipe['infos']}</textarea></td>
+      </tr>
+
+        <tr>
+            <th ><label for="keyword">图文消息封面</label></th>
+            <td colspan="4"><img class="thumb_img" id="headpic_src" src="{gr-:$recipe['headpic']}" style="max-height:100px;max-width: 150px;"><input type="input" class="form-control" id="headpic" value="{gr-:$recipe['headpic']}" name="headpic" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传回复图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png" style="width:400px;">
+<script src="__STATIC__/gfile.js"></script>
+<a href="###" onclick="gfilePicUpload('headpic',468,180,'{gr-:$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>
+<a href="###" onclick="viewImg('headpic')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> [468*180] </td>
+
+          </tr>
+      <tr>
+        <th>排序</th>
+        <td colspan="4"><input type="text" name="sort" value="{gr-:$recipe['sort']}" class="form-control" style="width:400px;" data-validation-engine="validate[required,custom[integer],min[1]]" data-errormessage-value-missing="必填项,必须是数字"> &nbsp; 数值越大,越靠前</td>
+      </tr>
+      <tr>
+        <th>是否显示</th>
+        <td colspan="4">
+            <select class="form-control"  name="ishow" id="ishow">
+            <option value="1" <if condition="$recipe['ishow'] eq 1">selected</if>>显示</option>
+            <option value="2" <if condition="$recipe['ishow'] eq 2">selected</if>>隐藏</option>
+            </select>
+        </td>
+      </tr>
+            <tr>
+        <th>时间段</th>
+        <td colspan="4"><input type="input" class="form-control" id="begintime" style="width:185px;" value="<if condition="$recipe['begintime'] neq ''">{gr-$recipe['begintime']|date="Y-m-d",###}</if>" onClick="WdatePicker({dateFmt:'yyyy-M-d',minDate:'%y-%M-%d',maxDate:'%y-%M-#{%d+8}'})" name="begintime" data-validation-engine="validate[required]"
+                    data-errormessage-value-missing="必填项,请选择日期"/>
+    到
+    <input type="input" class="form-control" id="endtime" style="width:185px;" value="<if condition="$recipe['endtime'] neq ''">{gr-$recipe['endtime']|date="Y-m-d",###}</if>" name="endtime"  onClick="WdatePicker({dateFmt:'yyyy-M-d',minDate:'%y-%M-%d',maxDate:'%y-%M-#{%d+14}'})"  data-validation-engine="validate[required]"
+                    data-errormessage-value-missing="必填项,请选择日期"/> &nbsp; <strong>复制上周食谱仅需修改一下时间,保存即可</strong></td>
+      </tr>
+       <tr style="border-top: 1px rgb(194, 183, 183) solid;">
+        <th style="border-right: 1px rgb(194, 183, 183) solid;">日期/餐段</th>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(194, 183, 183) solid;text-align:center;background-color: gainsboro;"> 早餐</th>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(194, 183, 183) solid;text-align:center;background-color: gainsboro;">早加餐</th>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(194, 183, 183) solid;text-align:center;background-color: gainsboro;">午餐</th>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(194, 183, 183) solid;text-align:center;background-color: gainsboro;">午加餐</th>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(194, 183, 183) solid;text-align:center;background-color: gainsboro;">晚餐</th>
+      </tr>
+
+      <tr>
+      <?php $monarr = @unserialize($recipe['monday']);?>
+      <?php $tuearr = @unserialize($recipe['tuesday']);?>
+      <?php $wedarr = @unserialize($recipe['wednesday']);?>
+      <?php $thuarr = @unserialize($recipe['thursday']);?>
+      <?php $friarr = @unserialize($recipe['friday']);?>
+      <?php $satarr = @unserialize($recipe['saturday']);?>
+      <?php $sunarr = @unserialize($recipe['sunday']);?>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(184, 116, 116) solid;" >星期一</th>
+        <td><textarea name="monday[mon_zc]"  id="mon_zc" placeholder="请输入早餐食材" data-validation-engine="validate[required,minSize[2]]"
+        data-errormessage-value-missing="必填项">{gr-:$monarr['mon_zc']}</textarea><br/><img class="thumb_img" id="zc_pic_src" src="{gr-:$monarr['zc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="zc_pic" <if condition="$monarr['zc_pic'] eq ''">value="<?php echo C('site_url');?>__STATIC__/recipe/zc.jpg" <else/>value="{gr-:$monarr['zc_pic']}" </if>  name="monday[zc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png">
+<br>
+<a href="###" onclick="gfilePicUpload('zc_pic',400,300,'{gr-:$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" onclick="viewImg('zc_pic')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="monday[mon_zjc]"  id="mon_zjc" placeholder="请输入早加餐食材,没有可以不填写." >{gr-:$monarr['mon_zjc']}</textarea><br/><img class="thumb_img" id="mon_zjc_pic_src" src="{gr-:$monarr['mon_zjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="mon_zjc_pic" <if condition="$monarr['mon_zjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/zjc.jpg" <else/>value="{gr-:$monarr['mon_zjc_pic']}"  </if> name="monday[mon_zjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" onclick="gfilePicUpload('mon_zjc_pic',400,300,'{gr-:$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" onclick="viewImg('mon_zjc_pic')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="monday[mon_wc]"  id="mon_wc" placeholder="请输入午餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$monarr['mon_wc']}</textarea><br/><img class="thumb_img" id="mon_wc_pic_src" src="{gr-:$monarr['mon_wc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="mon_wc_pic" <if condition="$monarr['mon_wc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wc.jpg" <else/>value="{gr-:$monarr['mon_wc_pic']}"  </if>  name="monday[mon_wc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('mon_wc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('mon_wc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="monday[mon_wjc]"  id="mon_wjc" placeholder="请输入午加餐食材,没有可以不填写." >{gr-:$monarr['mon_wjc']}</textarea><br/><img class="thumb_img" id="mon_wjc_pic_src" src="{gr-:$monarr['mon_wjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="mon_wjc_pic" <if condition="$monarr['mon_wjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wjc.jpg" <else/>value="{gr-:$monarr['mon_wjc_pic']}" </if> name="monday[mon_wjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###"  class="btn btn-warning btn-sm" onclick="gfilePicUpload('mon_wjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###"  class="btn btn-warning btn-sm" onclick="viewImg('mon_wjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="monday[mon_wwc]"  id="mon_wwc" placeholder="请输入晚餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$monarr['mon_wwc']}</textarea><br/><img class="thumb_img" id="mon_wwc_pic_src" src="{gr-:$monarr['mon_wwc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="mon_wwc_pic" <if condition="$monarr['mon_wwc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wwc.jpg" <else/>value="{gr-:$monarr['mon_wwc_pic']}" </if> name="monday[mon_wwc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('mon_wwc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('mon_wwc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+      </tr>
+      <tr>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(184, 116, 116) solid;">星期二</th>
+       <td><textarea name="tuesday[tus_zc]"  id="tus_zc" placeholder="请输入早餐食材" data-validation-engine="validate[required,minSize[2]]"
+        data-errormessage-value-missing="必填项">{gr-:$tuearr['tus_zc']}</textarea><br/><img class="thumb_img" id="tus_zc_pic_src" src="{gr-:$tuearr['tus_zc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="tus_zc_pic" <if condition="$tuearr['tus_zc_pic'] eq ''">value="<?php echo C('site_url');?>__STATIC__/recipe/zc.jpg" <else/>value="{gr-:$tuearr['tus_zc_pic']}" </if>  name="tuesday[tus_zc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png">
+<script src="__STATIC__/gfile.js"></script><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('tus_zc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('tus_zc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="tuesday[tus_zjc]"  id="tus_zjc" placeholder="请输入早加餐食材,没有可以不填写." >{gr-:$tuearr['tus_zjc']}</textarea><br/><img class="thumb_img" id="tus_zjc_pic_src" src="{gr-:$tuearr['tus_zjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="tus_zjc_pic" <if condition="$tuearr['tus_zjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/zjc.jpg" <else/>value="{gr-:$tuearr['tus_zjc_pic']}"  </if> name="tuesday[tus_zjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('tus_zjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('tus_zjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="tuesday[tus_wc]"  id="tus_wc" placeholder="请输入午餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$tuearr['tus_wc']}</textarea><br/><img class="thumb_img" id="tus_wc_pic_src" src="{gr-:$tuearr['tus_wc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="tus_wc_pic" <if condition="$tuearr['tus_wc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wc.jpg" <else/>value="{gr-:$tuearr['tus_wc_pic']}"  </if>  name="tuesday[tus_wc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('tus_wc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('tus_wc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="tuesday[tus_wjc]"  id="tus_wjc" placeholder="请输入午加餐食材,没有可以不填写." >{gr-:$tuearr['tus_wjc']}</textarea><br/><img class="thumb_img" id="tus_wjc_pic_src" src="{gr-:$tuearr['tus_wjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="tus_wjc_pic" <if condition="$tuearr['tus_wjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wjc.jpg" <else/>value="{gr-:$tuearr['tus_wjc_pic']}" </if> name="tuesday[tus_wjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('tus_wjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('tus_wjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="tuesday[tus_wwc]"  id="tus_wwc" placeholder="请输入晚餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$tuearr['tus_wwc']}</textarea><br/><img class="thumb_img" id="tus_wwc_pic_src" src="{gr-:$tuearr['tus_wwc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="tus_wwc_pic" <if condition="$tuearr['tus_wwc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wwc.jpg" <else/>value="{gr-:$tuearr['tus_wwc_pic']}" </if> name="tuesday[tus_wwc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###"  class="btn btn-warning btn-sm" onclick="gfilePicUpload('tus_wwc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###"  class="btn btn-warning btn-sm" onclick="viewImg('tus_wwc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+      </tr>
+      <tr >
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(184, 116, 116) solid;">星期三</th>
+<td><textarea name="wednesday[wed_zc]"  id="wed_zc" placeholder="请输入早餐食材" data-validation-engine="validate[required,minSize[2]]"
+        data-errormessage-value-missing="必填项">{gr-:$wedarr['wed_zc']}</textarea><br/><img class="thumb_img" id="wed_zc_pic_src" src="{gr-:$wedarr['wed_zc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="wed_zc_pic" <if condition="$wedarr['wed_zc_pic'] eq ''">value="<?php echo C('site_url');?>__STATIC__/recipe/zc.jpg" <else/>value="{gr-:$wedarr['wed_zc_pic']}" </if>  name="wednesday[wed_zc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png">
+<script src="__STATIC__/gfile.js"></script><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('wed_zc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('wed_zc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="wednesday[wed_zjc]"  id="wed_zjc" placeholder="请输入早加餐食材,没有可以不填写." >{gr-:$wedarr['wed_zjc']}</textarea><br/><img class="thumb_img" id="wed_zjc_pic_src" src="{gr-:$wedarr['wed_zjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="wed_zjc_pic" <if condition="$wedarr['wed_zjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/zjc.jpg" <else/>value="{gr-:$wedarr['wed_zjc_pic']}"  </if> name="wednesday[wed_zjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('wed_zjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('wed_zjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="wednesday[wed_wc]"  id="wed_wc" placeholder="请输入午餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$wedarr['wed_wc']}</textarea><br/><img class="thumb_img" id="wed_wc_pic_src" src="{gr-:$wedarr['wed_wc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="wed_wc_pic" <if condition="$wedarr['wed_wc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wc.jpg" <else/>value="{gr-:$wedarr['wed_wc_pic']}"  </if>  name="wednesday[wed_wc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('wed_wc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('wed_wc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="wednesday[wed_wjc]"  id="wed_wjc" placeholder="请输入午加餐食材,没有可以不填写." >{gr-:$wedarr['wed_wjc']}</textarea><br/><img class="thumb_img" id="wed_wjc_pic_src" src="{gr-:$wedarr['wed_wjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="wed_wjc_pic" <if condition="$wedarr['wed_wjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wjc.jpg" <else/>value="{gr-:$wedarr['wed_wjc_pic']}" </if> name="wednesday[wed_wjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('wed_wjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('wed_wjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="wednesday[wed_wwc]"  id="wed_wwc" placeholder="请输入晚餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$wedarr['wed_wwc']}</textarea><br/><img class="thumb_img" id="wed_wwc_pic_src" src="{gr-:$wedarr['wed_wwc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="wed_wwc_pic" <if condition="$wedarr['wed_wwc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wwc.jpg" <else/>value="{gr-:$wedarr['wed_wwc_pic']}" </if> name="wednesday[wed_wwc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('wed_wwc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('wed_wwc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+      </tr>
+      <tr>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(184, 116, 116) solid;">星期四</th>
+<td><textarea name="thursday[thu_zc]"  id="thu_zc" placeholder="请输入早餐食材" data-validation-engine="validate[required,minSize[2]]"
+        data-errormessage-value-missing="必填项">{gr-:$thuarr['thu_zc']}</textarea><br/><img class="thumb_img" id="thu_zc_pic_src" src="{gr-:$thuarr['thu_zc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="thu_zc_pic" <if condition="$thuarr['thu_zc_pic'] eq ''">value="<?php echo C('site_url');?>__STATIC__/recipe/zc.jpg" <else/>value="{gr-:$thuarr['thu_zc_pic']}" </if>  name="thursday[thu_zc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png">
+<script src="__STATIC__/gfile.js"></script><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('thu_zc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('thu_zc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="thursday[thu_zjc]"  id="thu_zjc" placeholder="请输入早加餐食材,没有可以不填写." >{gr-:$thuarr['thu_zjc']}</textarea><br/><img class="thumb_img" id="thu_zjc_pic_src" src="{gr-:$thuarr['thu_zjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="thu_zjc_pic" <if condition="$thuarr['thu_zjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/zjc.jpg" <else/>value="{gr-:$thuarr['thu_zjc_pic']}"  </if> name="thursday[thu_zjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('thu_zjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('thu_zjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="thursday[thu_wc]"  id="thu_wc" placeholder="请输入午餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$thuarr['thu_wc']}</textarea><br/><img class="thumb_img" id="thu_wc_pic_src" src="{gr-:$thuarr['thu_wc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="thu_wc_pic" <if condition="$thuarr['thu_wc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wc.jpg" <else/>value="{gr-:$thuarr['thu_wc_pic']}"  </if>  name="thursday[thu_wc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('thu_wc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('thu_wc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="thursday[thu_wjc]"  id="thu_wjc" placeholder="请输入午加餐食材,没有可以不填写." >{gr-:$thuarr['thu_wjc']}</textarea><br/><img class="thumb_img" id="thu_wjc_pic_src" src="{gr-:$thuarr['thu_wjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="thu_wjc_pic" <if condition="$thuarr['thu_wjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wjc.jpg" <else/>value="{gr-:$thuarr['thu_wjc_pic']}" </if> name="thursday[thu_wjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('thu_wjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('thu_wjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="thursday[thu_wwc]"  id="thu_wwc" placeholder="请输入晚餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$thuarr['thu_wwc']}</textarea><br/><img class="thumb_img" id="thu_wwc_pic_src" src="{gr-:$thuarr['thu_wwc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="thu_wwc_pic" <if condition="$thuarr['thu_wwc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wwc.jpg" <else/>value="{gr-:$thuarr['thu_wwc_pic']}" </if> name="thursday[thu_wwc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('thu_wwc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('thu_wwc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+      </tr>
+      <tr>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(184, 116, 116) solid;">星期五</th>
+<td><textarea name="friday[fri_zc]"  id="fri_zc" placeholder="请输入早餐食材" data-validation-engine="validate[required,minSize[2]]"
+        data-errormessage-value-missing="必填项">{gr-:$friarr['fri_zc']}</textarea><br/><img class="thumb_img" id="fri_zc_pic_src" src="{gr-:$friarr['fri_zc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="fri_zc_pic" <if condition="$friarr['fri_zc_pic'] eq ''">value="<?php echo C('site_url');?>__STATIC__/recipe/zc.jpg" <else/>value="{gr-:$friarr['fri_zc_pic']}" </if>  name="friday[fri_zc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png">
+<script src="__STATIC__/gfile.js"></script><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('fri_zc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('fri_zc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="friday[fri_zjc]"  id="fri_zjc" placeholder="请输入早加餐食材,没有可以不填写." >{gr-:$friarr['fri_zjc']}</textarea><br/><img class="thumb_img" id="fri_zjc_pic_src" src="{gr-:$friarr['fri_zjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="fri_zjc_pic" <if condition="$friarr['fri_zjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/zjc.jpg" <else/>value="{gr-:$friarr['fri_zjc_pic']}"  </if> name="friday[fri_zjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###"  class="btn btn-warning btn-sm" onclick="gfilePicUpload('fri_zjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('fri_zjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="friday[fri_wc]"  id="fri_wc" placeholder="请输入午餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$friarr['fri_wc']}</textarea><br/><img class="thumb_img" id="fri_wc_pic_src" src="{gr-:$friarr['fri_wc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="fri_wc_pic" <if condition="$friarr['fri_wc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wc.jpg" <else/>value="{gr-:$friarr['fri_wc_pic']}"  </if>  name="friday[fri_wc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('fri_wc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('fri_wc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="friday[fri_wjc]"  id="fri_wjc" placeholder="请输入午加餐食材,没有可以不填写." >{gr-:$friarr['fri_wjc']}</textarea><br/><img class="thumb_img" id="fri_wjc_pic_src" src="{gr-:$friarr['fri_wjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="fri_wjc_pic" <if condition="$friarr['fri_wjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wjc.jpg" <else/>value="{gr-:$friarr['fri_wjc_pic']}" </if> name="friday[fri_wjc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('fri_wjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('fri_wjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="friday[fri_wwc]"  id="fri_wwc" placeholder="请输入晚餐食材" data-validation-engine="validate[required,minSize[2]]"
+                    data-errormessage-value-missing="必填项">{gr-:$friarr['fri_wwc']}</textarea><br/><img class="thumb_img" id="fri_wwc_pic_src" src="{gr-:$friarr['fri_wwc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="fri_wwc_pic" <if condition="$friarr['fri_wwc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wwc.jpg" <else/>value="{gr-:$friarr['fri_wwc_pic']}" </if> name="friday[fri_wwc_pic]" data-validation-engine="validate[required,custom[url]]"
+                    data-errormessage-value-missing="必须上传图片!"  data-errormessage-custom-error="如果是手动填写,正确的网址,如: http://www.baidu.com/images/demo.png"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('fri_wwc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('fri_wwc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+      </tr>
+      <tr>
+        <th style="border-right: 1px rgb(194, 183, 183) solid;border-bottom: 1px rgb(184, 116, 116) solid;">星期六</th>
+<td><textarea name="saturday[sat_zc]"  id="sat_zc" placeholder="请输入早餐食材" >{gr-:$satarr['sat_zc']}</textarea><br/><img class="thumb_img" id="sat_zc_pic_src" src="{gr-:$satarr['sat_zc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sat_zc_pic" <if condition="$satarr['sat_zc_pic'] eq ''">value="<?php echo C('site_url');?>__STATIC__/recipe/zc.jpg" <else/>value="{gr-:$satarr['sat_zc_pic']}" </if>  name="saturday[sat_zc_pic]">
+<script src="__STATIC__/gfile.js"></script><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('sat_zc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('sat_zc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="saturday[sat_zjc]"  id="sat_zjc" placeholder="请输入早加餐食材,没有可以不填写." >{gr-:$satarr['sat_zjc']}</textarea><br/><img class="thumb_img" id="sat_zjc_pic_src" src="{gr-:$satarr['sat_zjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sat_zjc_pic" <if condition="$satarr['sat_zjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/zjc.jpg" <else/>value="{gr-:$satarr['sat_zjc_pic']}"  </if> name="saturday[sat_zjc_pic]" ><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('sat_zjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('sat_zjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="saturday[sat_wc]"  id="sat_wc" placeholder="请输入午餐食材" >{gr-:$satarr['sat_wc']}</textarea><br/><img class="thumb_img" id="sat_wc_pic_src" src="{gr-:$satarr['sat_wc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sat_wc_pic" <if condition="$satarr['sat_wc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wc.jpg" <else/>value="{gr-:$satarr['sat_wc_pic']}"  </if>  name="saturday[sat_wc_pic]" ><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('sat_wc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('sat_wc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="saturday[sat_wjc]"  id="sat_wjc" placeholder="请输入午加餐食材,没有可以不填写." >{gr-:$satarr['sat_wjc']}</textarea><br/><img class="thumb_img" id="sat_wjc_pic_src" src="{gr-:$satarr['sat_wjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sat_wjc_pic" <if condition="$satarr['sat_wjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wjc.jpg" <else/>value="{gr-:$satarr['sat_wjc_pic']}" </if> name="saturday[sat_wjc_pic]"><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('sat_wjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('sat_wjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="saturday[sat_wwc]"  id="sat_wwc" placeholder="请输入晚餐食材">{gr-:$satarr['sat_wwc']}</textarea><br/><img class="thumb_img" id="sat_wwc_pic_src" src="{gr-:$satarr['sat_wwc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sat_wwc_pic" <if condition="$satarr['sat_wwc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wwc.jpg" <else/>value="{gr-:$satarr['sat_wwc_pic']}" </if> name="saturday[sat_wwc_pic]" ><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('sat_wwc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('sat_wwc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+      </tr>
+
+      <tr style="border-bottom: 1px rgb(194, 183, 183) solid;">
+        <th style="border-right: 1px rgb(194, 183, 183) solid;">星期日</th>
+<td><textarea name="sunday[sun_zc]"  id="sun_zc" placeholder="请输入早餐食材" >{gr-:$sunarr['sun_zc']}</textarea><br/><img class="thumb_img" id="sun_zc_pic_src" src="{gr-:$sunarr['sun_zc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sun_zc_pic" <if condition="$sunarr['sun_zc_pic'] eq ''">value="<?php echo C('site_url');?>__STATIC__/recipe/zc.jpg" <else/>value="{gr-:$sunarr['sun_zc_pic']}" </if>  name="sunday[sun_zc_pic]" >
+<script src="__STATIC__/gfile.js"></script><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('sun_zc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('sun_zc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="sunday[sun_zjc]"  id="sun_zjc" placeholder="请输入早加餐食材" >{gr-:$sunarr['sun_zjc']}</textarea><br/><img class="thumb_img" id="sun_zjc_pic_src" src="{gr-:$sunarr['sun_zjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sun_zjc_pic" <if condition="$sunarr['sun_zjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/zjc.jpg" <else/>value="{gr-:$sunarr['sun_zjc_pic']}"  </if> name="sunday[sun_zjc_pic]" ><br>
+<a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('sun_zjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('sun_zjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="sunday[sun_wc]"  id="sun_wc" placeholder="请输入午餐食材" >{gr-:$sunarr['sun_wc']}</textarea><br/><img class="thumb_img" id="sun_wc_pic_src" src="{gr-:$sunarr['sun_wc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sun_wc_pic"
+        <if condition="$sunarr['sun_wc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wc.jpg" <else/>value="{gr-:$sunarr['sun_wc_pic']}"  </if>  name="sunday[sun_wc_pic]"><br>
+<a href="###"  class="btn btn-warning btn-sm" onclick="gfilePicUpload('sun_wc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###" class="btn btn-warning btn-sm"  onclick="viewImg('sun_wc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="sunday[sun_wjc]"  id="sun_wjc" placeholder="请输入午加餐食材">{gr-:$sunarr['sun_wjc']}</textarea><br/><img class="thumb_img" id="sun_wjc_pic_src" src="{gr-:$sunarr['sun_wjc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sun_wjc_pic" <if condition="$sunarr['sun_wjc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wjc.jpg" <else/>value="{gr-:$sunarr['sun_wjc_pic']}" </if> name="sunday[sun_wjc_pic]" ><br>
+<a href="###"   class="btn btn-warning btn-sm" onclick="gfilePicUpload('sun_wjc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###"   class="btn btn-warning btn-sm" onclick="viewImg('sun_wjc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+
+        <td><textarea name="sunday[sun_wwc]"  id="sun_wwc" placeholder="请输入晚餐食材" >{gr-:$sunarr['sun_wwc']}</textarea><br/><img class="thumb_img" id="sun_wwc_pic_src" src="{gr-:$sunarr['sun_wwc_pic']}" style="max-height:100px;max-width: 143px;"><input type="input" class="form-control" id="sun_wwc_pic" <if condition="$sunarr['sun_wwc_pic'] eq ''"> value="<?php echo C('site_url');?>__STATIC__/recipe/wwc.jpg" <else/>value="{gr-:$sunarr['sun_wwc_pic']}" </if> name="sunday[sun_wwc_pic]" ><br>
+<a href="###"  class="btn btn-warning btn-sm"  onclick="gfilePicUpload('sun_wwc_pic',400,300,'{gr-:$token}')" ><i class="mdi-file-file-upload"></i>上传</a> &nbsp;&nbsp;
+<a href="###"  class="btn btn-warning btn-sm"  onclick="viewImg('sun_wwc_pic')"><i class="mdi-action-pageview"></i>预览</a> [400 × 300]</td>
+      </tr>
+<tr>
+
+  <td colspan="7">
+  <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+  
+  <button type="reset"  class="btn btn-primary" onclick="javascript:history.back(-1);">取消</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</form>
+  </div>
+
+
+</div>
+
+<include file="Public/footer"/>

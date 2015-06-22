@@ -1,0 +1,1 @@
+a:9:{i:0;s:2:"id";i:1;s:5:"token";i:2;s:3:"tid";i:3;s:5:"km_id";i:4;s:5:"bj_id";i:5;s:5:"xq_id";i:6;s:5:"sd_id";s:3:"_pk";s:2:"id";s:5:"_type";a:7:{s:2:"id";s:7:"int(11)";s:5:"token";s:11:"varchar(50)";s:3:"tid";s:7:"int(11)";s:5:"km_id";s:7:"int(11)";s:5:"bj_id";s:7:"int(11)";s:5:"xq_id";s:7:"int(11)";s:5:"sd_id";s:7:"int(11)";}}

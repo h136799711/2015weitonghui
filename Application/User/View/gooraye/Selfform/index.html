@@ -1,0 +1,61 @@
+<include file="Public/head"/> 
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+        <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+<h4 >自定义表单 ({gr-$page}) </h4>
+<div class="searchbar right hide">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="form-control" placeholder="输入关键词搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="{gr-$wxid}">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btn btn-warning btn-sm" title="搜索">
+</form>
+</div>
+<div class="clearfix"></div>
+</div>
+
+<div >
+<div class="pageNavigator left"> <a href="{gr-:U('Selfform/add',array('token'=>$token))}" title="添加" class="btn btn-primary"><i class="mdi-content-add"></i>添加</a></div>
+<div class="clearfix"></div>
+</div>
+<div class="">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select"></th>
+<th width="160">名称</th>
+<th width="160">关键词</th>
+<th width="130">创建时间</th>
+ <th width="130">外链代码</th>
+<th width="200" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="item"> 
+<tr>
+<td><input type="checkbox" name="del_id[{gr-$i}]" value="285" class="checkitem"></td>
+<td>{gr-$item.name}</td>
+<td>{gr-$item.keyword}</td>
+<td>{gr-$item.time|date="Y-m-d H:i:s",###}</td> 
+<td>万能表单 {gr-$item.id}</td> 
+<td class="norightborder"><a class="btn btn-warning btn-sm" href="{gr-:U('Selfform/infos',array('id'=>$item['id'],'token'=>$token))}">提交信息管理</a>&nbsp;&nbsp;<a href="{gr-:U('User/Selfform/inputs',array('id'=>$item['id'],'token'=>$token))}" class="btn btn-warning btn-sm">输入项管理</a>&nbsp;&nbsp;<a href="{gr-:U('Selfform/set',array('id'=>$item['id'],'token'=>$token))}" class="btn btn-warning btn-sm"><i class="mdi-editor-mode-edit"></i>修改</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Selfform/del',array('id'=>$item['id'],'token'=>$token))}');" class="btn btn-warning btn-sm"><i class="mdi-action-delete"></i>删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+
+</div>
+<div >
+<div class="pageNavigator right">
+<div class="pages">{gr-$page}</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<include file="Public/footer"/>

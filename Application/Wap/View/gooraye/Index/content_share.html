@@ -1,0 +1,16 @@
+
+		<script type="text/javascript">
+
+			window.shareData = {  
+				"moduleName":"Index",
+				"moduleID": '3',
+				"imgUrl": "{gr-$res.pic}", 
+				"timeLineLink": "{gr-:C('site_url')}{gr-:U(MODULE_NAME/ACTION_NAME,array('token'=>$_GET['token'],'classid'=>$_GET['classid'],'id'=>intval($_GET['id'])))}",
+				"sendFriendLink": "{gr-:C('site_url')}{gr-:U(MODULE_NAME/ACTION_NAME,array('token'=>$_GET['token'],'classid'=>$_GET['classid'],'id'=>intval($_GET['id'])))}",
+				"weiboLink": "{gr-:C('site_url')}{gr-:U(MODULE_NAME/ACTION_NAME,array('token'=>$_GET['token'],'classid'=>$_GET['classid'],'id'=>intval($_GET['id'])))}",
+				"tTitle": "{gr-$res.title}-{gr-$tpl.wxname}",
+				"tContent": "{gr-$res.text|htmlspecialchars_decode|strip_tags|trim|mb_substr=###,0,30,'utf-8'|str_replace="\\r\\n",' ',###|str_replace='"','',###}"
+			};
+		</script>	
+
+{gr-$shareScript}

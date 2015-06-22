@@ -1,0 +1,163 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+	 <div class="righttitle">
+		<h4>商家设置 </h4><a href="javascript:history.go(-1);" class="btn btn-primary" data-top><i class="mdi-content-reply"></i>返回</a>
+	 </div>  
+	<div class=" bgfc">	 
+		<table class="table" >
+			<form action="" method="post">
+			<tbody>
+				<tr>
+					<td width="500px" rowspan="4" valign="top">商家简介：<br>
+						<textarea class="form-control" id="info" name="info" style="width: 450px; height: 230px; ">{gr-$info.info}</textarea>
+					</td>
+					<td valign="top">商家logo外链地址(图片尺寸100x100)<br>
+						<input type="input" class="form-control" id="logo" name="logo" value="{gr-$info.logo}" style="width:250px;" onblur="document.getElementById('logo_src').src=document.getElementById('logo').value;">  <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('logo',200,200,'{gr-$token}')" class="a_upload"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('logo')"><i class="mdi-action-pageview"></i>预览</a>
+					</td>
+					<td rowspan="4" valign="top">&nbsp;</td>
+					<td rowspan="4" valign="top"><img id="logo_src" class="logo" src="{gr-$info.logo}" width="100px" height="100px"></td>
+				</tr>
+				<tr>
+				<td valign="top">选择分类：<br>
+					<label for="select"></label>
+					<select class="form-control"  name="class" id="select">
+					<option value="1">美食餐饮</option>
+					<option value="2">休闲娱乐</option>
+					<option value="3">生活服务</option>
+					<option value="4">其他</option>
+					</select>
+				</td>
+				</tr>
+				<tr>
+					<td valign="top">会员卡优惠简短描述：（12个字以内）<br>
+					<input name="description" type="input"  class="form-control" id="logo2" style="width:250px;" onblur="document.getElementById('cardlogo').src=document.getElementById('logo').value;" value="{gr-$info.description}"></td>
+				</tr>
+				<tr>
+					<td valign="top">消费确认密码：<br>
+					<input type="input" class="form-control" id="title" value="{gr-$info.password}" name="password" style="width:150px;">
+					<br>
+					商家用来确认用户代金券，优惠券和礼品券使用的密码</td>
+				</tr>
+					 <tbody>
+			 <tr>
+				<td colspan="5" class="norightborder">
+					<button type="submit" name="batchsubmit" value="true" class="btnGreen vm"><strong>保存</strong></button>
+				</td>
+			 </tr>
+		</tbody>
+			</tbody>
+			</form>
+		</table>
+	</div> 
+	<div class="righttitle" style="display:none">
+		<h4>添加联系方式 <span class="FAQ">设置商家地址及联系电话。<a name="linkinfo"></a></span></h4>
+	</div>
+      		 
+ <div class=" form" style="display:none">
+<div class="bdrcontent ">
+	
+	<div id="div_ptype">
+	
+	<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+	 <form action="{gr-:U('MemberCard/Contact')}" method="post">  
+		<thead>
+			<tr>
+				<th>区域名称</th>
+				<th>详细地址</th>
+				<th>联系电话</th>
+				<th style=" width:70px;">显示顺序</th>
+				<th style=" width:100px;" class="norightborder">操作</th>
+			</tr>
+		</thead>			
+		<tbody>
+			<tr>
+				<td><input type="text" name="cname" value="" class="form-control" style="width:100px;"></td>
+				<td><input type="text" name="info" value="" class="form-control" style="width:350px;"></td>
+				<td><input type="text" name="tel" value="" class="form-control" style="width:150px;"></td>
+				<td><input type="text" name="sort" value="" class="form-control" style="width:50px;"></td>
+				<td class="norightborder"><button type="submit" class="btn btn-primary"><strong>添加</strong></button></td>
+			</tr>
+		 </tbody>
+		 	<tbody>
+			<tr>
+				<td rowssapn="5">
+					<div class="righttitle">
+						<h4>联系方式管理 <span class="FAQ">可编辑设置商家地址及联系电话。</span></h4>
+					</div>				
+				</td>
+				
+			</tr>
+		 </tbody>
+		<thead>
+			<tr>
+				<th>区域名称</th>
+				<th>详细地址</th>
+				<th>联系电话</th>
+				<th style=" width:70px;">显示顺序</th>
+				<th style=" width:100px;" class="norightborder">操作</th>
+			</tr>
+		</thead>		
+		 </form>
+		<volist id="contact" name="contact">
+			<tbody>
+				 <form action="{gr-:U('MemberCard/contact_edit')}" method="post">  
+				<tr>
+					<td><input type="text" name="cname" value="{gr-$contact.cname}" class="form-control" style="width:100px;"></td>
+					<td><input type="text" name="info" value="{gr-$contact.info}" class="form-control" style="width:350px;"></td>
+					<td><input type="text" name="tel" value="{gr-$contact.tel}" class="form-control" style="width:150px;"></td>
+					<td>
+						<input type="text" name="sort" value="{gr-$contact.sort}" class="form-control" style="width:50px;">
+						<input type="hidden" name="id" value="{gr-$contact.id}" class="form-control" style="width:50px;">
+					</td>					
+					<td class="norightborder"><button type="submit" class="btnGreen vm"><strong>修改</strong></button></td>
+				</tr>
+				</form>
+			</tbody>
+		</volist>
+	 
+	</table>
+	</div>
+	
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages"></div>
+</div>
+
+<script>
+function addrow(tbody) {
+	var add = false;
+	var newnode;
+	if($(tbody).rows.length == 1 && $(tbody).rows[0].style.display == 'none') {
+		$(tbody).rows[0].style.display = '';
+		newnode = $(tbody).rows[0];
+	} else {
+		newnode = $(tbody).rows[0].cloneNode(true);
+		add = true;
+	}
+	if(add) {
+		$(tbody).appendChild(newnode);
+	}
+}
+function delrow(obj, tbody) {
+	if($(tbody).rows.length == 1) {
+		var trobj = obj.parentNode.parentNode;
+		trobj.style.display='none';
+	} else {
+		$(tbody).removeChild(obj.parentNode.parentNode);
+	}
+}
+
+
+</script>
+
+
+
+ 
+   
+        </div>
+  
+  
+        </div>
+		<include file="Public/footer"/>

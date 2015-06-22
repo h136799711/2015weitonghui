@@ -1,0 +1,176 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+	.display-table-tr{
+		border: 1px solid #fee;
+	}
+	.display-table-tr > div{
+	  display: inline-block;
+	}
+</style>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+	<div class="righttitle">
+		<h4>
+			上传图片
+		</h4>
+		<a href="javascript:history.go(-1);" class="btn btn-primary" data-top>
+			<i class="mdi-content-reply">
+			</i>返回
+		</a>
+	</div>
+	<div class="righttitle">
+		<div class="pageNavigator left">
+			<strong>此相册地址：
+				<a target="_blank" href="{gr-:U('Wap/Photo/plist',array('token'=>$token,'id'=>I('get.id')))}" class="green">
+					{gr-:U('Wap/Photo/plist',array('token'=>$token,'id'=>I('get.id')))}
+				</a>
+			</strong>
+		</div>
+	</div>
+	<div class=" form">
+		<input type="hidden" name="formhash" value="">
+		<input type="hidden" name="wxid" value="">
+		<div class="bdrcontent ">
+			<div id="div_ptype">
+					<div class="table table-condensed table-bordered table-striped" >
+						<div class="display-table-tr">
+							<div class="display-table-cell" style=" width:120px;display:table-">
+								名称
+							</div>
+							<div style=" width:70px;">
+								显示顺序
+							</div>
+							<div>
+								图片外链地址（宽720够了，高不限制）
+							</div>
+							<div>
+								图片简单说明（可不填）
+							</div>
+							<div style=" width:80px;">
+								显示
+							</div>
+							<div style=" width:100px;" class="norightborder">
+								操作
+							</div>
+						</div>
+
+						<form method="post" action="__SELF__" >
+						<div class="display-table-tr">
+							<div>
+								<input type="text" name="title" value=""  class="form-control"/>
+							</div>
+							<div>
+								<input type="text" name="sort" value="0"  class="form-control" style="width:50px;" />
+							</div>
+							<div>
+								<div class="cateimg">
+								</div>
+								<input class="form-control" style="width:250px;" type="text" name="picurl" id="picurl" value=""  />
+								<script src="__STATIC__/gfile.js"></script>
+								<a href="###" onclick="gfilePicUpload('picurl',1500,1000,'{gr-$token}')" class="btn btn-warning btn-sm">
+									<i class="mdi-file-file-upload">
+									</i>上传
+								</a>
+								<a href="###" onclick="viewImg('picurl')" class="btn btn-warning btn-sm">
+									<i class="mdi-action-pageview">
+									</i>预览
+								</a>
+								<input type="hidden"   name="pid" value="{gr-$Think.get.id}"  />
+							</div>
+							<div>
+								<input class="form-control" type="text"  style="width:250px;"  name="info" value=""  />
+							</div>
+							<div>
+								<input class="checkbox" type="checkbox" name="status" value="1"  checked >
+							</div>
+							<div class="norightborder">
+								<button type="submit" id="vtype" class="btn btn-warning btn-sm" >
+									添加
+								</button>　
+							</div>
+						</div>
+							
+						</form>
+					</div>
+						<div colspan="6">
+							<div class="righttitle">
+								<h4>
+									图片列表
+								</h4>
+							</div>
+						</div>
+						<div class="table">
+						<div class="display-table-tr">
+							<div style=" width:120px;">
+								名称
+							</div>
+							<div style=" width:70px;">
+								显示顺序
+							</div>
+							<div>
+								图片外链地址
+							</div>
+							<div>
+								图片简单说明（可不填）
+							</div>
+							<div style=" width:80px;">
+								显示
+							</div>
+							<div style=" width:100px;" class="norightborder">
+								操作
+							</div>
+						</div>
+					<volist name="photo" id="photo">
+						<form method="post" action="{gr-:U('Photo/list_edit',array('token'=>session('token')))}" >
+						<div class="display-table-tr">
+								<div>
+									<input type="text" name="title" value="{gr-$photo.title}"  class="form-control"    />
+								</div>
+								<div>
+									<input type="text" name="sort" value="{gr-$photo.sort}"  class="form-control" style="width:50px;" />
+								</div>
+								<div>
+									<div class="cateimg">
+									</div>
+									<input class="form-control"  style="width:250px;"   type="text"   name="picurl" id="picurl{gr-$i}" value="{gr-$photo.picurl}"  />
+									<script src="__STATIC__/gfile.js"></script>
+									<a href="###" onclick="gfilePicUpload('picurl{gr-$i}',1500,1000,'{gr-$token}')" class="btn btn-warning btn-sm">
+										<i class="mdi-file-file-upload">
+										</i>上传
+									</a>
+									<a href="###" class="btn btn-warning btn-sm" onclick="viewImg('picurl{gr-$i}')">
+										<i class="mdi-action-pageview">
+										</i>预览
+									</a>
+								</div>
+								<div>
+									<input class="form-control" type="text"  style="width:250px;"  name="info" value="{gr-$photo.info}"  />
+								</div>
+								<div>
+									<input class="checkbox" type="checkbox" name="status" value="1"  <if condition="$photo['status'] eq 1">checked</if> >
+									<input type="hidden"   name="id" value="{gr-$photo.id}"  />
+								</div>
+								<div class="norightborder">
+									<button type="submit" name="edit" value="true" class="btn btn-warning btn-sm" >
+										<i class="mdi-editor-mode-edit">
+										</i>修改
+									</button>
+									<a class="btn btn-warning btn-sm" href="{gr-:U('Photo/list_del',array('id'=>$photo['id'],'token'=>session('token')))}">
+										<i class="mdi-action-delete">
+										</i>删除
+									</a>
+								</div>
+						</div>
+						</form>
+						</tbody>
+					</volist>
+
+						</div>
+			</div>
+			<!-- END OF div_type -->
+		</div>
+	</div>
+</div>
+
+<include file="Public/footer"/>

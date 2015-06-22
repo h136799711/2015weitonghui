@@ -1,0 +1,1 @@
+a:4:{i:0;s:5:"token";i:1;s:5:"score";i:2;s:8:"daylimit";s:5:"_type";a:3:{s:5:"token";s:11:"varchar(40)";s:5:"score";s:6:"int(5)";s:8:"daylimit";s:6:"int(5)";}}

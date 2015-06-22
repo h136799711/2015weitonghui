@@ -1,0 +1,41 @@
+<include file="Public/head"/>
+<div class="col-xs-12 col-sm-12  col-md-10 col-lg-10 ">
+    <div class="righttitle"><h4>修改密码</h4></div>
+    <form method="post" class="form-horizontal" action="{gr-:U('Index/usersave')}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="password" class="control-label col-lg-2 col-md-2">当前密码</label>
+            <div class="col-lg-10 col-md-10">
+                <input type="password" class="form-control" placeholder="当前密码"  value="" name="oldpassword">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="control-label col-lg-2 col-md-2">新密码</label>
+            <div class="col-lg-10 col-md-10">
+                <input type="password" class="form-control" id="password" placeholder="新密码"  value="" name="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="control-label col-lg-2 col-md-2">新密码</label>
+            <div class="col-lg-10 col-md-10">
+                <input type="password" class="form-control" id="passwordrepeat" placeholder="新密码"  value="" name="passwordrepeat">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">&nbsp;</label>
+            <div class="col-lg-10 col-md-10">
+                <button id="submit" type="submit" name="button" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+  $(function(){
+      $("#submit").click(function(ev){
+            if($('#passwordrepeat').val() != $('#password').val()){
+                alert('2次输入的新密码不一样');
+                ev.preventDefault();
+            }
+      });
+  });
+</script>
+<include file="Public/footer"/>

@@ -1,0 +1,39 @@
+<extend name="template/base"  />
+<block name="bodyIncludes" >
+<div class="cr">
+    <a href="{gr-:U('UserGroup/add',array('title'=>'添加前台用户组'))}" class="btn btn-primary">添加前台用户组</a> 
+</div>
+<table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="alist">
+    <tr>
+        <td width="70">ID</td>
+        <td width="150">会员组名称</td>
+        <td >自义定图文条数</td>
+        <td width="100">请求次数</td>
+        <td width="150">是否显示版权</td>
+        <td width="150">活动创建次数</td>
+        <td width="70">状态</td>
+        <td width="100">管理操作</td>
+    </tr>
+    <volist name="list" id="vo">
+    <tr>
+        <td align='center'>{gr-$vo.id}</td>
+        <td >{gr-$vo.name}</td>
+        <td >{gr-$vo.diynum}</td>
+        <td align='center'>{gr-$vo.connectnum}</td>
+        <td align='center'><if condition="$vo['iscopyright'] eq 1">是<else/>否</if></td>
+        <td align='center'>{gr-$vo.activitynum}</td>
+        <td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq>
+        </td>
+        <td align='center'>
+            <a href="{gr-:U('UserGroup/edit/',array('id'=>$vo['id']))}">修改</a>
+            | <eq name="vo.username" value="admin"><font color="#cccccc">删除</font><else/><a href="javascript:void(0)" onclick="return confirmurl('{gr-:U('UserGroup/del/',array('id'=>$vo['id']))}','确定删除该用户吗?')">删除</a></eq>
+        </td>
+    </tr>
+    </volist>
+    <tr bgcolor="#FFFFFF">
+        <td colspan="8"><div class="listpage">{gr-$page}</div></td>
+        <td></td>
+    </tr>
+
+</table>
+</block>

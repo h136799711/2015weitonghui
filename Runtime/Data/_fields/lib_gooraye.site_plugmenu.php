@@ -1,0 +1,1 @@
+a:6:{i:0;s:5:"token";i:1;s:4:"name";i:2;s:3:"url";i:3;s:5:"taxis";i:4;s:7:"display";s:5:"_type";a:5:{s:5:"token";s:11:"varchar(60)";s:4:"name";s:11:"varchar(20)";s:3:"url";s:12:"varchar(100)";s:5:"taxis";s:12:"mediumint(4)";s:7:"display";s:10:"tinyint(1)";}}

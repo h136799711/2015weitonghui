@@ -1,0 +1,65 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <h4>默认回复
+    <span class="text-warning small">当聊天系统关闭后，粉丝发送的消息无法处理时将触发此默认回复。</span></h4>
+    <form class="form row form-inline" method="post" action="" target="_top" >
+
+        <div class="form-group col-lg-12 col-md-12">
+            <label class="control-label col-lg-2 col-md-2">回复类型：</label>
+            <div class="col-lg-10 col-md-10">
+                <div class="radio radio-primary">
+                    <label class="control-label">
+                        <input type="radio" class="replyType " value="0" name="replyType" <if condition=" $replyType eq 'text' or $replyType eq '' "> checked="checked"</if> >
+                        文本回复
+                    </label>
+                </div>
+                <div class="radio radio-primary">
+                    <label class="control-label">
+                        <input type="radio" class="replyType" value="1"  <if condition=" $replyType eq 'keyword' "> checked="checked"</if>  name="replyType" >
+                        图文回复
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group  col-lg-12 col-md-12 " id="pickeyword" >
+            <label class="control-label col-lg-2 col-md-2">图文关键词：</label>
+            <input type="text" name="keyword" value="{gr-$other.keyword}"  class="form-control  col-lg-10 col-md-10 " ><br/> <span class="help-block">注：图文关键词是自定义回复中添加的关键词</span>
+        </div>
+        <div class="form-group  col-lg-12 col-md-12" id="textcontent" >
+            <label class="control-label col-lg-2 col-md-2">文本内容：</label>
+            <div class="col-lg-6 col-md-8">
+            <textarea rows="5" name="info" style="width:480px;"  class="form-control">{gr-$other.info}</textarea>
+            <span class="help-block">最多填写120个字</span>
+            </div>
+        </div>
+        <div class="form-group  col-lg-12 col-md-12">
+            <label class="control-label col-lg-2 col-md-2 ">&nbsp;</label>
+            <div class=" col-lg-10 col-md-10">
+                <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+                <a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+function switchReplyType(val){
+if(val == "0"){
+    $("#textcontent").show();
+    $("#pickeyword").hide();
+}
+else if(val == "1"){
+    $("#textcontent").hide();
+    $("#pickeyword").show();
+}
+
+}
+$(function(){
+    $(".replyType").change(function(){
+        switchReplyType(this.value);
+    });
+     switchReplyType($(".replyType").val());
+});
+</script>
+<include file="Public/footer"/>

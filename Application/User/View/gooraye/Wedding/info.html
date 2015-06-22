@@ -1,0 +1,101 @@
+<include file="Public/head"/>
+<style>
+.span4, .span1, .option, .valid, .input-large{
+	background: url(__IMG__/img/px.png) repeat-x scroll 0 0 #FFFFFF;
+    border-color: #848484 #E0E0E0 #E0E0E0 #848484;
+    border-style: solid;
+    border-width: 1px;
+	border-radius: 2px 2px 2px 2px;
+	padding:5px;
+	width: 210px;
+}
+#tags {
+	MARGIN: 15px 0 0 0; WIDTH: 990px; PADDING-TOP: 0px; HEIGHT: 40px;BACKGROUND: url(__IMG__/tagbg.gif) repeat-x left bottom;
+}
+#tags LI {
+	BACKGROUND: url(__IMG__/tagleft.gif) no-repeat left bottom; FLOAT: left; MARGIN-RIGHT: 3px; LIST-STYLE-TYPE: none; HEIGHT: 40px
+}
+#tags LI A {
+	PADDING:0 20px; BACKGROUND: url(__IMG__/tagright.gif) no-repeat right bottom; FLOAT: left; COLOR: #999; LINE-HEIGHT: 40px; HEIGHT: 40px; TEXT-DECORATION: none; font-size:16px;
+}
+#tags LI.emptyTag {
+	BACKGROUND: none transparent scroll repeat 0% 0%; WIDTH: 4px
+}
+#tags LI.selectTag {
+	BACKGROUND-POSITION: left top; MARGIN-BOTTOM: -2px; POSITION: relative; HEIGHT: 40px
+}
+#tags LI.selectTag A {
+	BACKGROUND-POSITION: right top; COLOR: #000; LINE-HEIGHT: 40px; HEIGHT: 40px
+}
+.cateradio {
+padding-top: 20px;
+}
+</style>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+
+<div class="righttitle">
+  <h4>微喜帖信息列表</h4>
+  <a href="{gr-:U('Wedding/index',array('token'=>getToken()))}" class="btn btn-primary" data-top><i class="mdi-content-reply"></i>返回</a>
+ </div>
+ <div class=" form">
+ <ul id="tags" class="nav nav-tabs">
+			
+              <li <if condition="$type eq 1">class="active" role="presentation" </if>><a href="{gr-:U('Wedding/info',array('id'=>strip_tags($_GET['id']),'type'=>1))}">赴宴名单</a> </li>
+			
+              <li <if condition="$type eq 2">class="active" role="presentation" </if>><a href="{gr-:U('Wedding/info',array('id'=>strip_tags($_GET['id']),'type'=>2))}">收到祝福</a> </li>
+			  
+              <div class="clearfix"></div>
+          </ul>
+ 
+<div id="tagcol-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="tagcol-xs-9 col-sm-9  col-md-10 col-lg-10  selectTag" id="tagcol-xs-9 col-sm-9  col-md-10 col-lg-10 0" style="display: block;">
+<fieldset>
+            <ul class="cateradio">
+                <div class="">
+          <form method="post" action="" id="info">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="{gr-$wxid}">
+            <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+				 <thead>
+					<tr>
+						<th>序号</th>
+						<th>姓名</th>
+						<th>电话</th>
+						<th><if condition="$type eq 1">赴宴人数<else/>祝福内容 </if></th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				   <tbody>
+			  <volist name="wedding" id="wedding">
+                <tr>
+                  <td>{gr-$i}</td>
+                  <td>{gr-$wedding.name}</td>
+                  <td>{gr-$wedding.phone}</td>
+                  <td><if condition="$type eq 1">{gr-$wedding.num}<else/>{gr-$wedding.info} </if></td>
+                
+                  <td class="norightborder">
+					<a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('User/Wedding/infodel',array('id'=>$wedding['id']))}');"><i class="mdi-action-delete"></i>删除</a>
+				   </td>
+                </tr>
+      			</volist>
+                 <tr>
+
+                </tr>
+              </tbody>
+				
+			</table>
+           </form> 
+           
+          </div>
+            </ul>
+</fieldset>
+</div>
+</div>		 
+
+  
+
+        <div class="clearfix"></div>
+          </div>
+  
+        </div>
+<include file="Public/footer"/>

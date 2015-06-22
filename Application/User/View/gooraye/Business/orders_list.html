@@ -1,0 +1,117 @@
+<include file="Public/basehead" />
+<div style="line-height:200%;padding:10px 20px;">
+    <strong>
+    <if condition="$type eq 'fitness'">
+    预约房间
+    <elseif condition="$type eq 'gover'"/>
+    服务窗口
+    <elseif condition="$type eq 'food'"/>
+    所属分店
+    <elseif condition="$type eq 'travel'"/>
+    所属景区
+    <elseif condition="$type eq 'flower'"/>
+    所属分店
+    <elseif condition="$type eq 'property'"/>
+    所属小区
+    <elseif condition="$type eq 'ktv'"/>
+    所属分店
+    <elseif condition="$type eq 'bar'"/>
+    所属分店
+    <elseif condition="$type eq 'fitment'"/>
+    所属分店
+    <elseif condition="$type eq 'wedding'"/>
+    所属分店
+    <elseif condition="$type eq 'affections'"/>
+    所属分店
+    <elseif condition="$type eq 'housekeeper'"/>
+    所属分店
+    <elseif condition="$type eq 'lease'"/>
+    所属分店
+    <elseif condition="$type eq 'beauty'"/>
+    所属分店
+    </if>
+    ：
+    </strong> <span>{gr-$userinfo['productName']}</span> <br />
+    <strong>
+    <if condition="$type eq 'fitness'">
+    健身项目
+    <elseif condition="$type eq 'gover'"/>
+    服务项目
+    <elseif condition="$type eq 'food'"/>
+    食品列表
+    <elseif condition="$type eq 'travel'"/>
+    景区景点
+    <elseif condition="$type eq 'flower'"/>
+    特色香花
+    <elseif condition="$type eq 'property'"/>
+    业主服务
+    <elseif condition="$type eq 'ktv'"/>
+    KTV包厢
+    <elseif condition="$type eq 'bar'"/>
+    特色酒水
+    <elseif condition="$type eq 'fitment'"/>
+    成功案例
+    <elseif condition="$type eq 'wedding'"/>
+    服务项目
+    <elseif condition="$type eq 'affections'"/>
+    宠物用品
+    <elseif condition="$type eq 'housekeeper'"/>
+    服务项目
+    <elseif condition="$type eq 'lease'"/>
+    租赁项目
+    <elseif condition="$type eq 'beauty'"/>
+    套餐名称
+    </if>
+    </strong> <span>{gr-$userinfo['orderName']}</span> <br />
+    <strong>预 约人：</strong><span>{gr-$userinfo['truename']}</span><br />
+    <strong>电  话：</strong><span>{gr-$userinfo['tel']}</span><br />
+    <if condition="($type eq 'gover') OR ($type eq 'property')"> <else/>
+    <strong>价 格：</strong><span>{gr-$userinfo['payprice']} RMB</span><br />
+    <strong>是否付款：</strong> <span><if condition="$userinfo['paid'] eq 1">已付款<else/>未付款</if></span><br />
+    </if>
+    <strong>备注：</strong><span>{gr-$userinfo['info']}</span><br />
+    <strong>下单时间：</strong><span>{gr-$userinfo['booktime']|date="Y年m月d日  H:i:s",###}点</span><br />
+    <!-- <strong>运单号：</strong>{gr-$userinfo['shiporder']}<br> -->
+    <if condition="$ok eq 1">
+    <strong><font  color='red'>修改成功</font> </strong>
+    <elseif condition="$ok eq 2"/>
+    <strong><font  color='red'>修改失败</font> </strong>
+    </if>
+</div>
+<form class="form" id="formID" method="post" id="form" action="">
+    <div class=" bgfc">
+        <table class="table" >
+            <tbody>
+                <tr>
+                    <th><span class="red">*</span>订单状态：</th>
+                    <td>
+                        <select class="form-control"  id="remate" name="remate" class="input-medium" style="width:80px">
+                            <option value="0" <if condition="$userinfo['remate'] eq 0">selected="selected"</if>>待处理</option>
+                            <if condition="($type eq 'gover') OR ($type eq 'property')">
+                            <option value="1" <if condition="$userinfo['remate'] eq 1">selected="selected"</if>>已经确认</option>
+                            <else/>
+                            <option value="1" <if condition="$userinfo['remate'] eq 1">selected="selected"</if>>确认付款</option>
+                            </if>
+                            <option value="2" <if condition="$userinfo['remate'] eq 2">selected="selected"</if>>拒绝</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="red">*</span>订单备注：</th>
+                    <td>
+                        <textarea class="form-control" id="kfinfo" name="kfinfo"  style="width:400px; height:100px">{gr-$userinfo['kfinfo']}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td>
+                        <input type="hidden" name="id" value="{gr-$userinfo['id']}" />
+                        <input type="hidden" name="wecha_id" value="{gr-$userinfo['wecha_id']}" />
+                        <input type="hidden" name="type" value="{gr-$userinfo['type']}" />
+                    <button type="submit" name="button" class="btn btn-warning btn-sm" ><i class="mdi-content-save"></i>保存</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+<include file="Public/basefooter" />

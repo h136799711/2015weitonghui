@@ -1,0 +1,165 @@
+<include file="Public/head"/>
+<!--鼠标移动上去效果start-->
+<style>
+    .shoptmpls li.active{
+        background-color: #333;
+    }
+    .shoptmpls li{
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 7px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+.shoptmpls li:hover {
+    background-color: #CDAFAF;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15);
+    color: #FFFFFF;
+    position:relative;
+    z-index: 999;
+}
+</style>
+<!--鼠标移动上去效果end-->
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4>商城首页模板管理 <span class="FAQ">选择适合您的商城首页模版风格，手机输入“商城”测试效果。</span></h4>
+    </div>
+    <div class="modal fade" id="eshoppreview" style="background:rgba(157, 182, 234, 0.89)">
+        <div class="modal-dialog text-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">商城预览</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe style="width:320px;height:480px;" src="" frameborder="0" id="myeshop"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" form">
+        <ul class="shoptmpls list-unstyled list-inline">
+            <li <eq name="listtpl" value="1">class="active"</eq>>
+                <img src="__IMG__/newshop/cate101.png" >
+                <div  class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('1');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('1')">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="2">class="active"</eq>>
+                <img src="__IMG__/newshop/cate101.png" >
+                <div  class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('2');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('2')">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="3">class="active"</eq>>
+                <img src="__IMG__/newshop/cate101.png" >
+                <div  class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('3');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('3')">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="4">class="active"</eq>>
+                <img src="__IMG__/newshop/cate102.png" >
+
+                <div  class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('4');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('4');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="5">class="active"</eq>>
+                <img src="__IMG__/newshop/cate103.png" >
+                <div  class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('5');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('5');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="6">class="active"</eq>>
+                <img src="__IMG__/newshop/cate1122.png" >
+                <div  class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('6');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('6');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="7">class="active"</eq>>
+                <img src="__IMG__/newshop/cate1119.png" >
+                <div class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('7');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('7');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="8">class="active"</eq>>
+                <img src="__IMG__/newshop/cate1113.png" >
+                <div class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('8');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('8');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="preview('9');">class="active"</eq>>
+                <img src="__IMG__/newshop/cate1111.png" >
+                <div class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('9');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('9');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="10">class="active"</eq>>
+                <img src="__IMG__/newshop/cate194.png" >
+
+                <div class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('10');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('10');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="11">class="active"</eq>>
+                <img src="__IMG__/newshop/cate1110.png" >
+
+                <div class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('11');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('11');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="12">class="active"</eq>>
+                <img src="__IMG__/newshop/cate199.png" >
+
+                <div class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('12');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('12');">预览</button>
+                </div>
+            </li>
+            <li <eq name="listtpl" value="13">class="active"</eq>>
+                <img src="__IMG__/newshop/cate187.png" >
+
+                <div  class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('13');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('13');">预览</button>
+                </div>
+            </li>
+            <li  <eq name="listtpl" value="14">class="active"</eq>>
+                <img src="__IMG__/newshop/cate184.png" >
+
+                <div class="text-center">
+                    <button class="btn btn-primary btn-sm" onclick="selecttmps('14');">选中</button>
+                    <button class="btn btn-primary btn-sm" onclick="preview('14');">预览</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+            function selecttmps(val){
+                var myurl="{gr-:U('Shoptmpls/add')}?style="+val+'&r='+Math.random();
+                $.ajax({url:myurl,async:false});
+                $(this).parents("li").addClass("active");
+                //刷新
+                window.location.reload();
+            }
+            function preview(val){
+                var shopURL = "{gr-:U('Wap/Store/preview')}";
+                $("#myeshop").attr("src",shopURL+"?listtpl="+val);
+                $("#eshoppreview").modal("show");
+            }
+</script>
+<include file="Public/footer"/>

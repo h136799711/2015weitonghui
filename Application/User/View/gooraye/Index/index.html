@@ -1,0 +1,52 @@
+<include file="Index/header" />
+<style type="text/css">
+
+</style>
+<!-- 右边内容 START -->
+<div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 " style="padding:20px">
+    <if condition="$userinfo['wechat_card_num'] - $thisUser['wechat_card_num'] gt 0 " >
+    <a class="btn btn-primary" onclick="location.href='{gr-:U('Index/add')}';">添加微信公众号</a>
+    <span class="text-info" >您还可以创建{gr-$userinfo['wechat_card_num'] - $thisUser['wechat_card_num']}个微信公众号</span>
+    <else />
+
+    </if>
+ 
+    <!-- 公众号列表 START-->
+    <div class=" " >
+        <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+            <thead>
+                <tr>
+                    <th>公众号名称</th>
+                    <th style="text-align:center">用户组</th>
+                    <th>到期时间</th>
+                    <!-- <th>已定义/上限</th> -->
+                    <!-- <th>请求数</th> -->
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr></tr>
+            <volist name="info" id="vo">
+            <tr>
+                <td><p><a href="{gr-:U('Function/index',array('id'=>$vo['id'],'token'=>$vo['token']))}" title="点击进入功能管理"><img src="{gr-$vo.headerpic}" width="40" height="40"></a></p><p>{gr-$vo.wxname}</p></td>
+                <td align="center">{gr-$thisGroup.name}</td>
+                <td>{gr-$viptime|date="Y-m-d",###} <!-- <a href="###" onclick="alert('请联系我们，电话0575-89974522')" id="smemberss" class="btn btn-flat btn-link btn-sm text-info"><em>如何续费</em></a> --></td>
+                <td class="norightborder">
+                    <a class="btn btn-lg btn-primary" href="{gr-:U('Function/index',array('id'=>$vo['id'],'token'=>$vo['token']))}" class="btn btn-primary" >进入管理</a>
+                    <a target="_blank" href="{gr-:U('Home/Index/bind',array('token'=>$vo['token'],'encodingaeskey'=>$vo['encodingaeskey']))}" class="btn btn-primary btn-sm" >绑定公众号</a>
+                    <a  class="btn btn-warning btn-sm" href="{gr-:U('Index/edit',array('id'=>$vo['id']))}"><i class="mdi-editor-mode-edit"></i>编辑</a>
+                    <a   href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Index/del',array('id'=>$vo['id']))}');" class="btn btn-danger btn-sm"><i class="mdi-action-delete"></i>删除</a>
+                </td>
+            </tr>
+            </volist>
+        </tbody>
+    </table>
+</div>
+<!-- 公众号列表 END-->
+<!-- 分页 START -->
+<div class="pageNavigator right">
+    <div class="pages"></div>
+</div>
+<!-- 分页 END-->
+</div>
+<include file="Public/footer"/>

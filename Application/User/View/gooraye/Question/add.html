@@ -1,0 +1,108 @@
+<include file="Public/head"/>
+
+
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<!--活动开始-->
+          <div class="righttitle">
+          	<h4 style="color:red;font-size:18px;">请先到接口配置中开启一战到底</h4><a data-top class="btn btn-primary" href="javascript:history.go(-1);"><i class="mdi-content-reply"></i>返回</a>
+		</div> 
+ <div class=" form">
+<ul id="tags" class="nav nav-tabs">
+	<li id="li_0" class="active" role="presentation"><a href="javascript:void(0)" >1.活动开始内容</a> </li>
+	<div class="clearfix"></div>
+</ul>
+<div id="tagcol-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div id="tagcol-xs-9 col-sm-9  col-md-10 col-lg-10 0" class="tagcol-xs-9 col-sm-9  col-md-10 col-lg-10  selectTag">
+<fieldset>
+<div class=" bgfc">
+
+<form method="post" action="">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style=" margin:0;"><tbody>
+<tr>
+  <th valign="top"><span class="red">*</span>关键词：</th>
+  <td>
+	<span class="red">一战到底——当用户输入该关键词时，将会触发此活动。</span></td>
+</tr>
+  
+<tr>
+  <th valign="top"><span class="red">*</span>活动名称：</th>
+  <td><input type="input" style="width:400px" name="title" value="一战到底" id="title" class="form-control">
+  	<br>
+  	请不要多于50字!  	  	
+  	</td>
+  </tr>	
+    <tr>
+  	<th valign="top"><span class="red">*</span>活动说明：</th>
+  	<td><textarea style="width:400px;height:125px" name="col-xs-9 col-sm-9  col-md-10 col-lg-10 " id="col-xs-9 col-sm-9  col-md-10 col-lg-10 " class="form-control"></textarea>
+  		 </td>
+</tr>
+    <tr>
+  	<th valign="top"><span class="red">*</span>活动规则：</th>
+  	<td><textarea style="width:400px;height:125px" name="info" id="info" class="form-control"></textarea>
+  		 </td>
+</tr>
+    <tr>
+  	<th valign="top"><span class="red">*</span>战前阅读：</th>
+  	<td><textarea style="width:400px;height:125px" name="before_info" id="before_info" class="form-control"></textarea>
+  		 </td>
+</tr>
+<tr>
+  	<th valign="top"><span class="red">*</span>奖品说明：</th>
+  	<td><textarea style="width:400px;height:125px" name="jiangpin" id="jiangpin" class="form-control"></textarea>
+  		 </td>
+</tr>
+<tr>
+  <th valign="top"><span class="red">*</span>答题数量：</th>
+  <td><input type="input" style="width:400px" name="dt_num" value="" id="dt_num" class="form-control">
+  	<br>每天答题数量!  	  	
+  	</td>
+  </tr>	
+<tr>
+  <th valign="top"><span class="red">*</span>前台展示排行榜数量：</th>
+  <td><input type="input" style="width:400px" name="pms" value="10" id="pms" class="form-control">
+  	<br>默认为显示前10名，需要显示更多，请写更大的值，比如100,1000.  	  	
+  	</td>
+  </tr>	  
+<tr>
+  <th valign="top"><span class="red">*</span>每题赚取积分数：</th>
+  <td><input type="input" style="width:400px" name="score" value="0" id="score" class="form-control">
+  	<br>建议10积分!  	  	
+  	</td>
+  </tr>	
+  	<tr>
+  	<th><span class="red">*</span>活动时间：</th>
+  	<td><input type="input" name="statdate" readonly="" value="" id="statdate" class="px hasDatepicker">                          
+  		到
+  		<input type="input" readonly="" name="enddate" value="" id="enddate" class="px hasDatepicker">
+		<span style="color:red"><br>（*本活动费用为每天1个金币,请选择合适的时间区间，以免浪费了金币）</span>		
+
+		</td>
+  </tr>
+
+<tr>
+  <th valign="top"><span class="red"></span>回复调用图片</th>
+  <td><div><img width="135px" src="__STATIC__/images/d-01.png" id="pic">	
+<br>
+<input style="width:363px;" onclick="" type="text" class="form-control" name="starpicurl">
+<br>
+  	<span style="color:red;">上传活动开始图片(图片大小：宽700px*高300px)</span>
+  </div></td>
+</tr>
+<tr>
+<th>&nbsp;</th>
+<td><button class="btn btn-primary" name="button" type="submit"><i class="mdi-content-save"></i>保存</button>　<a class="btn btn-primary" href="javascript:history.go(-1);"><i class="mdi-navigation-cancel"></i>取消</a></td>
+</tr></tbody>
+</form>
+</table>
+  </div> 
+  </fieldset>
+</div>
+
+</div>	
+
+</div>		  		  
+<!--活动结束-->   
+<!--奖项设置-->
+        </div>
+<include file="Public/footer"/>

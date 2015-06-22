@@ -1,0 +1,84 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4 >分支机构</h4>
+        <div class="searchbar right hide">
+            <form method="post" action="">
+                <script>
+                function selectall(name) {
+                var checkItems=$('.cbitem');
+                if ($("#check_box").attr('checked')==false) {
+                $.each(checkItems, function(i,val){
+                val.checked=false;
+                });
+
+                } else {
+                $.each(checkItems, function(i,val){
+                val.checked=true;
+                });
+                }
+                }
+                </script>
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--tab start-->
+    <div >
+        <ul class="nav nav-tabs" >
+            <li class="tabli" id="tab0"><a href="{gr-:U('Company/index',array('token'=>$token))}">公司信息</a></li>
+            <li class="<if condition="$isBranch eq 1">current</if> tabli" id="tab2"><a href="{gr-:U('Company/branches',array('token'=>$token,'isBranch'=>1))}">分支机构</a></li>
+        </ul>
+    </div>
+    <!--tab end-->
+    <div class="">
+        <form method="post" action="" id="info">
+            <div >
+                <div class="pageNavigator left"> <a href="{gr-:U('Company/index',array('token'=>$token,'isBranch'=>1))}" title="" class="btn btn-primary"><i class="mdi-content-add"></i>添加</a></div>
+                <div class="clearfix"></div>
+            </div>
+            <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="select" style="display:none"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                        <th width="70">名称</th>
+                        <th width="80">电话</th>
+                        <th width="80">状态</th>
+                        <th width="160">地址</th>
+                        <th width="280">分支登陆地址</th>
+                        <th width="80" class="norightborder">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr></tr>
+                <volist name="branches" id="c">
+                <tr>
+                    <td style="display:none"><input type="checkbox" value="{gr-$o.id}" class="cbitem" name="id_{gr-$i}"></td>
+                    <td>{gr-$c.name}</td>
+                    <td>{gr-$c.tel}</td>
+                    <td><if condition="$c['display'] eq 1">显示<else />隐藏</if></td>
+                    <td>{gr-$c.address}</td>
+                    <td>{gr-$c.url}</td>
+                    <td class="norightborder"><a href="{gr-:U('Company/index',array('token'=>$token,'id'=>$c['id'],'isBranch'=>1))}"  class="btn btn-warning btn-sm"><i class="mdi-editor-mode-edit"></i>修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Company/delete',array('token'=>$token,'id'=>$c['id'],'isBranch'=>1))}');" class="btn btn-warning btn-sm"><i class="mdi-action-delete"></i>删除</a></td>
+                </tr>
+                </volist>
+            </tbody>
+        </table>
+        <input type="hidden" name="token" value="{gr-$_GET['token']}" />
+    </form>
+    <script>
+    function showIntroDetail(id){
+    art.dialog.open('{gr-:U('Product/orderInfo',array('token'=>$token,'dining'=>$isDining,'id'=>''))}'+id,{lock:false,title:'订单详情',width:700,height:420,resize:true,yesText:'关闭',background: '#000',opacity: 0.87});
+    }
+    </script>
+</div>
+<div >
+    <div class="pageNavigator right">
+        <div class="pages">{gr-$page}</div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</div>
+<include file="Public/footer"/>

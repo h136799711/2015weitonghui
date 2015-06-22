@@ -1,0 +1,53 @@
+<include file="Public/head" />
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 "> 
+	<div class="righttitle"> 
+		<h4>房间分类操作</h4> 
+		<a href="{gr-:U('Hotels/index',array('token' => $token,'cid'=>$cid))}" class="btn btn-primary btn-sm" data-top><i class="mdi-content-reply"></i>返回</a> 
+	</div> 
+<if condition="$ischild neq 1">
+<div class="bg-warning tip">此处只显示总店信息，连锁店订单及菜品请进入相应平台进行管理，连锁店登录账号密码及登录地址请在LBS里设置查看</div>
+</if>
+<form method="post" action="" id="formID">
+<input type="hidden" name="id" value="{gr-$tableData.id}" />
+<input type="hidden" name="cid" value="{gr-$cid}" />
+    <div class=" bgfc"> 
+     <table class="table" > 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td>
+        <input type="text" name="name" id="name" value="{gr-$tableData.name}" class="form-control" style="width:400px;" />
+        </td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>所属分类：</th> 
+        <td>
+        <select class="form-control"  name="sid">
+        <volist name="list" id="row"> 
+        <option value="{gr-$row['id']}">{gr-$row['name']}</option>
+        </volist>
+        </select>
+        </td> 
+       </tr> 
+       <tr> 
+        <th>展示图片：</th>
+        <td><input type="text" name="image" value="{gr-$tableData.image}" class="form-control" id="pic" style="width:400px;" />  <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic',700,700,'{gr-$token}')" class="btn btn-warning btn-sm" ><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('pic')" class="btn btn-warning btn-sm" ><i class="mdi-action-pageview"></i>预览</a></td> 
+       </tr>
+       <tr> 
+        <th>描述：</th> 
+        <td><textarea name="note" class="form-control" style="width:400px;height:80px;">{gr-$tableData.note}</textarea></td> 
+       </tr>
+       <tr>   
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="submit" class="btn btn-primary" id="save"><i class="mdi-content-save"></i>保存</button> &nbsp; <a href="{gr-:U('Hotels/index',array('token' => $token, 'cid' => $cid))}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+</form>
+</div> 
+
+<include file="Public/footer" />

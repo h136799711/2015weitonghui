@@ -1,0 +1,69 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <include file="WXReply/navs"/>
+    <div >
+        <a href="{gr-:U('User/Img/multi',array('token'=>getToken()))}" title='添加多图文回复' class='btn btn-primary'><i class="mdi-content-add"></i>添加多图文回复</a>
+    </div>
+    <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+        <thead>
+            <tr>
+                <th style="width:80px">序号</th>
+                <th class="keywords">关键词</th>
+                <th >绑定图文消息关键词</th>
+                <th class="edit norightborder">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="list" id="vo">
+            <tr>
+                <td><div class="">{gr-$key+1}</div></td>
+                <td>{gr-$vo.keyword}</td>
+                <td>
+                    <volist name="vo.sub" id="subvo">
+                    <p style="padding: 5px;">{gr-$subvo.keyword} <a class="btn btn-warning btn-sm" href="{gr-:U('Img/edit',array('id'=>$subvo['id']))}" ><i class="mdi-editor-mode-edit"></i>编辑</a></p>
+                    </volist>
+                </td>
+                <td class="norightborder">
+                <a class="btn btn-warning btn-sm" href="{gr-:U('Img/delMulti',array('id'=>$vo['id']))}"><i class="mdi-action-delete"></i>删除</a></td>
+            </tr>
+            </volist>
+        </tbody>
+    </table>
+    <style>
+            .usort {
+            width:45px;
+            height:25px;
+            }
+    </style>
+    <script>
+            function checkvotethis() {
+            var aa=document.getElementsByName('del_id[]');
+            var mnum = aa.length;
+            j=0;
+            for(i=0;i<mnum;i++){
+            if(aa[i].checked){
+            j++;
+            }
+            }
+            if(j>0) {
+            document.getElementById('info').submit();
+            } else {
+            alert('未选中任何文章或回复！')
+            }
+            }
+    </script>
+</div>
+<div class="pageNavigator right">
+    <div class="pages">{gr-$page}</div>
+</div>
+<script>
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}
+</script>
+<include file="Public/footer"/>

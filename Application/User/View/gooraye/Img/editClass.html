@@ -1,0 +1,42 @@
+
+<include file="Public/basehead" />
+<style>
+body{line-height:180%;}
+ul.modules li{padding:4px 10px;margin:4px;background:#efefef;float:left;width:27%;}
+ul.modules li div.mleft{float:left;width:40%}
+ul.modules li div.mright{float:right;width:55%;text-align:right;}
+</style>
+<body style="background:#fff;padding:20px 20px;">
+<div class="bg-warning tip">使用方法：点击“选中”直接选中对应分类，或者点击“详细”进入对应分类的子分类，如果分类下有子分类请慎用“选中”，选中后子分类以及子分类下的内容将不能被显示</div>
+<h4>请选择分类：</h4>
+
+
+
+<table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<thead>
+<tr>
+<th>标题</th>
+<th style=" width:120px;">操作</th>
+</tr>
+</thead>
+<volist name="class" id="c">
+<tr><td>{gr-$c.name}</td><td class="norightborder"><if condition="$c['sub'] eq NULL"><a href="###" onclick="returnHomepage({gr-$c.id},'{gr-$c.name}')" class="btn btn-primary btn-sm">选中</a><else /><a href="###" onclick="returnHomepage({gr-$c.id},'{gr-$c.name}')"  class="btn btn-primary btn-sm">选中</a> &nbsp; <a href="{gr-:U('User/Img/editClass',array('id'=>$c['id']))}"  class="btn btn-primary btn-sm">详情</a></if></td></tr>
+</volist>
+</table>
+
+
+<script>
+var domid=art.dialog.data('domid');
+var domid2=art.dialog.data('domid2');
+// 返回数据到主页面
+function returnHomepage(url,n){
+	var origin = artDialog.open.origin;
+	var dom = origin.document.getElementById(domid);
+	var dom2 = origin.document.getElementById(domid2);
+	dom.value=url+','+n;
+	dom2.innerHTML=n;
+	setTimeout("art.dialog.close()", 100 )
+}
+</script>
+
+<include file="Public/basefooter" />

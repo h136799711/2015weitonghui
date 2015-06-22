@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>{gr-$set['title']}|在线订购</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="__CSS__/style/css/hotels.css" rel="stylesheet" type="text/css">
+</head>
+
+<body id="" >
+<div class="qiandaobanner"> 
+  <if condition="$set['ppicurl'] neq false">
+   <img src="{gr-$set['ppicurl']}"  />  
+  <else />
+    <img src="__CSS__/style/images/default.jpg"  />  
+ </if>
+ </div>
+<div class="cardexplain"> 
+
+  <!--普通用户登录时显示-->
+     
+
+<!--商家房价及类型-->
+<ul class="round">
+<li class="title"><span class="none">{gr-$set['title']}</span></li>
+            
+ <volist name="list" id="vo">            
+<li class="dandanb"> <!--订房-->
+  
+<a href="{gr-:U('Wap/Host/lists',array('hid'=>$set['id'],'token'=>$vo['token'],'id'=>$vo['id'],'wecha_id'=>I('get.wecha_id')))}"><span>
+<table class="jiagebiao" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td><div>{gr-$vo.type}</div>
+<div><img src="{gr-$vo.picurl}" class="showimg">
+<p>{gr-$vo.typeinfo}</p>
+<p>原价：<a class="yuanjia">￥{gr-$vo.price}</a></p>
+<p>优惠价：<a class="youhuijia">￥{gr-$vo.yhprice}</a></p></td>
+</tr>
+</table>
+</span></a>
+</li>
+</volist>  
+</ul>
+
+<!--后台可控制是否显示-->
+<ul class="round">
+<li class="title"><span class="none">订单说明</span></li>
+<li>
+<div class="text">
+{gr-$set['info2']}
+</div>
+</li>
+</ul>
+
+<!--后台可控制是否显示-->
+<ul class="round">
+
+<li class="addr"><a href="{gr-:U('Wap/Company/map',array('token'=>I('get.token'),'wecha_id'=>I('get.wecha_id')))}"><span>{gr-$set['address']}</span></a></li>
+<li class="tel"><a href="tel://{gr-$set['tel2']}"><span>{gr-$set['tel2']} 电话预订</span></a></li>
+<if condition="$set['tel'] neq false">
+<li class="tel"><a href="tel://{gr-$set['tel']}"><span>{gr-$set['tel']} 电话预订</span></a></li>
+</if>
+
+<li class="detail"><a href="{gr-:U('Wap/Host/companyDetail',array('token'=>I('get.token'),'wecha_id'=>I('get.wecha_id'),'hid'=>I('get.hid')))}"><span>查看商家详情</span></a></li>
+</ul>
+</div>
+
+
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Host",
+            "moduleID":"0",
+            "imgUrl": "", 
+            "sendFriendLink": "{gr-$cfg_siteUrl}{gr-:U('Host/index',array('token'=>$token))}",
+            "tTitle": "{gr-$set['title']}",
+            "tContent": "{gr-$set['title']}"
+};
+</script>
+{gr-$shareScript}
+</body>
+</html>

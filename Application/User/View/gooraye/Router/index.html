@@ -1,0 +1,50 @@
+<include file="Public/head"/>
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+
+
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<include file="Router:menu"/>
+        
+
+
+          <div class="bg-warning tip">下面是您拥有的路由器列表</div>
+          <div class="cLineC" style="line-height: 32px;">
+ <a href="{gr-:U('Router/set')}" class="btn btn-primary" ><i class="mdi-content-add"></i>添加路由</a>　 
+</div>
+         <div class=" form">
+<div class="bdrcontent ">
+<div id="div_ptype">
+<table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<thead>
+<tr>
+<th style=" width:180px;">路由器ID</th>
+<th style=" width:100px;">路由器名称</th>
+<th style=" width:100px;">绑定的公众号</th>              
+<th style=" width:150px;" class="norightborder">操作</th>
+</tr>
+</thead>
+<volist name="info" id="actinfo">
+<tr>
+<td>{gr-$actinfo.gw_id}</td>
+<td>{gr-$actinfo.name}</td>
+    <td>{gr-$actinfo.wechat}</td>
+<td class="norightborder">
+<a class="btn btn-warning btn-sm" href="{gr-:U('Router/lists',array('id'=>$actinfo['id'],'token'=>$_SESSION['token']))}" >在线列表</a>&nbsp;<a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Router/delete',array('token'=>$token,'id'=>$actinfo['id']))}');"><i class="mdi-action-delete"></i>删除</a>
+</td>
+</volist>
+</tr>
+
+</table>
+
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{gr-$page}</div>
+</div>
+          </div>
+          
+        </div>
+<include file="Public/footer"/>

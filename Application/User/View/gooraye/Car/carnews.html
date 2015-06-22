@@ -1,0 +1,92 @@
+<include file="Public/head"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/default_user_com.css" media="all">
+<script src="__JS__/select/js/comm.js"></script>
+<script src="__JS__/select/js/linkagesel-min.js"></script>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <include file="Car/menu"/>
+    <div class="righttitle">
+        <h4>汽车文章类型管理</h4> 最新车讯，最新优惠，尊享二手车都读取于 <a href="{gr-:U('Classify/index',array('token'=>$token))}" class="btn btn-warning"> 分类管理</a>,如果没有，请先到<a href="{gr-:U('Classify/add',array('token'=>$token))}" class="btn btn-warning btn-sm"> 分类管理</a>添加,然后再［<a href="{gr-:U('Img/add',array('token'=>$token))}" class="btn btn-warning btn-sm">图文回复</a>］添加您想添加的内容 <span class="help-inline"> 的［<a href="{gr-:U('Img/index',array('token'=>$token))}" class="btn btn-warning btn-sm">新增图文自定义回复</a>］！</span> 
+    </div>
+    <!--tab start-->
+    <!--tab end-->
+    <div class=" bgfc" style="margin-top:10px;">
+        <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">
+            <table class="table" >
+                <tbody>
+                    <tr>
+                        <th width="120">最新车讯：</th>
+                        <td>
+                            <select class="form-control"  class="input-medium valid" name="news_id">
+                                <volist  name="classify" id="vo">
+                                <option value="{gr-$vo['id']}" <if condition="$carnews['news_id'] eq $vo['id']">selected='selected' </if>>{gr-$vo['name']}</option>
+                                </volist>
+                            </select>
+                            <span class="maroon">店铺产品最新行情</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="120">最新优惠：</th>
+                        <td>
+                            <select class="form-control"  class="input-medium valid" name="pre_id">
+                                <volist  name="classify" id="vo">
+                                <option value="{gr-$vo['id']}"<if condition="$carnews['pre_id'] eq $vo['id']">selected='selected' </if>>{gr-$vo['name']}</option>
+                                </volist>
+                            </select>
+                            <span class="maroon">如店铺或者产品最新打折优惠或促销</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="120">尊享二手车</th>
+                        <td>
+                            <select class="form-control"  class="input-medium valid" name="usedcar_id">
+                                <volist  name="classify" id="vo">
+                                <option value="{gr-$vo['id']}"<if condition="$carnews['usedcar_id'] eq $vo['id']">selected='selected' </if>>{gr-$vo['name']}</option>
+                                </volist>
+                            </select>
+                            <span class="maroon">如店铺收藏的二手车</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>品牌相册：</th>
+                        <td>
+                            <select class="form-control"  id="album_id" name="album_id" class="input-medium valid" schoolSet>
+                                <option value="0">请选择相册</option>
+                                <volist name="photo" id="vo">
+                                <option value="{gr-$vo['id']}" <if condition="$vo['id'] eq $carnews['album_id']">selected="selected"</if>>{gr-$vo['title']}</option>
+                                </volist>
+                            </select>
+                            <span class="maroon">如选择：兰博基尼欣赏</span>
+                        ，如果没有请去：<a href="{gr-:U('Photo/add',array('token'=>$token,'poid'=>$carnews['album_id']))}" class="btn btn-warning">添加相册</a></td>
+                </tr>
+                <tr>
+                    <th>店铺LBS：</th>
+                    <td>
+                        <select class="form-control"  id="company_id" name="company_id" class="input-medium valid" schoolSet>
+                            <option value="0">请选择店铺LBS</option>
+                            <volist name="company" id="vo">
+                            <option value="{gr-$vo['id']}" <if condition="$vo['id'] eq $carnews['company_id']">selected="selected"</if>>{gr-$vo['name']}</option>
+                            </volist>
+                        </select>
+                        <span class="maroon"></span>
+                    ，如果没有请去：<a href="{gr-:U('Company/index',array('token'=>$token,'poid'=>$carnews['company_id']))}" class="btn btn-warning">添加LBS</a></td>
+            </tr>
+            <tr>
+                <td>
+                    <if condition="$carnews['id'] neq ''">
+                    <input type="hidden" name="id" value="{gr-$carnews['id']}" />
+                    </if>
+                    <input type="hidden" name="token" value="{gr-$token}" />
+                </td>
+                <td>
+                    <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+                    <a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+</div>
+</div>
+<include file="Public/footer"/>

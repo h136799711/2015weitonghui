@@ -1,0 +1,48 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 " >  
+<include file="Router:menu"/>
+
+<div class="">
+<form class="form" method="post" enctype="multipart/form-data" >
+<input type="hidden" class="form-control" id="gw_id"  name="gw_id" style="width:500px" value="<?php echo time();?>" >
+<table style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <thead>
+<tr>
+  <th valign="top"><label for="acttitle">名称：</label></th>
+  <td><input type="input" class="form-control" id="gw_name"  name="gw_name" style="width:500px"  value="{gr-$info.name}" >    </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <th valign="top"><label for="acttitle">绑定的公众号：</label></th>
+  <td><input type="input" class="form-control" id="public_wechat_id"  name="public_wechat_id" style="width:500px"  value="{gr-$info.wechat}" >    </td>
+  <td>&nbsp;</td>
+</tr>
+ <tr> 
+        <th>二维码图片地址：</th>
+        <td><input type="text" name="qrcode_url" value="{gr-$info.qrcode}" class="form-control" id="thumb" style="width:400px;" />  <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('thumb',700,420,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('thumb')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td> 
+       </tr>
+<tr>
+  <th></th>
+  <td><button type="submit"  name="button"  class="btn btn-primary" ><i class="mdi-content-save"></i>保存</button>　
+  	</td>
+  </tr>
+  </tbody>
+</table>
+  </form>
+
+
+
+  </div> 
+
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div> 
+
+<!--底部-->
+  	</div>
+<include file="Public/footer"/>

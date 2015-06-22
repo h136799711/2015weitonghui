@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- 后台主体结构框架 -->
+        <meta charset="UTF-8">
+        <block name="title"><title>标题</title></block>
+        <meta http-equiv="X-UA-Compatible" content = "IE=edge,chrome=1">
+        <link type="text/css" rel="stylesheet" href="__STATIC__/bootstrap/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="__STATIC__/bootstrap/material-design/css/ripples.min.css" />
+        <link type="text/css" rel="stylesheet" href="__STATIC__/bootstrap/material-design/css/material-wfont.min.css" />      
+        <link href="__CSS__/style.css" type="text/css" rel="stylesheet">
+        
+    </head>
+    
+    <body>
+
+
+<div class="top">
+    <div class="memberinfo"  >          
+      <a class="logo" href="{gr-:U('User/Index/index')}">
+       <img  src="__IMG__/logo.png">
+      </a>
+      
+       <a class="logout" title="退出系统" href="{gr-:U('System/Index/logout')}" ><i class="fa fa-power-off fa-lg"></i></a>
+
+    <div class="dropdown" >
+       <a href="#" class="">
+        <img class="avator" src="__ROOT__{gr-$wecha.headerpic}">
+        <span>{gr-$wecha.wxname} （{gr-$Think.session.uname}）</span>        
+        <i class="fa fa-sort-desc fa-lg" style="padding: 15px 0px;vertical-align: top;"></i>        
+        </a>
+         <ul class="dropdownmenu" >
+           <li><a href="{gr-:U('User/Index/index')}" ><i class="fa fa-exchange"></i>切换公众号</a>
+           <li><a href="{gr-:U('User/Index/useredit')}" ><i class="fa fa-key"></i>修改密码</a>
+          </li>
+          </li>
+         </ul>
+
+      </div>
+
+
+  </div>
+
+</div>
+
+
+<!--左侧功能菜单-->
+<div  class="sideBar" id="sideBar">
+      <div class="catalogList">
+        <ul id="menu">
+          {gr-$menuhtml}
+        </ul>
+      </div>
+</div>
+<!--左侧功能菜单 END-->   
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".nav-header").mouseover(function(){
+    $(this).addClass("nav-over");
+  }).mouseout(function(){
+    $(this).removeClass("nav-over");
+  }).click(function(){
+    $(this).toggleClass('nav-header-current');
+    $(this).next('.ckit').slideToggle();
+  })
+});
+</script>

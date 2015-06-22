@@ -1,0 +1,134 @@
+<include file="Public/top"/>
+<div id="wp" class="wp"><link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+ <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 manage">
+    <div class="developer">
+       <div class="appTitle normalTitle" style="padding: 20px;">
+        <h2>短信管理（剩余{gr-$smscount}条）</h2>
+        <div class="accountInfo">
+        
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="tablecol-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+        <!--左侧功能菜单-->
+        <div class="sideBar">
+          <div class="catalogList">
+            <ul class="list-unstyled">
+    
+    
+      <li > <a href="{gr-:U('User/Sms/index')}">短信记录</a></li>
+      <li > <a href="{gr-:U('User/Sms/expense')}">消费记录</a></li>
+        <li class="subCatalogList "><a href="{gr-:U('User/Sms/buy')}">购买短信</a> </li>
+            </ul>
+          </div>
+        </div>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<style>
+.usercontent  ul li{
+float:none;
+line-height:50px;
+padding-left:10px;
+}
+input{border: 1px solid #DDDDDD;height:30px;width:200px;margin-left:10px;}
+.new-btn-login{
+    background-color: transparent;
+    background-image: url("__IMG__/img/new-btn-fixed.png");
+    border: medium none;
+	border:1px solid red;
+	
+}
+.new-btn-login{
+    background-position: 0 -198px;
+    width: 82px;
+	color: #FFFFFF;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px 3px;
+	
+}
+.new-btn-login:hover{
+	background-position: 0 -167px;
+	width: 82px;
+	color: #FFFFFF;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px 3px;
+}
+.bottonbox{
+border: 1px solid #D74C00;
+padding: 1px;
+display: inline-block;
+}
+</style>
+<script>
+
+$(function(){
+	var price=new Array();
+	<volist id="p" name="group">
+	price[{gr-$p.id}]={gr-$p.price};
+	</volist>
+	$('#group').change(function(){
+		$('#price').val(price[$('#group').val()]*$('#num').val());
+		$('#needprice').val(price[$('#group').val()]*$('#num').val());
+	});
+	$('#num').change(function(){
+
+		$('#price').val(price[$('#group').val()]*$('#num').val());
+		$('#needprice').val(price[$('#group').val()]*$('#num').val());
+	});
+});
+function checkcz(){
+	if($('#group').val()==0){
+		alert('请选择级别');
+		return false;
+	}
+	return true;
+}
+</script>
+<div class="usercol-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+ <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <thead>
+                <tr>
+<th class="keywords">Token</th>
+<th class="answer">内容</th>
+                    <th  class="category" >手机号</th>
+<th class="time">时间</th>
+                     
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+				</tr>
+				<volist name="list" id="vo">
+				<tr>
+                  <td>{gr-$vo.token}</td>
+                  <td><div class="answer_text">{gr-$vo.text}</div></td>
+                  <td>{gr-$vo.mp}</td>
+                    <td><php>echo date('Y-m-d',$vo['time']);</php></td>
+                </tr>
+				</volist>
+                             
+              </tbody>
+            </table>
+        <div class="clearfix"></div>
+      </div>
+          <div >
+            <div class="pageNavigator right">
+              <div class="pages">{gr-$page}</div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+
+
+
+<include file="Public/footer"/>

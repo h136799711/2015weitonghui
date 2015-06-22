@@ -1,0 +1,94 @@
+<include file="Public/head"/> 
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+        <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+<h4 ><if condition="$isDining neq 1">商品管理<else/>菜品管理</if> ({gr-$page}) </h4>
+<div class="searchbar right hide">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="form-control" placeholder="输入关键词搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="{gr-$wxid}">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btn btn-default " title="搜索">
+</form>
+</div>
+<div class="clearfix"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul class="list-unstyled nav nav-tabs">
+<li class="current tabli" id="tab0"><a href="{gr-:U('Product/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></li>
+<li class="tabli" id="tab2"><a href="{gr-:U('Product/cats',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+<li class="tabli" id="tab2"><a href="{gr-:U('Product/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+<if condition="$isDining eq 1"><li class="tabli" id="tab2"><a href="{gr-:U('Product/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+<if condition="$isDining neq 1">
+<li class="tabli" id="tab5"><a href="{gr-:U('ReplyInfo/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+<else/>
+<li class="tabli" id="tab5"><a href="{gr-:U('ReplyInfo/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+</if>
+</ul>
+</div>
+<!--tab end-->
+<div >
+<div class="pageNavigator left"> <a href="{gr-:U('Product/add',array('token'=>$token,'dining'=>$isDining))}" title="添加" class="btn btn-primary"><img src="__IMG__/product/add.png" width="16" class="vm">添加<if condition="$isDining neq 1">商品<else/>菜品</if></a></div>
+<div class="clearfix"></div>
+</div>
+<div class="">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select">选择</th>
+<th width="160">商品名称</th>
+<th width="60">价格</th>
+<th width="170">关键词</th>
+<th width="130">创建时间</th>
+ 
+<th width="200" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="hostlist"> 
+<tr>
+<td><input type="checkbox" name="del_id[{gr-$i}]" value="285" class="checkitem"></td>
+<td>{gr-$hostlist.name}</td>
+<td>{gr-$hostlist.price}元</td>
+<td>{gr-$hostlist.keyword}</td>
+<td>{gr-$hostlist.time|date="Y-m-d H:i:s",###}</td> 
+
+<td class="norightborder"><a href="{gr-:U('Product/set',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}"><i class="mdi-editor-mode-edit"></i>修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Product/del',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}');"><i class="mdi-action-delete"></i>删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+<script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script> 
+</div>
+<div >
+<div class="pageNavigator right">
+<div class="pages">{gr-$page}</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<include file="Public/footer"/>

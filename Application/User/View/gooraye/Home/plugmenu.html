@@ -1,0 +1,77 @@
+<include file="Public/head"/>
+<style type="text/css">
+.plug-menu {
+width:36px;
+height:36px;
+border-radius:36px;
+-moz-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+-webkit-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);
+background-color: FF0000;
+position:relative
+}
+.plug-menu span {
+display: block;
+width:28px;
+height:28px;
+background: url(__IMG__/photo/plugmenu.png) no-repeat;
+background-size: 28px 28px;
+text-indent: -999px;
+position:absolute;
+top:4px;
+left:4px;
+overflow: hidden;
+}
+</style>
+<script src="__JS__/cart/jscolor.js" type="text/javascript"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <form method="post" action="" enctype="multipart/form-data">
+        <div class="righttitle">
+            <h4>菜单颜色与导航 <span class="FAQ">提供一键拨号，一键导航，一键email等等快捷功能</span></h4>
+        </div>
+        <ul id="tags" class="nav nav-tabs">
+            <li><a href="{gr-:U('Catemenu/index')}">底部菜单分类设置</a> </li>
+            <li><a href="{gr-:U('Catemenu/styleSet')}">底部菜单风格<i class="mdi-toggle-check-box"></i>选择</a> </li>
+            <li class="active" role="presentation"><a href="{gr-:U('Home/plugmenu')}">菜单颜色与版权</a> </li>
+            <div class="clearfix"></div>
+        </ul>
+        <table class="table" >
+            <tbody>
+                <tr>
+                    <td width="60"><div class="plug-menu" id="plugmenucolor" style="background-color:{gr-$homeInfo.plugmenucolor}"><span class="close"></span></div></td>
+                    <td width="140"><strong>请选择快捷菜单的颜色：</strong></td>
+                    <td width="95"><input type="text" name="plugmenucolor" id="themeStyle" value="{gr-$homeInfo.plugmenucolor}" class="px color" style="width: 55px; background-image: none; background-color:{gr-$homeInfo.plugmenucolor}; color: rgb(255, 255, 255);" onblur="document.getElementById('plugmenucolor').style.backgroundColor=document.getElementById('themeStyle').value;"></td>
+                    <td width="536">请在手机上查看效果！</td>
+                </tr>
+                <if condition="$userGroup.iscopyright eq 1">
+                <tr>
+                    <td width="60"> </td>
+                    <td><strong>设置页面版权：</strong></td>
+                    <td colspan="2"><textarea class="form-control" style="width:550px; height:35px" name="copyright">{gr-$homeInfo.copyright}</textarea><br>例如：© 2013-2014 古睿版权所有 </td>
+                </tr>
+                </if>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <button type="submit" name="batchsubmit" value="true" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<script>
+                                    $(document).ready(function(){
+                                    $(".checkbox").click(function(){
+                                    var i=0;
+                                    $("input:checked").each(function(){
+                                        i++;
+                                    });
+                                    if(i>4){
+                                    alert('最多只显示四项');
+                                    }
+                                    });
+                                    });
+</script>
+<include file="Public/footer"/>

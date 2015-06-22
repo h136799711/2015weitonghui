@@ -1,0 +1,41 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <include file="School/menu"/>
+    <div class="righttitle">
+        <h4 >当前位置：微学校 >> 食谱管理</h4><a href="{gr-:U('School/cookbook_add',array('token'=>$token,'type'=>'assess'))}" class="btn btn-primary" style="margin-top:-2px">新增食谱</a>
+        <div class="clearfix"></div>
+    </div>
+    <div class=" form">
+        <div class="bdrcontent ">
+            <div id="div_ptype">
+                <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th style=" width:100px;">标题</th>
+                            <th style=" width:100px;">关键词</th>
+                            <th style=" width:100px;">开始/结束时间</th>
+                            <!--  <th style=" width:100px;">图文消息封面</th> -->
+                            <th style=" width:100px;">是否显示</th>
+                            <th style=" width:120px;">操作</th>
+                        </tr>
+                    </thead>
+                    <volist name="recipe" id="vo">
+                    <tbody><tr>
+                        <td>{gr-$vo['title']}</td>
+                        <td>{gr-$vo['keyword']}</td>
+                        <td>{gr-$vo['begintime']|date="Y-m-d",###} / {gr-$vo['endtime']|date="Y-m-d",###}</td>
+                        <td><if condition="$vo['ishow'] eq 1">显示<else/>隐藏</if></td>
+                        <td class="norightborder">
+                            <a href="{gr-:U('School/cookbook_add',array('id'=>$vo['id'],'type'=>$vo['type']))}" class="btn btn-warning btn-sm"><i class="mdi-editor-mode-edit"></i>编辑</a>
+                        <a href="{gr-:U('School/cookbook_del',array('id'=>$vo['id'],'type'=>$vo['type']))}" onclick="return(confirm('确定要删除吗？'))" class="btn btn-warning btn-sm"><i class="mdi-action-delete"></i>删除</a> </td>
+                    </tr></tbody>
+                    </volist>
+                </table>
+            </div>
+        </div>
+        <div class="footactions" style="padding-left:10px">
+            <div class="pages"> {gr-$page}</div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer"/>

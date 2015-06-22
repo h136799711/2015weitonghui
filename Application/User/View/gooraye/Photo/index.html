@@ -1,0 +1,106 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+.cLine {
+    display: block;
+    width: 100%;
+}
+.photo li{ float:left; margin:10px 10px 10px 0; position:relative;}
+.photoimg{border: 1px solid #DDDDDD;
+box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-moz-box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-webkit-box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.15);
+-webkit-border-radius:5px 5px 5px 5pxx;
+-moz-border-radius:5px 5px 10px 10px;
+border-radius:5px 5px 10px 10px;
+width:235px;padding: 0 0 10px;
+background: url(__IMG__/photo/bottom.png) repeat-x scroll left bottom #FFFFFF;
+background-size:2px auto;
+*background:none;
+}
+.photoimg .cover{ width:100%;height:131px; overflow:hidden;display:block; background:url(__IMG__/photo/noneimg.jpg) no-repeat 0 0 #f5f5f5;
+-webkit-border-radius:5px 5px 0 0;
+-moz-border-radius:5px 5px 0 0;
+border-radius:5px 5px 0 0;
+}
+.photoimg img{ width:100%;
+-webkit-border-radius:5px 5px 0 0;
+-moz-border-radius:5px 5px 0 0;
+border-radius:5px 5px 0 0;
+}
+.bd h6{ font-size:14px;margin:5px 10px; font-weight:normal;overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap !important;}
+.bd p{ margin:5px 10px;}
+.sn{ color:#999}
+.fr{ position:absolute; bottom:15px;right:10px; display:none;* display: block}
+.photoimg:hover .fr{ display:block}
+.userinfoArea th {
+width: 200px;
+}
+</style>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4 >相册</h4>
+        <div class="searchbar right hide">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class=" bgfc">
+        <form method="post" action="{gr-:U('Photo/config')}" enctype="multipart/form-data">
+            <input type="hidden" name="formhash" value="7566c850">
+            <table class="table" ><tbody>
+                <tr>
+                    <th>回复：相册 触发此功能：</th>
+                    <td><strong><a href="" class="green">在回复中，系统默认第一个相册（封面，标题，筒介）为图文回复信息</a></strong></td>
+                </tr>
+                <tr>
+                    <th>相册头部图片外链地址:</th>
+                    <td><input type="text" name="picurl" id="picurl" value="{gr-$headpic}" class="form-control" style="width:400px;">   <script src="__STATIC__/gfile.js"></script><a href="###" class="btn btn-warning btn-sm" onclick="gfilePicUpload('picurl',700,420,'{gr-$token}')" class="a_upload"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('picurl')" class="btn btn-warning btn-sm" ><i class="mdi-action-pageview"></i>预览</a> <button type="submit" name="homesubmit" value="true" class="btn btn-warning btn-sm" ><i class="mdi-editor-mode-edit"></i>修改</button></td>
+                </tr></tbody></table>
+            </form>
+        </div>
+        <div >
+        <a href="{gr-:U('Photo/add',array('token'=>getToken()))}" title="创建相册" class="btn btn-primary"><i class="mdi-content-add"></i>创建相册</a> </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="">
+        <ul class="photo">
+            <volist name="photo" id="photo">
+            <li>
+                <div class="photoimg">
+                    <a title="{gr-$photo.title}" class="cover" href="{gr-:U('Photo/list_add',array('id'=>$photo['id']))}">
+                    <img src="{gr-$photo.picurl}" alt="{gr-$photo.title}">
+                    </a>
+                    <div class="bd">
+                        <h6>{gr-$photo.title}</h6>
+                        <p class="sn">有{gr-$photo.num}张照片</p>
+                    </div>
+                    <div class="fr">
+                        <a class="btn btn-warning btn-sm" href="{gr-:U('Photo/list_add',array('id'=>$photo['id']))}"><i class="mdi-file-file-upload"></i>上传图片</a>
+                        <a class="btn btn-warning btn-sm" href="{gr-:U('Photo/edit',array('token'=>session('token'),'id'=>$photo['id']))}"><i class="mdi-editor-mode-edit"></i>编辑</a>　<a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Photo/del',array('token'=>session('token'),'id'=>$photo['id']))}');"><i class="mdi-action-delete"></i>删除</a>
+                    </div>
+                </div>
+            </li>
+            </volist>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div >
+        <div class="pageNavigator right">
+            <div class="pages">{gr-$page}</div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <script>
+        function checkAll(form, name) {
+        for(var i = 0; i < form.elements.length; i++) {
+        var e = form.elements[i];
+        if(e.name.match(name)) {
+        e.checked = form.elements['chkall'].checked;
+        }
+        }
+        }
+    </script>
+    <include file="Public/footer"/>

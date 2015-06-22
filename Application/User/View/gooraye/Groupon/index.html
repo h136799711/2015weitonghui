@@ -1,0 +1,91 @@
+<include file="Public/head"/>
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4 >团购订单管理（<a href="{gr-:U('Groupon/index',array('token'=>$token,'handled'=>0))}">未处理订单<span style="color:#f00">{gr-$unhandledCount}</span>个</a>） ({gr-$page}) </h4>
+        <div class="searchbar right hide">
+            <input type="text" id="msgSearchInput" class="form-control" placeholder="输入团购券密码搜索" name="searchkey" value="">
+            <input type="hidden" name="ac" value="hotels-list">
+            <input type="submit" value="搜索" id="msgSearchBtn" onclick="location.href='{gr-:U('User/Groupon/index',array('token'=>$token))}?code='+$('#msgSearchInput').val()" class="btn btn-default " title="搜索">
+            <script>
+            function selectall(name) {
+            var checkItems=$('.cbitem');
+            if ($("#check_box").attr('checked')==false) {
+            $.each(checkItems, function(i,val){
+            val.checked=false;
+            });
+
+            } else {
+            $.each(checkItems, function(i,val){
+            val.checked=true;
+            });
+            }
+            }
+            </script>
+            <if condition="($parentid neq  '0') and ($parentid neq '')"><a href="{gr-:U('Product/cats',array('token'=>$token,'parentid'=>$parentCat['parentid']))}" class="btn btn-primary" data-top>返回上</a></if>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!--tab start-->
+    <div>
+        <ul class="list-unstyled nav nav-tabs">
+            <include file="tabs"/>
+        </ul>
+    </div>
+    <!--tab end-->
+    <div class="">
+        <form method="post" action="" id="info">
+            <div >
+                <a href="###" onclick="$('#info').submit()" title="" class="btn btn-primary"><i class="mdi-editor-mode-edit"></i>处理订单</a></div>
+                <div class="clearfix"></div>
+            </div>
+            <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                        <th width="70">姓名</th>
+                        <th width="80">电话</th>
+                        <th class="60">数量</th>
+                        <th width="80">总价（元）</th>
+                        <th class="160">付款状态/发送状态</th>
+                        <th class="60">状态</th>
+                        <th width="130">创建时间</th>
+
+                        <th width="150" class="norightborder">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr></tr>
+                <volist name="orders" id="o">
+                <tr>
+                    <td><input type="checkbox" value="{gr-$o.id}" class="cbitem" name="id_{gr-$i}"></td>
+                    <td>{gr-$o.truename} <if condition="$isDining eq 1"><span style="color:#f60">[<if condition="$o.diningtype eq 1">点餐<elseif condition="$o.diningtype eq 2" />外卖<elseif condition="$o.diningtype eq 3" />预定<else /></if>]</span></if></td>
+                    <td>{gr-$o.tel}</td>
+                    <td>{gr-$o.total}</td>
+                    <td>{gr-$o.price}</td>
+                    <td><if condition="$o.paid eq 1"><span style="color:green">已付款</span><else/><span style="color:red">未付款</span></if> / <if condition="$o.sent eq 1"><span style="color:green">已发货</span><else/><span style="color:red">未发货</span></if></td>
+                    <td><if condition="$o.handled eq 1"><span style="color:green">已处理</span><else/><span style="color:red">未处理</span></if></td>
+                    <td>{gr-$o.time|date="Y-m-d H:i:s",###}</td>
+                    <td class="norightborder"><a class="btn btn-warning btn-sm" href="###" onclick="showIntroDetail({gr-$o.id})"><i class="mdi-action-visibility"></i>详细</a> <a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Product/deleteOrder',array('token'=>$token,'id'=>$o['id'],'dining'=>$isDining))}');"><i class="mdi-action-delete"></i>删除</a></td>
+                </tr>
+                </volist>
+            </tbody>
+        </table>
+        <input type="hidden" name="token" value="{gr-$_GET['token']}" />
+    </form>
+    <script>
+    function showIntroDetail(id){
+    art.dialog.open('{gr-:U('Product/orderInfo',array('token'=>$token,'dining'=>$isDining,'id'=>''))}'+id,{lock:false,title:'订单详情',width:700,height:420,resize:true,yesText:'关闭',background: '#000',opacity: 0.87});
+    }
+    </script>
+</div>
+<div >
+    <div class="pageNavigator right">
+        <div class="pages">{gr-$page}</div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</div>
+<include file="Public/footer"/>

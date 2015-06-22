@@ -1,0 +1,97 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4 >订单管理（<a href="{gr-:U('Store/orders',array('token'=>$token,'handled'=>0))}">未处理订单<span style="color:#f00">{gr-$unhandledCount}</span>个</a>） </h4>
+    </div>
+
+    <script>
+                function selectall(name) {
+                var checkItems=$('.cbitem');
+                if ($("#check_box").attr('checked')==false) {
+                $.each(checkItems, function(i,val){
+                val.checked=false;
+                });
+
+                } else {
+                $.each(checkItems, function(i,val){
+                val.checked=true;
+                });
+                }
+                }
+                </script>
+    <!--tab start-->
+    <div class="tab">
+        <ul class="list-unstyled nav nav-tabs">
+            <li class="tabli" id="tab2"><a href="{gr-:U('Store/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+            <li class="current tabli" id="tab2"><a href="{gr-:U('Store/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+            <if condition="$isDining eq 1"><li class="tabli" id="tab2"><a href="{gr-:U('Store/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+            <if condition="$isDining neq 1">
+            <li class="tabli" id="tab5"><a href="{gr-:U('ReplyInfo/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+            <else/>
+            <li class="tabli" id="tab5"><a href="{gr-:U('ReplyInfo/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+            </if>
+        </ul>
+    </div>
+    <!--tab end-->
+    <div class="">
+        <form method="post" action="" id="info">
+            <div >
+                <div class="pageNavigator left"> <a href="###" onclick="$('#info').submit()" title="" class="btn btn-primary"><i class="mdi-editor-border-color"></i>处理订单</a></div>
+                <div class="clearfix"></div>
+            </div>
+            <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                        <th width="70">姓名</th>
+                        <th width="80">电话</th>
+                        <th class="60">数量</th>
+                        <th width="80">总价（元）</th>
+                        <th class="160">付款状态/发货状态</th>
+                        <th class="60">付款方式</th>
+                        <th class="60">状态</th>
+                        <th width="130">创建时间</th>
+
+                        <th width="150" class="norightborder">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr></tr>
+                <volist name="orders" id="o">
+                <tr>
+                    <td><input type="checkbox" value="{gr-$o.id}" class="cbitem" name="id_{gr-$i}"></td>
+                    <td>{gr-$o.truename} <if condition="$isDining eq 1"><span style="color:#f60">[<if condition="$o.diningtype eq 1">点餐<elseif condition="$o.diningtype eq 2" />外卖<elseif condition="$o.diningtype eq 3" />预定<else /></if>]</span></if></td>
+                    <td>{gr-$o.tel}</td>
+                    <td>{gr-$o.total}</td>
+                    <td>{gr-$o.price}</td>
+                    <td><if condition="$o.paid eq 1"><span style="color:green">已付款</span><else/><span style="color:red">未付款</span></if> / <if condition="$o.sent eq 1"><span style="color:green">已发货</span><else/><span style="color:red">未发货</span></if></td>
+                    <td><if condition="$o.handled eq 1"><span style="color:green">已处理</span><else/><span style="color:red">未处理</span></if></td>
+                    <td>
+                        <if condition="$o['paymode'] eq 0"><span style="color:green">其他方式</span>
+                        <elseif condition="$o['paymode'] eq 1" /><span style="color:green">在线支付</span>
+                        <else /><span style="color:green">货到付款</span></if>
+                    </td>
+                    <td>{gr-$o.time|date="Y-m-d H:i:s",###}</td>
+                    <td class="norightborder"><a class="btn btn-warning btn-sm" href="###" onclick="showIntroDetail({gr-$o.id})"><i class="mdi-image-details"></i>详细</a> <a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Store/deleteOrder',array('token'=>$token,'id'=>$o['id'],'dining'=>$isDining))}');"><i class="mdi-action-delete"></i>删除</a></td>
+                </tr>
+                </volist>
+            </tbody>
+        </table>
+        <input type="hidden" name="token" value="{gr-$_GET['token']}" />
+    </form>
+    <script>
+    function showIntroDetail(id){
+    art.dialog.open('{gr-:U('Store/orderInfo',array('token'=>$token,'dining'=>$isDining,'id'=>''))}'+id,{lock:false,title:'订单详情',width:1000,height:620,resize:true,yesText:'关闭',background: '#000',opacity: 0.87});
+    }
+    </script>
+</div>
+<div >
+    <div class="pageNavigator right">
+        <div class="pages">{gr-$page}</div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</div>
+<include file="Public/footer"/>

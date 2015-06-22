@@ -1,0 +1,137 @@
+<include file="Public/head" />
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+        <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+<h4 >订单管理({gr-$page}) </h4>
+<div class="searchbar right hide">
+<!-- <form method="post" action="">
+<input type="text" id="msgSearchInput" class="form-control" placeholder="输入订购人名字搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="{gr-$wxid}">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btn btn-default " title="搜索">
+</form> -->
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script>
+</div>
+<div class="clearfix"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul class="list-unstyled nav nav-tabs">
+<li class="tabli" id="tab0"><a href="{gr-:U('Hotels/index', array('token' => $token,'cid' => $cid))}">房间类型管理</a></li>
+<li class="tabli" id="tab1"><a href="{gr-:U('Hotels/house', array('token' => $token,'cid' => $cid))}">房间管理</a></li>
+<li class="current tabli" id="tab4"><a href="{gr-:U('Hotels/orders', array('token' => $token,'cid' => $cid))}">订单管理</a></li>
+<if condition="$ischild neq 1" >
+<li class="tabli" id="tab5"><a href="{gr-:U('ReplyInfo/set', array('token'=>$token,'infotype'=>'Hotels'))}">酒店预订回复配置</a></li>
+</if>
+</ul>
+</div>
+<!--tab end-->
+<div class="">
+<form method="post" action="" id="info">
+<div >
+<!-- <a href="###" onclick="$('#info').submit()" title="" class="btn btn-primary"><img src="__IMG__/product/arrow_switch.png" class="vm">处理订单</a></div> -->
+查看当天的预定情况：
+<select class="form-control"  onchange="change(this);">
+	<volist name="dates" id="date">
+	<if condition="$date['k'] eq $status">
+	<option value="{gr-$date['k']}" selected>{gr-$date['v']}</option>
+	<else />
+	<option value="{gr-$date['k']}">{gr-$date['v']}</option>
+	</if>
+	
+	</volist>
+</select>
+<div class="clearfix"></div>
+</div>
+
+<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+<th width="70">姓名</th>
+<th width="80">电话</th>
+<th class="60">房间类型</th>
+<th class="60">房间数量</th>
+<th width="80">总价（元）</th>
+<th class="80">入住时间</th>
+<th class="80">退房时间</th>
+<th class="60">状态</th>
+<th width="100" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="orders" id="o"> 
+<tr>
+<td><input type="checkbox" value="{gr-$o.id}" class="cbitem" name="id_{gr-$i}"></td>
+<td>{gr-$o.name}</td>
+<td>{gr-$o.tel}</td>
+<td>{gr-$o.housename}</td>
+<td>{gr-$o.nums}</td>
+<td>{gr-$o.price}</td>
+<td>{gr-$o.startdate}</td>
+<td>{gr-$o.enddate}</td>
+<td><if condition="$o.paid eq 1"><span style="color:green">已付款</span><else/><span style="color:red">未付款</span></if> / <if condition="$o.status eq 1"><span style="color:green">已入住</span><else/><span style="color:red">未入住</span></if></td>
+<td class="norightborder"><a  class="btn btn-warning btn-sm" href="javascript:void(0);" onclick="showIntroDetail({gr-$o.id})">详细</a> 
+<a  class="btn btn-warning btn-sm"  href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Hotels/deleteOrder',array('token'=>$token,'id'=>$o['id']))}');"><i class="mdi-action-delete"></i>删除</a> 
+</td>
+</tr>
+</volist>
+</tbody>
+</table>
+<input type="hidden" name="token" value="{gr-$_GET['token']}" />
+</form>
+
+<script>
+function showIntroDetail(id){
+	art.dialog.open('{gr-:U('Hotels/orderInfo',array('token'=>$token,'cid'=>$cid,'id'=>''))}'+id,{lock:false,title:'订单详情',width:1000,height:620,resize:true,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+function showHouse(id){
+	art.dialog.open('{gr-:U('Hotels/orderInfo',array('token'=>$token,'cid'=>$cid,'id'=>''))}'+id,{lock:false,title:'订单详情',width:1000,height:620,resize:true,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+</div>
+<div >
+<div class="pageNavigator right">
+<div class="pages">{gr-$page}</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+function change(obj) {
+	location.href = "{gr-:U('Hotels/orders',array('token' => $token, 'cid' => $cid))}&status=" + $(obj).val();
+}
+</script>
+<include file="Public/footer"/>

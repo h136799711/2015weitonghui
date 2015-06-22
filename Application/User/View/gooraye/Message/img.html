@@ -1,0 +1,59 @@
+<include file="Public/basehead"/>
+<body >
+    <div class="bg-info">使用方法：点击对应内容后面的“选中”即可。</div>
+    <h4>{gr-$moduleName}列表</h4>
+    <table class="table-responsive table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+        <thead>
+            <tr>
+                <th class="col-lg-8 col-md-8 ">标题</th>
+                <th class="col-lg-4 col-md-4 ">操作</th>
+            </tr>
+        </thead>
+        <volist name="list" id="m">
+        <tr><td>{gr-$m.name}</td><td class="norightborder"><a class="btn btn-primary btn-sm" href="###" onclick="returnHomepage({gr-$m.id},'{gr-$m.name}','{gr-$m.pic}','{gr-$m.info}')">选中</a></td></tr>
+        </volist>
+    </table>
+    <div class="footactions" style="padding-left:10px">
+        <div class="pages">{gr-$page}</div>
+    </div>
+    <script>
+        var titledom=art.dialog.data('titledom');
+        var imgids=art.dialog.data('imgids');
+        // 返回数据到主页面
+        function returnHomepage(id,title,pic,info){
+        var origin = artDialog.open.origin;
+        var dom = origin.document.getElementById(titledom);
+        var imgidsdom = origin.document.getElementById(imgids);
+        var multinews= origin.document.getElementById(art.dialog.data('multinews'));
+        var singlenews= origin.document.getElementById(art.dialog.data('singlenews'));
+        var multione= origin.document.getElementById(art.dialog.data('multione'));
+        var js_appmsg_preview= origin.document.getElementById(art.dialog.data('js_appmsg_preview'));
+        //dom.value+=','+url;
+        imgCount=imgidsdom.value.split(',').length-1;
+        //
+    dom.innerHTML='<div class="mediaPanel"><div class="mediaHead"><span class="title" id="zbt">'+title+'</span><span class="time"><?php echo date('Y-m-d',time());?></span><div class="clearfix"></div></div><div class="mediaImg"><img id="suicaipic1" src="'+pic+'"></div><div class="mediacol-xs-9 col-sm-9  col-md-10 col-lg-10  mediacol-xs-9 col-sm-9  col-md-10 col-lg-10 P"><p id="zinfo">'+info+'</p></div><div class="mediaFooter"><span class="mesgIcon right"></span><span style="line-height:50px;" >查看全文</span><div class="clearfix"></div></div></div>';
+    if(multione && multione.innerHTML==''){
+    if(singlenews){
+    singlenews.style.display="";
+    }
+    if(multinews){
+    multinews.style.display="none";
+    }
+    multione.innerHTML=' <h4 class="appmsg_title"><a href="javascript:void(0);" onClick="return false;" target="_blank">'+title+'</a></h4><div class="appmsg_thumb_wrp"><img style="border:1px solid #ddd" class="js_appmsg_thumb appmsg_thumb" src="'+pic+'"><i class="appmsg_thumb default" style="background:url('+pic+');background-size:100% 100%">&nbsp;</i></div>';
+    }else{
+    if(singlenews){
+    singlenews.style.display="none";
+    }
+    if(multinews){
+    multinews.style.display="";
+    }
+    if(js_appmsg_preview ){
+    js_appmsg_preview.innerHTML=js_appmsg_preview.innerHTML+'<div id="appmsgItem4" data-fileid="" data-id="4" class="appmsg_item js_appmsg_item "><img class="js_appmsg_thumb appmsg_thumb" src="'+pic+'"><i class="appmsg_thumb default" style="background:url('+pic+');background-size:100% 100%">&nbsp;</i><h4 class="appmsg_title"><a onClick="return false;" href="javascript:void(0);" target="_blank">'+title+'</a></h4></div>';
+    }
+    }
+    dom.style.display="";
+    imgidsdom.value+=','+id;
+    setTimeout("art.dialog.close()", 100 )
+    }
+    </script>
+    <include file="Public/basefooter"/>

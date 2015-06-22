@@ -1,0 +1,72 @@
+<include file="Public/head"/> 
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+<h4 >商品管理({gr-$page})</h4>
+<div class="clearfix"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul class="list-unstyled nav nav-tabs">
+<li class="tabli" id="tab2"><a href="{gr-:U('Store/index',array('token'=>$token))}">商品分类管理</a></li>
+<li class="current tabli" id="tab0"><a href="{gr-:U('Store/product',array('token'=>$token, 'catid'=>$catid))}">商品管理</a></li>
+<li class="tabli" id="tab2"><a href="{gr-:U('Store/orders',array('token'=>$token))}">订单管理</a></li>
+<li class="tabli" id="tab5"><a href="{gr-:U('ReplyInfo/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div >
+<if condition="$catid neq 0">
+<div class="pageNavigator left">
+<a href="{gr-:U('Store/addNew', array('token' => $token, 'catid' => $catid))}" title="添加" class="btn btn-primary">
+<i class="mdi-content-add"></i>添加商品</a>
+</div>
+</if>
+<div class="pageNavigator right">
+	<a href="{gr-:U('Store/index',array('token'=>$token,'catid'=>$catid))}" class="btn btn-primary"><i class="mdi-content-reply"></i>返回</a>
+</div>
+<div class="clearfix"></div>
+</div>
+<div class="">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select">选择</th>
+<th width="160">商品名称</th>
+<th width="60">价格</th>
+<th width="60">会员价</th>
+<th width="170">关键词</th>
+<th width="200">创建时间</th>
+<th width="150" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="hostlist"> 
+<tr>
+<td><input type="checkbox" name="del_id[{gr-$i}]" value="285" class="checkitem"></td>
+<td>{gr-$hostlist.name}</td>
+<td>{gr-$hostlist.price}元</td>
+<td>{gr-$hostlist.vprice}元</td>
+<td>{gr-$hostlist.keyword}</td>
+<td>{gr-$hostlist.time|date="Y-m-d H:i:s",###}</td> 
+<td class="norightborder" align="center">
+	<a  class="btn btn-warning btn-sm"  href="{gr-:U('Store/addNew',array('id' => $hostlist['id'], 'token' => $token,'catid' => $catid))}"><i class="mdi-editor-mode-edit"></i>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a  class="btn btn-warning btn-sm"  href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Store/del',array('id'=>$hostlist['id'],'token'=>$token,'catid'=>$catid))}');"><i class="mdi-action-delete"></i>删除</a>
+</td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+</div>
+<div >
+<div class="pageNavigator right">
+<div class="pages">{gr-$page}</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<include file="Public/footer"/>

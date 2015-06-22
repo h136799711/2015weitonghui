@@ -1,0 +1,86 @@
+<extend name="template/base"  />
+<block name="bodyIncludes" >
+<include file="Site:public" />
+<script>
+function changeuploadtype(v){
+if(v=='local'){
+document.getElementById('upload_bucket').style.display='none';
+document.getElementById('upload_secret').style.display='none';
+document.getElementById('upload_username').style.display='none';
+document.getElementById('upload_password').style.display='none';
+document.getElementById('upload_domain').style.display='none';
+}else{
+document.getElementById('upload_bucket').style.display='';
+document.getElementById('upload_secret').style.display='';
+document.getElementById('upload_username').style.display='';
+document.getElementById('upload_password').style.display='';
+document.getElementById('upload_domain').style.display='';
+}
+}
+</script>
+<div id="artlist">
+    <form  action="{gr-:U('Site/insert')}" method="post">
+        <table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+            <tr>
+                <td  height="48" align="right"><strong>保存方式：</strong></td>
+                <td><select onchange="changeuploadtype(this.value)" name="upload_type" id="upload_type"><option value="local"<?php if (C('upload_type')==''||C('upload_type')=='local'){echo ' selected';}?>>保存到本服务器</option><option value="gfile"<?php if (C('upload_type')=='gfile'){echo ' selected';}?>>保存到又拍云</option></select>
+            </td>
+        </tr>
+        <tr id="upload_bucket" class="gfile"<?php if (C('upload_type')==''||C('upload_type')=='local'){echo ' style="display:none"';}?>>
+            <td  height="48" align="right"><strong>BUCKET：</strong></td>
+            <td><input type="text" name="up_bucket" value="{gr-:C('up_bucket')}" class="form-control empty" size="45" /><span></span>
+        </td>
+    </tr>
+    <tr id="upload_secret" class="gfile"<?php if (C('upload_type')==''||C('upload_type')=='local'){echo ' style="display:none"';}?>>
+        <td  height="48" align="right"><strong>FORM_API_SECRET：</strong></td>
+        <td><input type="text" name="up_form_api_secret" value="{gr-:C('up_form_api_secret')}" class="form-control empty" size="45" /><span></span>
+    </td>
+</tr>
+<tr id="upload_username" class="gfile"<?php if (C('upload_type')==''||C('upload_type')=='local'){echo ' style="display:none"';}?>>
+    <td  height="48" align="right"><strong>操作员用户名：</strong></td>
+    <td><input type="text" name="up_username" value="{gr-:C('up_username')}" class="form-control empty" size="45" /><span></span>
+</td>
+</tr>
+<tr id="upload_password" class="gfile"<?php if (C('upload_type')==''||C('upload_type')=='local'){echo ' style="display:none"';}?>>
+<td  height="48" align="right"><strong>操作员密码：</strong></td>
+<td><input type="password" name="up_password" value="{gr-:C('up_password')}" class="form-control empty" size="45" /><span></span>
+</td>
+</tr>
+<tr id="upload_domain" class="gfile"<?php if (C('upload_type')==''||C('upload_type')=='local'){echo ' style="display:none"';}?>>
+<td  height="48" align="right"><strong>云存储域名：</strong></td>
+<td><input type="text" name="up_domainname" value="{gr-:C('up_domainname')}" class="form-control empty" size="45" /><span class="text-warning">不包含http://</span>
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>上传文件类型：</strong></td>
+<td><input type="text" name="up_exts" value="{gr-:C('up_exts')}" class="form-control empty" size="45" /><span class="text-warning">多类型用,隔开</span>
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>上传文件大小限制：</strong></td>
+<td><input type="text" name="up_size" value="{gr-:C('up_size')}" class="form-control empty" size="45" /><span class="text-warning">Kb</span>
+</td>
+</tr>
+<tr style="display:none">
+<td  height="48" align="right"><strong>文件存储路径：</strong></td>
+<td><input type="text" name="up_path" value="{gr-:C('up_path')}" class="form-control empty" size="45" /><span  class="text-warning">例:/Public/</span>
+</td>
+</tr>
+<tr style="display:none">
+<td  height="48" align="right"><strong>微信过期提醒：</strong></td>
+<td><input type="text" name="connectnum" value="{gr-:C('connectnum')}" class="form-control empty" size="45" /><span class="text-warning">释：当微信请求超过或用户费用到期提示信息</span>
+</td>
+</tr>
+<input type="hidden" name="files" value="upfile.php" />
+<tr>
+<td height="48" colspan="2">
+<div id="addkey"></div>
+<div style="padding-left:100px;">
+<input type="submit" class="btn btn-primary" value="保存" />
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>
+</block>

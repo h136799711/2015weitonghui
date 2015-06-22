@@ -1,0 +1,54 @@
+<include file="Public/basehead"/>
+<body style="background:#fff">
+    <if condition="I('get.error',-1) eq -1">
+    <div class="bg-warning tip">您可直接上传本地文件或从素材库中选择已上传文件</div>
+    <form enctype="multipart/form-data" action="{gr-:U('User/GFile/upload')}" id="thumbForm" method="POST" >
+        <div style="font-size:14px;">选择本地文件：<br><br>
+            <input type="file" style="width:80%;border:1px solid #ddd" name="photo" />
+        </div>
+        <div style="padding:20px 0;text-align:center;">
+            <input id="submitbtn" name="doSubmit" type="submit" class="btn btn-primary" value="上传" onclick="this.value='上传中...'" />
+            <input name="btnchoose" onclick="location.href='{gr-:U('Attachment/my',array('type'=>'my'))}'" type="button" class="btn btn-primary" value="从素材库选择" />
+        </div>
+        <input type="hidden" value="" id="width" name="width" />
+        <input type="hidden" value="" id="height" name="height" />
+    </form>
+    <script>
+                                if (art.dialog.data('width')) {
+                                document.getElementById('width').value = art.dialog.data('width');// 获取由主页面传递过来的数据
+                                document.getElementById('height').value = art.dialog.data('height');
+                                };
+    </script>
+    <else />
+    <div class="text-center alert <php>if($_GET['error']==0){echo 'alert-info';}else{echo 'alert-warning';}</php> " >
+        <php>if($_GET['error']==0){echo '上传成功';}else{echo $_GET['msg'];}</php>
+        <eq name="Think.get.error" value="1">
+        <a class="btn btn-primary" href="{gr-:U('User/GFile/upload',array('token'=>getToken()))}">
+        重新上传
+        </a>
+        </eq>
+    </div>
+    </if>
+    <script>
+                                function appendImg(domid,imgsrc){
+                                        var img = document.creatElement("img");
+                                        img.src = imgsrc;
+                                }
+
+                                var domid=art.dialog.data('domid');
+                                // 返回数据到主页面
+                                function returnHomepage(url){
+                                    var origin = artDialog.open.origin;
+                                    var dom = origin.document.getElementById(domid);
+                                    var domsrcid=domid+'_src';
+                                    if(origin.document.getElementById(domsrcid)){
+                                    origin.document.getElementById(domsrcid).src=url;
+                                    }
+                                    dom.value=url;
+                                    setTimeout("art.dialog.close()", 1500 )
+                                }
+                                <if condition="I('get.error',-1) eq 0" >
+                                    returnHomepage("{gr-:I('msg')}");
+                                </if>
+    </script>
+    <include file="Public/basefooter"/>

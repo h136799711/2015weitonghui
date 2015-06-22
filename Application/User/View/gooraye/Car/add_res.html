@@ -1,0 +1,147 @@
+<include file="Public/head"/>
+<include file="Car/menu"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/default_user_com.css" media="all">
+<script src="__JS__/date/WdatePicker.js"></script>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="__STATIC__/daterangepicker/daterangepicker-bs3.css" />
+<script type="text/javascript" src="__STATIC__/daterangepicker/moment.js"></script>
+<script type="text/javascript" src="__STATIC__/daterangepicker/daterangepicker.js"></script>
+<link rel="stylesheet" href="__STATIC__/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="__STATIC__/kindeditor/plugins/code/prettify.css" />
+<script src="__STATIC__/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script>
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#info', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson : '{gr-:U("User/GFile/kindedtiropic")}',
+items : [
+'source','undo','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr']
+});
+});
+
+function setlatlng(longitude,lat){
+  art.dialog.data('longitude', longitude);
+  art.dialog.data('latitude', latitude);
+  // 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+  // document.getElementById('aInput').value = art.dialog.data('test');
+  art.dialog.open("{gr-:U('Map/setLatLng',array('token'=>$token,'id'=>$id))}",{lock:false,title:'设置经纬度',width:900,height:400,resize:true,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+
+</script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+  <h4>预约系统设置  ---- <if condition="$addtype eq 'drive'">预约试驾<else/>预约保养</if> </h4><!--a href="javascript:history.go(-1);return false;" class="btn btn-primary" data-top>返回</a-->
+ </div>
+  <div class=" bgfc">
+  <form action="" method="post" class="form-horizontal form-validate" novalidate="novalidate">
+ <input type="hidden" name="rid" id="rid" value="123"/>
+ <input type="hidden" name="addtype" value="{gr-$addtype}"/>
+<if condition="$reslist['id'] neq ''">
+  <input type="hidden" name="id" id="id" value="{gr-$reslist['id']}"/>
+</if>
+    <div class="control-group">
+        <label for="title" class="control-label">图文消息标题：</label>
+        <div class="controls">
+           <input type="text" placeholder="请输入图文消息标题" name="title" id="title" class="span4"  value="{gr-$reslist['title']}" schoolSet /><span class="maroon">*</span><span class="help-inline">尽量简单，不要超过20字</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="keyword" class="control-label">触发关键词：</label>
+        <div class="controls">
+            <input type="text" name="keyword" id="keyword" class="span4" schoolSet value="{gr-$reslist['keyword']}"><span class="maroon">*</span><span class="help-inline">只能设置一个关键字</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label for="coverurl" class="control-label">图文封面：</label>
+<!--试驾预约-->
+    <if condition="$addtype eq 'drive'">
+
+        <div class="controls">
+      <img class="thumb_img" id="picurl_src" src="{gr-$reslist['picurl']|default='__IMG__/car/yuyue.jpg'}" style="max-height:100px;">
+      <input id="picurl" type="text" class="span4" name="picurl" class="input-xlarge"  schoolSet data-rule-url="true" value="{gr-$reslist['picurl']|default='__IMG__/car/yuyue.jpg'}" />
+          <span class="help-inline">
+               <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('picurl',720,400,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('picurl')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>
+              <span class="help-inline">建议尺寸：宽720像素，高400像素</span>
+          </span>
+       </div>
+<else/>
+ <div class="controls">
+      <img class="thumb_img" id="picurl_src" src="{gr-$reslist['picurl']|default='__IMG__/car/baoyang.jpg'}" style="max-height:100px;">
+      <input id="picurl" type="text" class="span4" name="picurl" class="input-xlarge"  schoolSet data-rule-url="true" value="{gr-$reslist['picurl']|default='__IMG__/car/baoyang.jpg'}" />
+          <span class="help-inline">
+               <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('picurl',720,400,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('picurl')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>
+              <span class="help-inline">建议尺寸：宽720像素，高400像素</span>
+          </span>
+       </div>
+</if>
+    </div>
+     <div class="control-group">
+    <label for="address" class="control-label">预约地址：</label>
+     <div class="controls">
+        <input type="text" name="address" id="address" class="span4"  value="{gr-$reslist['address']}" schoolSet  placeholder="请输入接待预约用户的地址"/><span class="maroon">*</span><span class="help-inline">如合肥市政务区南二环路3818号万达广场</span>
+    </div>
+ </div>
+    <div class="control-group">
+    <label for="suggestId" class="control-label">地图标识：</label>
+         <div class="controls">
+
+          经度 <input type="text" id="longitude"  name="lng" size="14" class="form-control" value="{gr-$reslist['lng']}" />
+          纬度 <input type="text" id="latitude" name="lat" size="14"  class="form-control" value="{gr-$reslist['lat']}" />
+          <a class="btn btn-warning btn-sm"  href="###" onclick="setlatlng($('#longitude').val(),$('#latitude').val())"><i class="mdi-maps-pin-drop"></i>在地图中查看/设置</a>
+         </div>
+    </div>
+
+<div class="control-group">
+         <label for="estate_desc" class="control-label">预约电话：</label>
+         <div class="controls">
+             <input type="text" name="tel" id="tel" class="span4" value="{gr-$reslist['tel']}"  schoolSet  placeholder="请输入接收预约的电话号码"/><span class="maroon">*</span><span class="help-inline">如0575-89974522</span>
+         </div>
+     </div>
+     <div class="control-group">
+         <label for="project_brief" class="control-label">订单页头部图片：</label>
+<!--试驾预约-->
+    <if condition="$addtype eq 'drive'">
+         <div class="controls">
+             <img class="thumb_img" id="headpic_src" src="{gr-$reslist['headpic']|default='__IMG__/car/yuyue.jpg'}" style="max-height: 100px;">
+              <input id="headpic"type="text"class="input-large" name="headpic" class="span4 px"  schoolSet data-rule-url="true" value="{gr-$reslist['headpic']|default='__IMG__/car/yuyue.jpg'}" />
+            <span class="maroon">*</span>
+            <span class="help-inline">
+            <a href="###" onclick="gfilePicUpload('headpic',720,400,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a class="btn btn-warning btn-sm" href="###" onclick="viewImg('headpic')"><i class="mdi-action-pageview"></i>预览</a>
+         </div>
+<else/>
+ <div class="controls">
+             <img class="thumb_img" id="headpic_src" src="{gr-$reslist['headpic']|default='__IMG__/car/baoyang.jpg'}" style="max-height: 100px;">
+              <input id="headpic"type="text"class="input-large" name="headpic" class="span4 px"  schoolSet data-rule-url="true" value="{gr-$reslist['headpic']|default='__IMG__/car/baoyang.jpg'}" />
+            <span class="maroon">*</span>
+            <span class="help-inline">
+            <a href="###" onclick="gfilePicUpload('headpic',720,400,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" class="btn btn-warning btn-sm" onclick="viewImg('headpic')"><i class="mdi-action-pageview"></i>预览</a>
+         </div>
+</if>
+
+     </div>
+     <div class="control-group">
+        <label for="traffic_desc" class="control-label">订单详情：</label>
+        <div class="controls">
+          <textarea class="input-xlarge" id="info" name="info" style="width:560px;height:75px;border:1px #000 solid"  placeholder="显示在图文封面下方，文字请尽量的简洁">{gr-$reslist['info']}</textarea>
+        </div>
+    </div>
+
+                                <div class="form-actions">
+            <button id="bsubmit" type="submit" data-loading-text="提交中..." class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>　<button type="button" class="btn btn-primary" onclick="javascript:history.back(-1)">取消</button>
+        </div>
+                        </div>
+
+</form>
+  </div>
+
+
+        </div>
+
+<include file="Public/footer"/>

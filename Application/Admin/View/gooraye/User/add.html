@@ -1,0 +1,94 @@
+
+<extend name="template/base"  />
+<block name="bodyIncludes" >
+
+<div id="artlist" >
+<gt name="info.id" value="0">
+			<form action="{gr-:U('User/edit')}" method="post" name="form" id="myform">
+			<input type="hidden" name="id" value="{gr-$info.id}">
+			
+		<else />
+			<form action="{gr-:U('User/add')}" method="post" name="form" id="myform">
+			对不起，系统目前只支持一个管理员操作
+		</gt>
+		
+			<table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="addn" <gt name="info.id" value="0"><else />style="display:none"</gt>>
+
+				 <tr>
+					<th colspan="4">{gr-$title}</th>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>用户名称：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="username" class="form-control empty" size="45" value="{gr-$info.username}" <eq name="info.username" value="admin">readonly="readonly"</eq>>
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>密　　码：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="password" name="password" class="form-control empty" size="45" value="">
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>确认密码：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="password" name="repassword" class="form-control empty" size="45"/>
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>用户角色：</strong></td>
+					<td colspan="3" class="lt">
+						<select name="role" style="width:136px">
+							<volist name="role" id="vo">
+								<option value="{gr-$vo.id}" <eq name="vo.id" value="$info.role">selected=""</eq> >{gr-$vo.name}</option>
+							</volist>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>用户状态：</strong></td>
+					<td colspan="3" class="lt">
+						<div class="radio radio-primary">
+							<label >
+								<input type="radio" class="radio" class="form-control empty" value="1" name="status" id="status1" <if condition="($info.status eq 1) OR ($info['status'] eq '') ">checked=""</if> >
+								启用
+							</label>
+						</div>
+						<div class="radio radio-primary">
+							<label >
+								<input type="radio" class="radio" class="form-control empty"  value="0" name="status" id="status2" <eq name="info.status" value="0">checked=""</eq> >
+							关闭
+							</label>
+						</div>
+							
+							
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong>备注说明：</strong></td>
+					<td colspan="3" class="lt">
+						<input type="text" name="remark" class="form-control empty" size="45" value="{gr-$info.remark}"/>
+					</td>
+				</tr>
+				<tr>
+					<td height="48" align="right"><strong></strong></td>
+					
+					</td>
+				</tr>
+	<tr>
+		<td colspan="4">
+			<gt name="info.id" value="0">
+				<input class="btn btn-primary"  type="submit" name="dosubmit" value="修 改" >
+				<else />
+				<input class="btn btn-primary" type="submit" name="dosubmit" value="添 加"></gt>
+			&nbsp;
+			<input class="btn btn-primary" type="button" onclick="javascript:history.back(-1);" value="返 回" ></td>
+	</tr>
+</table>
+</form>
+<br />
+<br />
+<br />
+
+</div>
+</block>

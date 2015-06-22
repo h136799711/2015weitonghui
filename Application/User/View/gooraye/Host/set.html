@@ -1,0 +1,97 @@
+ <include file="Public/head" /> 
+ <script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+  <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">   
+   <div class="righttitle"> 
+    <h4>商家设置 </h4> 
+    <a href="{gr-:U('Host/index',array('token'=>$token))}" class="btn btn-primary btn-sm" data-top><i class="mdi-content-reply"></i>返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <input type="hidden" name="id" value="{gr-$set.id}" /> 
+     
+    <div class=" bgfc"> 
+     <table class="table" > 
+      <tbody> 
+       <tr> 
+        <th width="120"><span class="red">*</span>关键词：</th> 
+        <td><input type="text" name="keyword" value="{gr-$set.keyword}" class="form-control" style="width:400px;" /> <span class="red">只能写一个关键词</span></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>商家名称：</th> 
+        <td><input type="text" name="title" value="{gr-$set.title}" class="form-control" style="width:400px;" /></td> 
+       </tr> 
+       <tr style="display:none"> 
+        <th><span class="red">*</span>商家地址：</th> 
+        <td><input type="text" name="address" value="{gr-$set.address}" class="form-control" style="width:400px;" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>商家电话：</th> 
+        <td><input type="text" name="tel" value="{gr-$set.tel}" class="form-control" style="width:400px;" /> 电话号码</td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>手机号：</th> 
+        <td><input type="text" name="tel2" value="{gr-$set.tel2}" class="form-control" style="width:400px;" /> 手机号</td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>订单封面图片：</th> 
+        <td><input type="text" name="ppicurl" value="{gr-$set.ppicurl}" id="pic" class="form-control" style="width:400px;" />   <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('pic')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> &nbsp;&nbsp;推荐大小为720x400</td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>订单页头部图片：</th> 
+        <td><input type="text" id="pic1" name="headpic" value="<if condition="$set.headpic neq false">{gr-$set.headpic}<else/>__IMG__/cart_info/online.jpg</if>" class="form-control" style="width:400px;" />  <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic1',720,125,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('pic1')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> &nbsp;&nbsp;推荐大小为720x400 不会自定义请留空:填写图片外链地址，推荐大小为720x125，高度可根据自身需求调整。<br />不填默认本图片: <a target="ss" href="{gr-$cfg_siteUrl}__IMG__/cart_info/online.jpg" class="btn btn-warning btn-sm">点击查看</a> </td> 
+       </tr> 
+        
+       <tr> 
+        <th valign="top"><span class="red">*</span>商家图片：</th> 
+        <td valign="top">
+         <div class="bdrcontent "> 
+          <div id="div_ptype"> 
+           <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+            <thead> 
+             <tr> 
+              <th width="160">文字描述</th>  
+              <th width="160">图片地址</th> 
+              <th width="160">图片跳转地址以http://开头</th> 
+               
+             </tr> 
+            </thead> 
+            <tbody> 
+             <tr> 
+              <td width="160"><input type="text" name="name" value="{gr-$set.name}" class="form-control" style="width:160px;" /></td>  
+              
+              <td width="200"><input type="text" name="picurl" value="{gr-$set.picurl}" id="pic2" class="form-control" style="width:160px;" />   <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic2',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('pic2')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> &nbsp;&nbsp;</td> 
+              <td width="200"><input type="text" name="url" value="{gr-$set.url}" class="form-control" style="width:160px;" /></td> 
+               
+             </tr> 
+            </tbody> 
+            
+           </table> 
+          </div> 
+         </div> 
+ 
+</td> 
+       </tr> 
+       <tr> 
+        <th valign="top"><span class="red">*</span>商家介绍：</th> 
+        <td valign="top"><textarea class="form-control" id="info" name="info" style="width: 410px; height: 180px;">{gr-$set.info}</textarea></td> 
+       </tr> 
+       <tr> 
+        <th valign="top"><span class="red">*</span>订单说明：</th> 
+        <td valign="top"><textarea class="form-control" id="info2" name="info2" style="width: 410px; height: 180px; ">{gr-$set.info2}</textarea></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+    </div>
+        <div class=""> 
+       <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+       <tbody>
+       <tr>         
+        <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td>  <td><button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button> | <a href="{gr-:U('Host/index',array('token'=>$token))}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public/footer" />

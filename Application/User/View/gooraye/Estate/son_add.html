@@ -1,0 +1,48 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<include file="Estate/menu"/>
+
+<div class="righttitle">
+  <h4>添加子楼盘 </h4><a href="javascript:history.go(-1);return false;" class="btn btn-primary" data-top><i class="mdi-content-reply"></i>返回</a>
+ </div>
+
+    <div class=" bgfc">
+	  <form class="form" method="post" action="" target="_top" >
+		<table class="table" >
+			<tbody>
+				<tr>
+				  <th valign="top"><span class="red">*</span>子楼盘名称：</th>
+				  <td>
+					 <input type="text" id="title" name="title" value="{gr-$son['title']}" class="input-large px" schoolSet data-rule-maxlength="20">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">尽量简单，不要超过20字</span></td>
+				</tr>
+				<tr>
+					<th width="120">显示顺序</th>
+					<td> <input type="text" id="sort" name="sort" value="{gr-$son['sort']|default=1}" class="input-mini px" schoolSet data-rule-number="true">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">数值越大越靠前</span></td>
+				</tr>
+				<tr>
+					<th>子楼盘介绍：</th>
+					<td><textarea id="description" name="description" style="width:560px;height:75px;border: 1px solid rgb(153, 153, 153);" data-rule-maxlength="150" placeholder="可不填">{gr-$son['description']}</textarea></td>
+				</tr>
+				<th>&nbsp;</th>
+				  <if condition="$son['id'] neq ''">
+                                    <input type="hidden" name="id" value="{gr-$son['id']}" />
+
+                                    </if>
+                                    <input type="hidden" name="pid" value="{gr-$pid}">
+					<td>
+						<button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+						<a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div>
+
+
+        </div>
+<include file="Public/footer"/>

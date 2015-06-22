@@ -1,0 +1,55 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4>直达号对接配置 </h4>
+    </div>
+    <form class="form" method="post" action="" enctype="multipart/form-data">
+        <table class="table" >
+            <tbody>
+                <tr>
+                    <th valign="top">开启/关闭</th>
+                    <td>
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="status" value="1" id="turnon" <if condition="$info['status'] eq 1">checked</if> />
+                                开启
+                            </label>
+                        </div>
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="status" value="0" id="turnoff" <if condition="$info['status'] eq 0">checked</if> />
+                                关闭
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="120">移动站点验证地址</th>
+                    <td>{gr-:C('site_url')}{gr-:U('Wap/Index/index',array('token'=>$token))}</td>
+                </tr>
+                <tr>
+                    <th width="120">验证代码</th>
+                    <td><textarea style="width:560px;height:75px" name="code" id="code" class="form-control">{gr-$info.code}</textarea></td>
+                </tr>
+                <tr>
+                    <th width="120">SiteMap建议更新周期</th>
+                    <td>
+                        <b style="font-szie:18px;margin-left:50px;">每天</b>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="120">SiteMap地址</th>
+                    <td><span id="sitemapurl">{gr-:C('site_url')}{gr-:U('Sitemap/index',array('token'=>$token,'freq'=>'daily'))}</span></td>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td>
+                        <button type="submit" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+                        <a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<include file="Public/footer"/>

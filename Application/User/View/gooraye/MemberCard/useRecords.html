@@ -1,0 +1,70 @@
+<include file="Public/head"/>  
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+         
+          <div class="righttitle">
+              <h4 >当前位置：<a href="{gr-:U('MemberCard/index',array('token'=>$token))}">会员卡</a> >> <a href="{gr-:U('MemberCard/index',array('token'=>$token))}">{gr-:htmlspecialchars_decode($thisCard['cardname'])}</a> >> <a href="{gr-:U('User/MemberCard/'.$a,array('token'=>$token,'id'=>$thisCard['id']))}">{gr-$thisItem.title}</a> >> 使用统计</h4>
+               
+              <div class="clearfix"></div>
+          </div>
+
+          <div class="">
+          <form method="post" action="#" id="info">
+          <input name="delall" type="hidden" value="del">
+           <input name="wxid" type="hidden" value="#">
+            <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+              <thead>
+                <tr>
+					<th class="select" style="width:50px">选择</th>
+					<th style="width:100px">卡号</th>
+					<th style="width:80px;">姓名</th>
+					<th style="width:100px">电话</th>
+					<th style="width:160px;">消费金额</th>
+					<th style="width:150px;">操作员</th>
+					<th style="width:150px;">时间</th>
+					<th class="edit norightborder">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list" id="c">           
+                <tr>
+					  <td>  <input type="checkbox" name="del_id[]" value="" class="checkitem"></td>
+					  <td>{gr-$c.cardNum}</td>
+					  <td>{gr-$c.userName}</td>
+					  <td>{gr-$c.userTel}</td>
+					  <td>{gr-$c.expense}</td>
+					  <td>{gr-$c.operName}</td>
+					  <td><nobr>{gr-$c.time|date='Y-m-d H:i:s',###}</nobr></td>
+					  <td class="norightborder"><a href="javascript:drop_confirm('您确定要删除吗?','{gr-:U('MemberCard/useRecord_del',array('itemid'=>$c['id'],'id'=>$thisCard['id']))}');"><i class="mdi-action-delete"></i>删除</a>
+					  </td>
+                </tr>
+				</volist>
+      			 
+              </tbody>
+            </table>
+           </form> 
+			<script>
+			   function checkvotethis() {
+					var aa=document.getElementsByName('del_id[]');
+					var mnum = aa.length;
+					j=0;
+					for(i=0;i<mnum;i++){
+					if(aa[i].checked){
+					j++;
+					}
+					}
+					if(j>0) {
+					document.getElementById('info').submit();
+					} else {
+					alert('未选中内容！')
+					}
+				}
+			</script>
+          </div>
+          <div >
+            <div class="pageNavigator right">
+                 <div class="pages">{gr-$page}</div>
+             </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+<include file="Public/footer"/>

@@ -1,0 +1,39 @@
+<extend name="template/base"  />
+<block name="bodyIncludes" >
+
+<include file="Site:public" />
+<div id="artlist">
+ <form id="myform" action="{gr-:U('Site/insert')}" method="post">
+<table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+
+    <tr> 
+      <td  height="48" align="right"><strong>支付宝帐号</strong></td>
+      <td><input type="text" name="alipay_name" value="{gr-:C('alipay_name')}" class="form-control empty" size="45" /><span>例：gooraye@163.COM</span>
+	  </td>
+    </tr>
+	 <tr> 
+      <td  height="48" align="right"><strong>支付宝PID：</strong></td>
+      <td><input type="text" name="alipay_pid" value="{gr-:C('alipay_pid')}" class="form-control empty" size="45" /><span>请登陆支付宝商家服务中去查看</span>
+	  
+    </tr>
+	 <tr> 
+      <td  height="48" align="right"><strong>支付宝KEY：</strong></td>
+      <td><input type="text" name="alipay_key" value="{gr-:C('alipay_key')}" class="form-control empty" size="45" /><span>请登陆支付宝商家服务中去查看</span>
+    </tr> 
+
+   <input type="hidden" name="files" value="alipay.php" />
+    <tr> 
+      <td height="48" colspan="2">
+		  <div id="addkey"></div>
+		  <div style="padding-left:100px;">
+			<input type="submit" class="btn btn-primary" value="保存" />
+		  </div>
+	  </td>
+    </tr>
+	</form>
+</table><br />
+<br />
+<br />
+
+</div>
+</block>

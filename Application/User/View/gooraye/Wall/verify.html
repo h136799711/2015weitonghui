@@ -1,0 +1,94 @@
+<include file="Public/head"/>
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+         
+          <div >
+            <h3>大屏幕内容审核</h3>
+           
+                <a href='#' onclick="checkvotethis();" title='选中通过' class='btn btn-primary'><i class="fa fa-pencil"></i>选中通过</a>
+                <!-- <a href='#' title='选中通过' class='btn btn-primary'><i class="fa fa-pencil"></i>所有内容</a> -->
+            </div>          
+          <form method="post"  action="{gr-:U('Wall/verifyMsg',array('wallid'=>$_GET['wallid']))}" id="info" >
+            <input  type="hidden"  id="delids" name="delids"  />
+            <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <thead>
+                <tr>
+<th style="width:60px"><input type="checkbox" value="" id="check_box" onclick="selectall('ids');">全选</th>
+<th >内容</th>
+<th >操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                </tr>
+                <volist name="list" id="vo">
+                <tr>
+                  <td><input  type="checkbox" class="cbitem" name="ids" value="{gr-$vo['id']}" /></td>
+                  <td><div class="answer_text" style="height:auto;">{gr-$vo.content } <if condition="!empty($vo['picture'])"> <a href="{gr-$vo.picture}" target="_blank"><img src="{gr-$vo.picture}" width="60px" height="60px" /></a></if></div></td>
+                   <td class="norightborder"> 
+                    <a class="btn btn-warning btn-sm"  href="{gr-:U('Wall/verifyMsg',array('id'=>$vo['id'],'wallid'=>$vo['wallid'],'sb'=>1))}" title="通过">通过</a>
+                    <a class="btn btn-warning btn-sm"  href="{gr-:U('Wall/verifyMsg',array('id'=>$vo['id'],'wallid'=>$vo['wallid'],'sb'=>0))}" title="不通过">不通过</a>
+                    <a class="btn btn-warning btn-sm" href="{gr-:U('Wall/delMsg',array('id'=>$vo['id'],'wallid'=>$vo['wallid']))}"><i class="mdi-action-delete"></i>删除</a>
+                </td>
+          
+                </tr>
+                </volist>
+                             
+              </tbody>
+            </table>
+           </form> 
+           <script>
+   function checkvotethis() {
+var aa=document.getElementsByName('ids');
+var mnum = aa.length;
+j=0;
+var delids = '';
+for(i=0;i<mnum;i++){
+    if(aa[i].checked){
+    j++;
+    if(delids != ''){
+
+        delids += ","+aa[i].value;
+    }else{
+        delids += aa[i].value;
+    }
+// console.log(delids);
+    }
+}
+if(j>0) {
+
+document.getElementById("delids").value = delids;
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+function selectall(name) {
+    var checkItems=$('.cbitem');
+    if ($("#check_box").attr('checked')==false) {
+        $.each(checkItems, function(i,val){
+            val.checked=false;
+        });
+        
+    } else {
+        $.each(checkItems, function(i,val){
+            val.checked=true;
+        });
+    }
+}
+
+   </script>
+            <div class="pageNavigator right">
+                 <div class="pages">{gr-$page}</div>
+              </div>
+  <!--底部-->
+    </div>
+
+    <script language="JavaScript"> 
+function myrefresh(){ 
+window.location.reload(); 
+} 
+setTimeout('myrefresh()',10000); //指定5秒刷新一次 
+</script> 
+<include file="Public/footer"/>

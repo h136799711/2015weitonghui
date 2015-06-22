@@ -1,0 +1,47 @@
+<extend name="template/base"  />
+
+<block name="bodyIncludes" >
+
+<div class="bottom">
+<input type="submit" value="排序" class="btn btn-primary" />
+</div>
+<form action="{gr-:U('Group/role_sort')}" method="post">
+<table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="alist">
+	<tr>
+		<td width="70">排序权重</td>
+		<td width="70">ID</td>
+		<td width="350">角色名称</td>
+		<td >角色描述</td>
+		<td width="70">状态</td>
+		<td width="200">管理操作</td>
+	</tr>
+	<volist name="list" id="vo">
+		<tr>
+			<td align='center'>
+				<input type='text' value='{gr-$vo.sort}' size='3' name='sort[{gr-$vo.id}]'></td>
+			<td align='center'>{gr-$vo.id}</td>
+			<td >{gr-$vo.name}</td>
+			<td >{gr-$vo.remark}</td>
+			<td align='center'><eq name="vo.status" value="1"><font color="red">√</font><else/><font color="blue">×</font></eq> 
+			</td>
+			<td align='center'>
+				<a href="javascript:setting_access({gr-$vo.id}, '{gr-$vo.name}')">权限设置</a>
+				| <a href="{gr-:U('Group/edit/',array('id'=>$vo['id']))}">修改</a>
+				| <a href="javascript:void(0)" onclick="return confirmurl('{gr-:U('Group/del/',array('id'=>$vo['id']))}','确定删除该角色吗?')">删除</a>
+			</td>
+		</tr>
+	</volist>
+</table>
+
+</form>
+</block>
+
+<block name="bottomjsIncludes">
+	
+<script type="text/javascript">
+//权限设置
+function setting_access(id, name) {
+	window.top.art.dialog.open('{gr-:U("Group/access")}'+'?roleid='+id,{title: name+'权限设置', width: 600, height: 500});
+}
+</script>
+</block>

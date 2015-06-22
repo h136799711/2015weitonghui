@@ -1,0 +1,59 @@
+<include file="Public/head"/> 
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+        <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+<h4>“{gr-$thisForm.name}”信息列表 <if condition="$page">({gr-$page})</if> &nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary " href="{gr-:U('Selfform/index',array('token'=>$token))}"><i class="mdi-content-reply"></i>返回</a> </h4>
+
+<div class="searchbar right hide">
+<form method="post" action="">
+<input type="text" id="msgSearchInput" class="form-control" placeholder="输入关键词搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="{gr-$wxid}">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btn btn-warning btn-sm" title="搜索">
+</form>
+</div>
+<div class="clearfix"></div>
+</div>
+
+<div >
+<div class="clearfix"></div>
+</div>
+<div class="">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="40">ID</th>
+<th width="120">时间</th>
+<volist name="fields" id="item">
+<th>{gr-$item.displayname}</th>
+</volist>
+<th width="60" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="item"> 
+<tr>
+<volist name="item" id="citem">
+<td>{gr-$citem}</td>
+</volist>
+<td class="norightborder"><a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Selfform/infoDelete',array('id'=>$item['id'],'token'=>$token))}');"><i class="mdi-action-delete"></i>删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+
+</div>
+<div >
+<div class="pageNavigator right">
+<div class="pages">{gr-$page}</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<include file="Public/footer"/>

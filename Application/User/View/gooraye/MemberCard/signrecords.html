@@ -1,0 +1,105 @@
+<include file="Public/head"/>
+<script src="__JS__/date/WdatePicker.js"></script>  
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+         
+          <div class="righttitle">
+              <h4 >当前位置：<a href="{gr-:U('MemberCard/index',array('token'=>$token))}">会员卡</a> >> <a href="{gr-:U('MemberCard/members',array('token'=>$token,'id'=>$thisCard['id']))}">{gr-:htmlspecialchars_decode($thisCard['cardname'])}会员管理</a> >> {gr-$thisUser.truename}</h4>
+                 
+              <div class="clearfix"></div>
+          </div>
+      
+          <div class="">
+          
+         
+          <input name="delall"  type="hidden" value="del" />
+           <input name="wxid"  type="hidden" value="{gr-$wxid}" />
+           <h5 style="margin-top:20px;">会员资料</h5>
+            <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <thead>
+                <tr>
+				<th>卡号</th>
+				<th>微信名</th>
+				<th>姓名</th>
+        <th>联系电话</th>
+				<th>QQ号码</th> 
+        <th>领卡时间</th>
+        <th>积分</th>
+        <th>消费总额(元)</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+
+				 <volist id="list" name="members">
+                <tr>
+                  <td>{gr-$list.number}</td>
+                  <td>{gr-$list.wechaname}</td>
+                  <td>{gr-$list.truename}</td>
+                  <td>{gr-$list.tel}</td>
+                  <td>{gr-$list.qq}</td> 
+                  <td>
+                   <if condition="$list['getcardtime'] gt 0">
+                        {gr-$list.getcardtime|date='Y-m-d',###}
+                    <else/>
+                    无时间记录
+                    </if>                      
+                  </td>
+                  <td>{gr-$list.total_score}</td> 
+                  <td>{gr-$list.expensetotal}</td> 
+                </tr>
+				</volist>
+
+
+              </tbody>
+            </table>
+          
+<h5 style="margin-top:20px;">签到记录</h5>
+            <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <thead>
+                <tr>
+				<th>日期</th>
+				<th>获取积分</th>
+                </tr>
+              </thead>
+              <tbody>
+				 <volist id="r" name="records">
+                <tr>
+                  <td>{gr-$r.sign_time|date='Y-m-d',###}</td>
+                  <td>{gr-$r.expense}</td>
+                </tr>
+				</volist>
+
+              </tbody>
+            </table>
+          </div>
+            
+
+ 
+ 
+          <div >
+            <div class="pageNavigator right">
+                <div class="pages">{gr-$page}</div>
+              </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}
+  </script>
+  <!--底部-->
+  	</div>
+<include file="Public/footer"/>  

@@ -1,0 +1,68 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="yes" name="apple-touch-fullscreen">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta name="author" content="m.weitonghui.com">
+        <meta name="copyright" content="Copyright ©m.weitonghui.com 版权所有">
+        <meta name="revisit-after" content="1 days">
+        <title>微信安全支付</title>
+        <script type="text/javascript">
+                                //调用微信JS api 支付
+        function jsApiCall()
+        {
+	        WeixinJSBridge.invoke(
+	        'getBrandWCPayRequest',
+	        {gr-$jsApiParameters},
+	        function(res){
+	        	// WeixinJSBridge.log(res.err_msg);
+	        	// alert(res.err_msg);
+		if(res.err_msg=='get_brand_wcpay_request:ok'){
+		    	//支付成功
+        			document.getElementById('payfailed').style.display='none';
+			document.getElementById('paySuccess').style.display='';
+			// setTimeout("window.location.href = '{gr-$returnUrl}'",2000);
+
+		}else{
+			document.getElementById('paySuccess').style.display='none';
+			document.getElementById('payfailed').style.display='';
+			document.getElementById('content').innerHTML= res.err_code+'|'+res.err_desc+'|'+res.err_msg;
+		}
+	        }
+	        );
+        }
+        function callpay()
+        {
+	        if (typeof WeixinJSBridge == "undefined"){
+		        if( document.addEventListener ){
+		        	document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		        }else if (document.attachEvent){
+		        	document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+		        	document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		        }
+	        }else{
+	        	jsApiCall();
+	        }
+        }
+        </script>
+    </head>
+    <body>
+        <div align="center">
+            <div>
+                {gr-$jsApiParameters}
+                {gr-$error}
+            </div>
+        	<div id="paySuccess" style="display:none;">
+        		<p >支付成功！</p>
+        	</div>
+        	<div id="payfailed" style="display:none;">
+        		支付失败！<p id="content"></p>
+        	</div>
+            <button style="width:210px; height:30px; background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >贡献一下</button>
+        </div>
+    </body>
+</html>

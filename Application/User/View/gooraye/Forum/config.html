@@ -1,0 +1,93 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+
+    
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+
+<div class="righttitle">
+  <h4>讨论社区配置 </h4>
+ </div>
+<!--tab start-->
+<div class="tab">
+<ul class="list-unstyled nav nav-tabs">
+<include file="tabs"/> 
+</ul>
+</div>
+<!--tab end-->    
+    <div class=" bgfc">
+	  <form class="form" method="post" action="{gr-:U('Forum/set')}" target="_top" enctype="multipart/form-data">	 
+		<table class="table" >
+			<tbody>
+				<tr>
+				  <th valign="top"><span class="red">*</span>关键词：</th>
+				  <td>
+					<span class="red">论坛 或者 讨论社区 —— 当用户输入该关键词时，将会触发此回复。</span></td>
+				</tr>
+				
+				<tr>
+					<th width="120">讨论社区名字</th>
+					<td><input type="text" name="forumname" value="{gr-$conf.forumname|default=$wxname.'官方粉丝社区'}" class="form-control" style="width:250px;"></td>
+				</tr>
+				<tr>
+					<th>回复图片：</th>
+					<td><input type="text" name="picurl" id="picurl" value="{gr-$conf.picurl}" class="form-control" style="width:550px;"><script src="__STATIC__/gfile.js"></script>  <a href="###" onclick="gfilePicUpload('picurl',360,200,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" class="btn btn-warning btn-sm" onclick="viewImg('picurl')"><i class="mdi-action-pageview"></i>预览</a><br/> </td>
+				</tr>
+				
+				<tr>
+					<th>讨论社区Logo：</th>
+					<td><input type="text" name="logo" id="logo" value="{gr-$conf.logo}" class="form-control" style="width:550px;">  <a href="###" onclick="gfilePicUpload('logo',1500,1000,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('logo')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a><br/> </td>
+				</tr>				
+				<tr>
+					<th>自定义背景</th>
+					<td><input type="text" name="bgurl" id="bgurl" value="{gr-$conf.bgurl}" class="form-control" style="width:550px;">  <a href="###" onclick="gfilePicUpload('bgurl',1500,1000,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('bgurl')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a><br/> </td>
+				</tr>
+				<tr>
+					<th width="120">图文回复介绍：</th>
+					<td><textarea style="width:560px;height:75px" name="intro" id="intro" class="form-control">{gr-$conf.intro}</textarea></td>
+				</tr>
+				
+				
+				<tr>
+					<th width="120">是否需要审核新帖</th>
+					<td>
+						<input type="radio" name="ischeck" id="nocheck" <if condition="$conf['ischeck'] eq 0">checked</if> value="0" /><label for="nocheck">不需要 &nbsp;</label>
+						<input type="radio" name="ischeck" id="check" <if condition="$conf['ischeck'] eq 1">checked</if> value="1" /><label for="check">需要</label>
+					</td>
+				</tr>
+								
+				<tr>
+					<th width="120">是否需要审核新评论</th>
+					<td>
+						<input type="radio" name="comcheck" id="nocomcheck" <if condition="$conf['comcheck'] eq 0">checked</if> value="0" /><label for="nocomcheck">不需要 &nbsp;</label>
+						<input type="radio" name="comcheck" id="comcheck" <if condition="$conf['comcheck'] eq 1">checked</if> value="1" /><label for="comcheck">需要</label>
+					</td>
+				</tr>
+				
+				<tr>
+					<th width="120">开启/关闭讨论社区</th>
+					<td>
+						<input type="radio" name="isopen" id="open" <if condition="$conf['isopen'] eq 1">checked</if> value="1" /><label for="open">开启 &nbsp;</label>
+						<input type="radio" name="isopen" id="noopen" <if condition="$conf['isopen'] eq 0">checked</if> value="0" /><label for="noopen">关闭</label>
+						 &nbsp; &nbsp; &nbsp;<tt style="color:red">(*选择关闭将不能打开讨论社区)</tt>
+					</td>
+				</tr>
+				
+				
+				
+				<th>&nbsp;</th>
+					<td>
+						<input type="hidden" name="token" value="{gr-$_GET['token']}" />
+						<button type="submit" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+						<a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div> 
+ 
+  
+        </div>
+<include file="Public/footer"/>

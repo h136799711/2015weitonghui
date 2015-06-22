@@ -1,0 +1,58 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4>文章分类管理<if condition="$fid neq 0">({gr-$thisClassify.name}子分类)</if>  </h4>
+        <if condition="$_GET['fid'] neq ''"> <a href="javascript:history.go(-1);"  class="btn btn-primary" data-top ><i class="mdi-content-reply"></i><i class="mdi-content-reply"></i>返回</a></if>
+    </div>
+    <div class="cLineC" style="line-height: 32px;">
+        <a href="<if condition="$fid neq 0">{gr-:U('Classify/add',array('fid'=>$fid))}<else/>{gr-:U('Classify/add')}</if>" class="btn btn-primary"><i class="mdi-content-add"></i>添加<if condition="$fid neq 0">{gr-$thisClassify.name}子</if>分类</a>
+    </div>
+
+    <div class=" form">
+        <div class="bdrcontent ">
+            <div id="div_ptype">
+                <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th style=" width:120px;">分类名称</th>
+                            <th >显示顺序</th>
+                            <th>分类图片 </th>
+                            <th >外链</th>
+                            <th style=" width:80px;"  >首页显示</th>
+                            <th style="width:220px;">操作</th>
+                        </tr>
+                    </thead>
+                    <volist name="info" id="vo">
+                    <tr>
+                        <td>{gr-$vo.name}</td>
+                        <td>{gr-$vo.sorts}</td>
+                        <td><img src="{gr-$vo.img}" class="thumbnail"  /></td>
+                        <td  style="width:120px" class="text-ellipsis bg-info">{gr-$vo.url}</td>
+                        <td><eq name="vo.status" value="1">显示<else/>不显示</eq></td>
+                        <td>
+                            <a href="{gr-:U('User/Img/index',array('token'=>getToken()))}" class="btn btn-primary btn-sm"><i class="mdi-content-add"></i>添加文章</a>
+                            <a class="btn btn-warning btn-sm"  href="{gr-:U('Classify/index',array('fid'=>$vo['id']))}"><i class="mdi-content-add-circle"></i>子分类</a>
+                            <a class="btn btn-warning btn-sm" href="<?php if ($vo['fid']==0){?>{gr-:U('Classify/edit',array('id'=>$vo['id']))}<?php }else{?>{gr-:U('Classify/edit',array('id'=>$vo['id'],'fid'=>$vo['fid']))}<?php }?>"><i class="mdi-editor-mode-edit"></i>编辑</a>
+                            <a class="btn btn-warning btn-sm"  href="javascript:drop_confirm('您确定要删除吗?', '<?php if ($vo['fid']==0){?>{gr-:U('Classify/del',array('id'=>$vo['id']))}<?php }else{?>{gr-:U('Classify/del',array('id'=>$vo['id'],'fid'=>$vo['fid']))}<?php }?>');"><i class="mdi-action-delete"></i>删除</a>
+                            </nobr>
+                        </td>
+                    </tr>
+                    </volist>
+
+                </table>
+            </div>
+        </div>
+        <div class="footactions" style="padding-left:10px">
+            <div class="pages">{gr-$page}</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+<!--底部-->
+</div>
+<include file="Public/footer"/>

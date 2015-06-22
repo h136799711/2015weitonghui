@@ -1,0 +1,36 @@
+ <include file="Public/head" /> 
+ <script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+  <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 "> 
+   <div class="righttitle"> 
+    <h4><span class="red">{gr-$catData.name}</span>的分类属性设置</h4> 
+    <a href="{gr-:U('Store/attributes',array('token' => $token, 'catid' => $catid))}" class="btn btn-primary btn-sm" data-top><i class="mdi-content-reply"></i>返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <input type="hidden" name="id" value="{gr-$set.id}" /> 
+     
+    <div class=" bgfc"> 
+     <table class="table" > 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td><input type="text" name="name" value="{gr-$set.name}" class="form-control" style="width:400px;" /></td> 
+       </tr>
+       <tr>
+        <th><span class="red">*</span>属性值：</th> 
+        <td><input type="text" name="value" value="{gr-$set.value}" class="form-control" style="width:400px;" /></td> 
+       </tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <input type="hidden" value="{gr-:$catid}" name="catid" />
+       <input type="hidden" value="{gr-:$token}" name="token" />
+       <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button> &nbsp; <a href="{gr-:U('Store/attributes',array('token' => $token, 'catid' => $catid))}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public/footer" />

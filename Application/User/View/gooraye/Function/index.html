@@ -1,0 +1,54 @@
+<include file="Public/head"/>
+
+<link href="__CSS__/switch.css" rel="stylesheet" type="text/css" />
+
+<!-- col-xs-9 col-sm-9  col-md-10 col-lg-10  START -->      
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+
+
+<table class="table table-striped">
+  <thead> 
+    <th>序号</th>
+    <th>功能名称</th>
+    <th>用法例子</th>
+    <th>开关</th>
+  </thead>
+  <tbody> 
+    <empty name="fun">  
+  <tr>
+       <td colspan="4">无相关内容</td>
+  </tr>
+  <else /> 
+  <volist name="fun" id="list" key="b">
+    <tr>
+    <td>{gr-$b}</td>
+  <td>
+        {gr-$list.name}
+  </td>
+  <td>
+       {gr-$list.info}
+
+  </td>
+  <td>
+
+        <input  type="checkbox" id="switch{gr-$list.id}" class='switch switch-flat switch-gray'  onchange="changeapp('{gr-:U('User/TokenOpen/add')}','{gr-:U('User/TokenOpen/del')}',this,'{gr-$Think.session.token}','{gr-$list.id}')"  value="{gr-$list.id}" <if condition="in_array($list['funname'],$check)">checked="checked"</if>/>
+        <label class='switch-btn' for='switch{gr-$list.id}' style="display:inline-block;"></label>
+  </td>
+  </tr>
+  </volist>
+  </empty>
+</tbody>
+</table>
+
+</div>
+<!-- col-xs-9 col-sm-9  col-md-10 col-lg-10  END -->        
+
+
+      </div>
+    </div>
+  </div>
+  <!--底部-->
+  	</div>
+
+
+<include file="Public/footer"/> 

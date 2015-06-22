@@ -1,0 +1,10 @@
+7e84mgby
+
+配置
+111.1.89.110
+255.255.255.0
+111.1.89.1
+211.140.13.188
+
+
+http://www.w3cplus.com/mobile/install-ratchet.html

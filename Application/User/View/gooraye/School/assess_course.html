@@ -1,0 +1,90 @@
+<include file="Public/head"/>
+<script>
+    jQuery(document).ready(function(){
+      jQuery("#formID").validationEngine();
+    });
+    </script>
+<style>
+.maroon{color: red;}
+</style>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<include file="School/menu"/>
+<div class="righttitle">
+  <h4>当前位置：微学校 >> <a href="{gr-:U('School/assess',array('token'=>$token))}">教师管理</a> >> 课程添加</h4>
+ </div>
+
+    <div class=" bgfc" style="margin-top:10px;">
+      <form class="form" id="formID" method="post" action="" target="_top" enctype="multipart/form-data">
+
+        <table class="table" >
+            <tbody>
+            <tr>
+                    <th width="120">教师姓名:</th>
+                    <td>
+                        <h1><span class="maroon">{gr-$teachers['tname']}</span></h1>
+                    </td>
+            </tr>
+            <tr>
+                    <th width="120">任教班级:</th>
+                    <td>
+                     <select class="form-control"  name="bj_id" id="bj_id">
+                    <volist name="li_theclass" id="list">
+                        <option value="{gr-$list['sid']}" <if condition="$tcourse['bj_id'] eq $list['sid']"> selected </if>>{gr-$list['sname']}</option>
+                    </volist>
+                    </select>
+                    <span class="maroon">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="120">任教科目:</th>
+                    <td>
+                    <select class="form-control"  name="km_id" id="km_id">
+                    <volist name="li_subject" id="list">
+                    <option value="{gr-$list['sid']}" <if condition="$tcourse['km_id'] eq $list['sid']"> selected </if> >{gr-$list['sname']}</option>
+                    </volist>
+                    </select>
+                    <span class="maroon">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="120">任教星期:</th>
+                    <td>
+                   <select class="form-control"  name="xq_id" id="xq_id">
+                    <volist name="li_week" id="list">
+                    <option value="{gr-$list['sid']}" <if condition="$tcourse['xq_id'] eq $list['sid']"> selected </if> >{gr-$list['sname']}</option>
+                    </volist>
+                    </select>
+                    <span class="maroon">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="120">任教时段:</th>
+                    <td>
+                    <select class="form-control"  name="sd_id" id="sd_id">
+                    <volist name="li_timeframe" id="list">
+                    <option value="{gr-$list['sid']}" <if condition="$tcourse['sd_id'] eq $list['sid']"> selected </if> >{gr-$list['sname']}</option>
+                    </volist>
+                    </select>
+                    <span class="maroon">*</span>
+                    </td>
+                </tr>
+                <tr>
+                   <th><if condition="$tcourse['id'] neq ''"><input type="text" hidden name="id" value="{gr-$tcourse['id']}"></if></th>
+                   <input type="text" name="tid" value="{gr-$teachers['tid']}" hidden>
+                    <td>
+                  <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+                    </td>
+                    </tr>
+                <tr>
+                     <th></th>
+                    <td>
+                   <a href="{gr-:U('School/assess',array('token'=>session('token')))}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+  </div>
+</div>
+
+<include file="Public/footer"/>

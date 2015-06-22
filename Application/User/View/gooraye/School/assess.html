@@ -1,0 +1,104 @@
+<include file="Public/head"/>
+
+<script src="__JS__/date/WdatePicker.js"></script>
+
+<script>
+    window.onload=function(){
+        document.forms[0].reset();
+        placeFo();
+    }
+    function placeFo(){
+        document.forms[0].elements[0].focus();
+    }
+</script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+
+<include file="School/menu"/>
+          <div class="righttitle">
+              <h4 >当前位置：微学校 >> 教师管理</h4><a href="{gr-:U('School/assess_add',array('token'=>$token,'type'=>'assess'))}" class="btn btn-primary" style="margin-top:-2px">新增教师</a>
+              <div class="clearfix"></div>
+          </div>
+          <div class="cLineD">
+    <form method="post" action="{gr-:U('School/search',array('token'=>$token))}">
+    <input type="hidden" name="searchkey[key]" value="assess">
+        姓名:<input size="20" value="" name="searchkey[name]" class="form-control">&nbsp;&nbsp;&nbsp;入职时间:<input size="20" value="" name="searchkey[time]" class="form-control" >&nbsp;&nbsp;&nbsp;手机号:<input size="20" value="" name="searchkey[phone]" class="form-control">&nbsp;&nbsp;&nbsp;电子邮件:<input size="20" value="" name="searchkey[email]" class="form-control">&nbsp;&nbsp;&nbsp;
+        <button type="submit" name="appidsubmit" value="true" class="btn btn-warning btn-sm" ><strong>查询</strong></button>
+    </form>
+ </div>
+          <div class="">
+           <div class="bg-warning tip">注意:支持模糊查询</div>
+
+
+          <!-- <input name="delall"  type="hidden" value="del" />
+           <input name="wxid"  type="hidden" value="{gr-$wxid}" /> -->
+            <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <thead>
+                <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>出生</th>
+                <th>手机</th>
+                <th>固话</th>
+                <th>邮箱</th>
+                <th>入职时间</th>
+<!--
+                <th>优秀</th>
+                <th>中等</th>
+                <th>差劲</th> -->
+                <th >操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+<volist id="list" name="teachers">
+                <tr>
+                  <td>{gr-$list['tname']}</td>
+                  <td>{gr-$list['age']}</td>
+                  <td><if condition="$list['sex'] eq 1">男</if><if condition="$list['sex'] eq 2">女</if></td>
+                  <td>{gr-$list['birthdate']}</td>
+                  <td>{gr-$list['mobile']}</td>
+                  <td>{gr-$list['homephone']}</td>
+                  <td>{gr-$list['email']}</td>
+                  <td>{gr-$list['jiontime']}</td>
+<!--
+                 <td> </td>
+                 <td> </td>
+                 <td> </td> -->
+                 <td>
+<a class="btn btn-warning btn-sm" href="{gr-:U('School/assess_add',array('token'=>$token,'tid'=>$list['tid'],'type'=>'edit'))}" title="编辑"><i class="mdi-editor-mode-edit"></i>编辑</a>
+<a class="btn btn-warning btn-sm" href="{gr-:U('School/del_item',array('token'=>$list['token'],'id'=>$list['tid'],'deltype'=>'assess'))}" onclick="return(confirm('确定要删除吗？'))"  title="删除"><i class="mdi-action-delete"></i>删除</a>
+<a class="btn btn-warning btn-sm" href="{gr-:U('School/assess_course',array('token'=>$token,'tid'=>$list['tid']))}" title="添加课程" >添加课程</a>
+                 </td>
+                </tr>
+</volist>
+              </tbody>
+            </table>
+          </div>
+          <div >
+            <div class="pageNavigator right">
+                <div class="pages">{gr-$page}</div>
+              </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+// function checkAll(form, name) {
+// for(var i = 0; i < form.elements.length; i++) {
+// var e = form.elements[i];
+// if(e.name.match(name)) {
+// e.checked = form.elements['chkall'].checked;
+// }
+// }
+// }
+  </script>
+  <!--底部-->
+    </div>
+
+<include file="Public/footer"/>

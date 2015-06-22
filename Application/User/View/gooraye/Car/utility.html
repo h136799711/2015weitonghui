@@ -1,0 +1,48 @@
+<include file="Public/head"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/default_user_com.css" media="all">
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <include file="Car/menu"/>
+    <div class="righttitle">
+        <h4 >实用工具</h4>
+        <div class="clearfix"></div>
+    </div>
+    <div class="alert">
+        <p><span class="bold">使用方法：</span>请先在回复设置里添加。 开启状态可以在手机显示，关闭就不显示</p>
+    </div>
+    <div class="">
+        <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+            <thead>
+                <tr>
+                    <th>工具名称</th>
+                    <!--<th>回复关键词</th> -->
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <volist name="utility" id="vo">
+                <form method="post" action="">
+                    <tr>
+                        <td><span class="sn weather">{gr-$vo['name']}</span></td>
+                        <td>
+                            <div class="switch switch-small">
+                                <if condition="$vo['status'] eq 1">
+                                <a href="{gr-:U('Car/utility',array('token'=>$token,'status'=>'on','id'=>$vo['id'],'isPost'=>1))}"><strong>开启</strong></a>
+                                <else/>
+                                <a href="{gr-:U('Car/utility',array('token'=>$token,'status'=>'off','id'=>$vo['id'],'isPost'=>1))}"><strong>关闭</strong></a>
+                                </if>
+                            </div>
+                        </td>
+                    </tr>
+                </form>
+                </volist>
+            </tbody>
+        </table>
+    </div>
+    <div >
+        <div class="pageNavigator right">
+            <div class="pages">{gr-$page}</div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<include file="Public/footer"/>

@@ -1,0 +1,33 @@
+body{
+	font-family: "\5FAE\8F6F\96C5\9ED1","Microsoft Yahei","Hiragino Sans GB",tahoma,arial,"\5B8B\4F53";
+}
+.nosmallsize{
+	min-width: 640px;
+	padding: 0px;
+}
+/* 公共 */
+.logo {
+	float:left;
+	width:180px;
+	display:block;
+	margin-top: 10px;
+	overflow:hidden;
+}
+
+.left{
+	float: left;
+	width: 20%;
+	background-color: #f0f0f0;
+}
+.main{
+	width: 80%;
+	float: left;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.userinfo{
+	height: 50px;
+	line-height: 50px;
+	font-size: 26px;
+}

@@ -1,0 +1,35 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <include file="ServiceUser:menu"/>
+    <div class="righttitle">
+        <h4 >微信多客服设置</h4>
+    </div>
+    <div class="alert alert-info">
+        <p>微信多客服是指微信公众平台自带的多客服系统，只有认证服务号才有此功能，必须安装腾讯的多客服软件。<br>请点击此链接下载 <a target="_blank" href="http://crm.mp.weixin.qq.com/cgi-bin/dkf_download_url"  class="btn btn-link" >多客服软件</a> 。查看 <a class="btn btn-link" href="http://dkf.qq.com/" target="_blank">多客服使用说明</a>。使用多客服必须关闭聊天功能</p>
+    </div>
+    <form class="form form-inline" method="post" enctype="multipart/form-data" >
+        <table style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+            <tbody>
+                <tr>
+                    <th valign="top">微信多客服：</th>
+                    <td>
+                        <div class="form-group">
+                            <div class="radio radio-primary"><label for="radio3">
+                                <input id="radio3" class="radio" type="radio" name="transfer_customer_service" value="1"  <eq name="info.transfer_customer_service" value="1">checked="checked"</eq> /> 开启
+                            </label></div>
+                            <div class="radio radio-primary"><label for="radio4">
+                                <input class="radio" id="radio4" type="radio" name="transfer_customer_service" value="0" <eq name="info.transfer_customer_service" value="0">checked="checked"</eq> /> 关闭
+                            </label></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><button type="submit"  name="button"  class="btn btn-primary" ><i class="mdi-content-save"></i>保存</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<include file="Public/footer"/>

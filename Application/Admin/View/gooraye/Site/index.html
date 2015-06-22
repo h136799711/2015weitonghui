@@ -1,0 +1,106 @@
+<extend name="template/base"  />
+<block name="bodyIncludes" >
+<include file="Site/public" />
+<div id="artlist">
+    <form id="myform" action="{gr-:U('Site/insert')}" method="post">
+        <table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+            <tr>
+                <td  height="48" align="right"><strong>网站名称：</strong></td>
+                <td><input type="text" name="site_name" value="{gr-$cfg_siteName}" class="form-control empty"  /><span  class="text-warning"> </span>
+            </td>
+        </tr>
+        <tr>
+            <td  height="48" align="right"><strong>网站标题：</strong></td>
+            <td><input type="text" name="site_title" value="{gr-$cfg_siteTitle}" class="form-control empty"  /><span class="text-warning">
+            请不超过80个字符</span>
+        </td>
+    </tr>
+    <tr>
+        <td  height="48" align="right"><strong>网站地址：</strong></td>
+        <td><input type="text" name="site_url" value="{gr-$cfg_siteUrl}" class="form-control empty"  /><span  class="text-warning"></span>
+    </td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>用户请求数超出提示：</strong></td>
+<td><input type="text" name="connectout" value="{gr-:C('connectout')}" class="form-control empty"  /><span></span>
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>审核用户：</strong></td>
+<td><input type="radio" name="ischeckuser" value="true" <php>if(C('ischeckuser')==='true')echo checked;</php> /> 注册时无需要审核 <input type="radio" name="ischeckuser" value="false" <php>if(C('ischeckuser')==='false')echo checked;</php> /> 注册时需要审核</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>注册需要手机号：</strong></td>
+<td><input type="radio" name="reg_needmp" value="true" <php>if(C('reg_needmp')==='true')echo checked;</php> /> 需要填写手机号 <input type="radio" name="reg_needmp" value="false" <php>if(C('reg_needmp')==='false')echo checked;</php> /> 不需要填写手机号</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>注册后级别：</strong></td>
+<td>
+<select name="reg_groupid">
+<volist name="groups" id="g">
+<option value="{gr-$g.id}" <if condition="C('reg_groupid') eq $g['id']">selected</if>>{gr-$g.name}</option>
+</volist>
+</select>
+<span>仅注册不需要审核的时候有效</span>
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>注册后使用天数：</strong></td>
+<td><input type="text" name="reg_validdays" value="{gr-:C('reg_validdays')}" class="form-control empty"  /><span>注册后多少天过期(仅注册不需要审核的时候有效)</span>
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>网站备案：</strong></td>
+<td><input type="text" name="ipc" value="{gr-:C('ipc')}" class="form-control empty"  />
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>站长QQ：</strong></td>
+<td><input type="text" name="site_qq" value="{gr-$cfg_qq}" class="form-control empty"  />
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>站长手机：</strong></td>
+<td><input type="text" name="site_mp" value="{gr-:C('site_mp')}" class="form-control empty"  />
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>百度地图API：</strong></td>
+<td><input type="text" name="baidu_map_api" value="{gr-:C('baidu_map_api')}" class="form-control empty"  />
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>站长Email：</strong></td>
+<td><input type="text" name="site_email" value="{gr-:C('site_email')}" class="form-control empty"  />
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>网站关键词：</strong></td>
+<td><textarea  type="text" name="keyword" class="form-control empty" style="width:450px;height:60px;margin:5px 0 5px 0;" />{gr-$cfg_metaKeyword}</textarea>
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>网站描述：</strong></td>
+<td><textarea  type="text" name="content" rows="5" class="form-control empty"  />{gr-$cfg_metaDes}</textarea><span>一般不超过200个字符</span>
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>底部版权：</strong></td>
+<td>
+    <textarea  type="text" name="copyright" class="form-control empty" rows="5" />{gr-:C('copyright')}</textarea>
+</td>
+</tr>
+<input type="hidden" name="files" value="info.php" />
+<tr>
+<td height="48" colspan="2">
+<div id="addkey"></div>
+<div style="padding-left:100px;">
+<input type="submit" class="btn btn-primary" value="保存" />
+</div>
+</td>
+</tr>
+</form>
+</table>
+<br>
+</div>
+</block>

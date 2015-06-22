@@ -1,0 +1,85 @@
+<include file="Public/head"/>
+<script>
+function selectall(name) {
+var checkItems=$('.cbitem');
+if ($("#check_box").attr('checked')==false) {
+$.each(checkItems, function(i,val){
+val.checked=false;
+});
+} else {
+$.each(checkItems, function(i,val){
+val.checked=true;
+});
+}
+}
+</script>
+<script src="__STATIC__/fushionCharts/JSClass/FusionCharts.js" type="text/javascript"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4 >关注粉丝管理</h4>
+    </div>
+    <div >
+        <div class="bg-warning tip" style="margin:0 auto">高级服务号才能使用此功能，点击下面的“更新列表”便会同步您的粉丝信息</div>
+    </div>
+    <if condition="$showStatistics eq 1">
+    <div id="chartdiv1" align="center"></div>
+    <script type="text/javascript">
+                    var chart = new FusionCharts("__STATIC__/fushionCharts/Charts/Pie3D.swf", "ChartId", "600", "400", "0", "1");
+                    //chart.setTransparent("false");
+                    chart.setDataXML('{gr-$xml}');
+                    //chart.setDataURL("data.html");
+                    chart.render("chartdiv1");
+    </script>
+    </if>
+    <div >
+        <a href="{gr-:U('User/WechatGroup/send')}" class="btn btn-primary">
+        更新列表
+        </a>
+        <a href="{gr-:U('User/WechatGroup/send_info',array('all'=>1))}" class="btn btn-primary">
+        刷新所有粉丝信息
+        </a>
+    </div>
+    <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+        <thead>
+            <tr>
+                <th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                <th class="select">编号</th>
+                <th>粉丝昵称</th>
+                <th>性别 </th>
+                <th>分组名</th>
+                <th>省(直辖市) </th>
+                <th>城市 </th>
+                <th>头像</th>
+                <th>关注时间</th>
+                <th class="norightborder">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="list" id="list">
+            <tr>
+                <td><input type="checkbox" value="{gr-$list.id}" class="cbitem" name="id_{gr-$list.id}"></td>
+                <td>{gr-$list.id}</td>
+                <td>{gr-$list.nickname}</td>
+                <td><if condition="$list['sex'] eq 1">男<else/>女</if></td>
+                <td>{gr-$list.groupName}</td>
+                <td>{gr-$list.province}</td>
+                <td>{gr-$list.city}</td>
+                <td>
+                    <div >
+                    <a href="{gr-:U('User/WechatGroup/showExternalPic',array('token'=>$token,'wecha_id'=>$list['openid'],'url'=>$list['headimgurl']))}" target="_blank"><?php if (strlen($list['smallheadimgurl'])){?><img src="{gr-$list.smallheadimgurl}" class="thumbnail col-lg-2 col-md-2 col-sm-4 col-xs-12"  /><?php }?></a></div>
+                </td>
+                <td>{gr-$list.subscribe_time|date='Y-m-d',###} </td>
+                <td class="norightborder">
+                    <a class="btn btn-warning btn-sm" href="{gr-:U('WechatBehavior/statisticsOfSingleFans',array('openid'=>$list['openid']))}">粉丝行为管理</a>
+                </td>
+            </tr>
+            </volist>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pageNavigator right">
+        <div class="pages">{gr-$page}</div>
+    </div>
+</div>
+<include file="Public/footer"/>

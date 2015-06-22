@@ -1,0 +1,108 @@
+<extend name="template/base"  />
+<block name="bodyIncludes" >
+<div id="artlist" class="addn">
+    <form id="form" >
+        <table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+            <tr>
+                <th colspan="4">编辑节点</th>
+            </tr>
+            <tr>
+                <td height="48" align="right"><strong>归属节点：</strong></td>
+                <td>
+                    <select name="pid" style="width:136px">
+                        {gr-$select_categorys}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td  height="48" align="right"><strong>节点名称：</strong></td>
+                <td><input type="text" name="title" value="{gr-$info.title}" class="form-control empty" size="45" /></td>
+            </tr>
+            <tr>
+                <td height="48" align="right"><strong>节点名字：</strong></td>
+                <td height="48"><input type="text" name="name" value="{gr-$info.name}" class="form-control empty" />　<strong>注释：</strong>填写控制器名或方法名。</td>
+            </tr>
+            <tr>
+                <td height="48" align="right"><strong>节点类型：</strong></td>
+                <td height="48">
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="level" value="0"  <eq name="info.level" value="0">checked</eq> />应用
+                        </label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="level" value="2"  <eq name="info.level" value="2">checked</eq> />模块
+                        </label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="level" value="3"  <eq name="info.level" value="3">checked</eq> />方法
+                        </label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="level" value="4"  <eq name="info.level" value="4">checked</eq> />链接
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="48" align="right"><strong>显示类型：</strong></td>
+                <td height="48">
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="display" value="0"  <eq name="info.display" value="0">checked</eq> />隐藏
+                        </label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="display" value="1"  <eq name="info.display" value="1">checked</eq> />导航显示
+                        </label>
+                    </div>
+                    <div class="radio radio-primary">
+                        <label>
+                            <input type="radio" name="display" value="2"  <eq name="info.display" value="2">checked</eq> />菜单显示
+                        </label>
+                    </div>
+                </td>
+                <input type="hidden" name="dosubmit" />
+                <input type="hidden" name="id" value="{gr-$info.id}" />
+            </tr>
+            <tr>
+                <td height="48" align="right"><strong>备注：</strong></td>
+                <td height="48"><input type="text" name="remark" size="45" value="{gr-$info.remark}" class="form-control empty" /></td>
+            </tr>
+            <tr>
+                <td height="48" align="right"><strong>排序：</strong></td>
+                <td height="48"><input type="text" name="sort" size="45" value="0" class="form-control empty" /><span>注释：按照升序，值越大越往后。</span></td>
+            </tr>
+            <tr>
+                <td height="48" colspan="2"><div id="addkey"></div><div class="fabu">
+                <button id="submit" type="button" class="btn btn-primary" >保存</button>
+            <button  type="button" class="btn btn-primary" onclick="javascript:history.go(-1);" >返回</button></div></td>
+        </tr>
+    </table>
+</form>
+</div>
+</block>
+<block name="bottomjsIncludes">
+<script type="text/javascript" >
+$(function(){
+$('#submit').click(function(){
+// console.log("click");
+var forms=$('#form').serialize();
+$.ajax({
+type:'POST',
+url:'{gr-:U("Node/edit")}',
+data:forms,
+}).done(function(data){
+alert(data.info);
+if(data.url){
+window.location.href = data.url;
+}
+})
+})
+});
+</script>
+</block>

@@ -1,0 +1,49 @@
+<include file="Public/head" />
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4>商城设置</h4>
+        <a href="{gr-:U('Store/index',array('token'=>$token))}" class="btn btn-primary btn-sm" data-top><i class="mdi-content-reply"></i>返回</a>
+    </div>
+    <form class="form-horizontal " method="post" action="">
+        <input type="hidden" name="id" value="{gr-$setting.id}" />
+        <input type="hidden" name="token" value="{gr-$token}" />
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-md-2"><span class="text-warning">*</span>免邮设置</label>
+            <div class="col-lg-5 col-md-8">满<input type="text" style="width:60px" name="price" value="{gr-$setting.price}" class="form-control pull-inline"/>元免邮
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-md-2"><span class="text-warning">*</span>积分兑换</label>
+            <div class="col-lg-5 col-md-8">
+                <input type="text" name="score" value="{gr-$setting.score}" class="form-control  pull-inline"/>积分=1元
+                <span class="help-block">(注：写0表示积分不可兑换)</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-md-2"><span class="text-warning">*</span>是否支持货到付款</label>
+            <div class="col-lg-5 col-md-8">
+                <div class="radio radio-primary col-lg-4 col-md-5">
+                    <label>
+                        <input type="radio" name="paymode" value="0" id="paymode_0" <if condition="$setting['paymode'] eq 0">checked</if> />
+                        不支持
+                    </label>
+                </div>
+                <div class="radio radio-primary col-lg-4 col-md-5">
+                    <label>
+                        <input type="radio" name="paymode" value="1" id="paymode_1" <if condition="$setting['paymode'] eq 1">checked</if> />
+                        支持
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-md-2">&nbsp;</label>
+            <div class="col-lg-5 col-md-8">
+                <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button> &nbsp; <a href="{gr-:U('Store/index',array('token' => $token))}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="Public/footer" />

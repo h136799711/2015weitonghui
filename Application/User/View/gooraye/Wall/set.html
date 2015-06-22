@@ -1,0 +1,160 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 " >
+    <div class="righttitle"><h4>微信墙设置</h4><a href="javascript:history.go(-1);"  class="btn btn-primary" data-top ><i class="mdi-content-reply"></i>返回</a></div>
+    <div class="">
+        <form class="form" method="post" enctype="multipart/form-data" >
+            <table style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+                <thead>
+                    <tr>
+                        <th valign="top"><label for="acttitle">活动名称：</label></th>
+                        <td><input type="input" class="form-control" id="title"  name="title" style="width:500px"  value="{gr-$info.title}" >    </td>
+                    </tr>
+                    <tr>
+                        <th valign="top"><label for="acttitle">关键词：</label></th>
+                        <td><input type="input" class="form-control" id="keyword"  name="keyword" style="width:500px"  value="{gr-$info.keyword}" >    </td>
+                    </tr>
+                    <tr>
+                        <th valign="top"><label for="text">Logo：</label></th>
+                        <td><input type="input" class="form-control" id="logo" value="{gr-$info.logo}" name="logo" style="width:250px" value="" >  <a href="###" onclick="chooseFile('logo','my')"  class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="gfilePicUpload('logo',400,400,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('logo')"   class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> 标题前面的logo,高度最佳80px，宽度最佳不超过200px，可以不填写
+                    </td>
+                </tr>
+                <tr>
+                    <th valign="top"><label for="text">开幕背景：</label></th>
+                    <td><input type="input" class="form-control" id="startbackground" value="{gr-$info.startbackground}" name="startbackground" style="width:250px" value="{gr-$info.startbackground}" > <script src="__STATIC__/gfile.js"></script><a href="###" onclick="chooseFile('startbackground','background')"  class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="gfilePicUpload('startbackground',1500,1000,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('startbackground')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> 最佳尺寸宽984px,高636px
+                </td>
+            </tr>
+            <tr>
+                <th valign="top"><label for="text">背景：</label></th>
+                <td><input type="input" class="form-control" id="background" value="{gr-$info.background}" name="background" style="width:250px" value="{gr-$info.background}" > <script src="__STATIC__/gfile.js"></script><a href="###" onclick="chooseFile('background','background')"  class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="gfilePicUpload('background',1500,1000,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('background')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>  默认为空会有更好的显示效果
+            </td>
+        </tr>
+        <tr>
+            <th valign="top"><label for="text">结束背景：</label></th>
+            <td><input type="input" class="form-control" id="endbackground" value="{gr-$info.endbackground}" name="endbackground" style="width:250px" value="{gr-$info.endbackground}" > <script src="__STATIC__/gfile.js"></script><a href="###" onclick="chooseFile('endbackground','background')"  class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="gfilePicUpload('endbackground',1500,1000,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('endbackground')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>
+        </td>
+    </tr>
+    <tr>
+        <th valign="top"><label for="text">二维码：</label></th>
+        <td><input type="input" class="form-control" id="qrcode" value="{gr-$info.qrcode}" name="qrcode" style="width:250px" value="" >  <a href="###" onclick="gfilePicUpload('qrcode',800,800,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('qrcode')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>
+    </td>
+</tr>
+<tr>
+    <th valign="top">内容是否需要审核</th>
+    <td>
+        <div class="radio radio-primary">
+            <label><input id="radio_check1" class="radio" type="radio" name="needcheck" value="1"  <eq name="info.needcheck" value="1">checked="checked"</eq> /> 是
+          </label>
+      </div>
+    <div class="radio radio-primary">
+        <label><input class="radio" id="radio_check2" type="radio" name="needcheck" value="0" <eq name="info.needcheck" value="0">checked="checked"</eq> /> 否
+    </label>
+</div>
+</td>
+</tr>
+<tr>
+<th valign="top">状态：</th>
+<td>
+ <div class="radio radio-primary">
+            <label>
+              <input id="radio3" class="radio" type="radio" name="isopen" value="1"  <eq name="info.isopen" value="1">checked="checked"</eq> /> 开启
+          </label>
+      </div>
+    <div class="radio radio-primary">
+      <label>       
+        <input class="radio" id="radio4" type="radio" name="isopen" value="0" <eq name="info.isopen" value="0">checked="checked"</eq> /> 关闭
+    </label>
+</div>
+</td>
+</tr>
+<tr>
+<th valign="top"><label for="text">一等奖名称：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.firstprizename}" name="firstprizename" style="width:250px" value="" ></td>
+</tr>
+<tr>
+<th valign="top"><label for="text">一等奖数量：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.firstprizecount}" name="firstprizecount" style="width:50px" value="" ></td>
+</tr>
+<tr>
+<th valign="top"><label for="text">一等奖图片：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.firstprizepic}" id="firstprizepic" name="firstprizepic" style="width:250px" value="" >  <a href="###" onclick="gfilePicUpload('firstprizepic',600,600,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('firstprizepic')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td>
+</tr>
+<tr>
+<th valign="top"><label for="text">二等奖名称：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.secondprizename}" name="secondprizename" style="width:250px" value="" ></td>
+</tr>
+<tr>
+<th valign="top"><label for="text">二等奖数量：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.secondprizecount}" name="secondprizecount" style="width:50px" value="" ></td>
+</tr>
+<tr>
+<th valign="top"><label for="text">二等奖图片：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.secondprizepic}" id="secondprizepic" name="secondprizepic" style="width:250px" value="" >  <a href="###" onclick="gfilePicUpload('secondprizepic',600,600,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('secondprizepic')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td>
+</tr>
+<tr>
+<th valign="top"><label for="text">三等奖名称：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.thirdprizename}" name="thirdprizename" style="width:250px" value="" ></td>
+</tr>
+<tr>
+<th valign="top"><label for="text">三等奖数量：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.thirdprizecount}" name="thirdprizecount" style="width:50px" value="" ></td>
+</tr>
+<tr>
+<th valign="top"><label for="text">三等奖图片：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.thirdprizepic}" id="thirdprizepic" name="thirdprizepic" style="width:250px" value="" >  <a href="###" onclick="gfilePicUpload('thirdprizepic',600,600,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('thirdprizepic')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">四等奖名称：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.fourthprizename}" name="fourthprizename" style="width:250px" value="" ></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">四等奖数量：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.fourthprizecount}" name="fourthprizecount" style="width:50px" value="" ></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">四等奖图片：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.fourthprizepic}" id="fourthprizepic" name="fourthprizepic" style="width:250px" value="" >  <a href="###" onclick="gfilePicUpload('fourthprizepic',600,600,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('fourthprizepic')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">五等奖名称：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.fifthprizename}" name="fifthprizename" style="width:250px" value="" ></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">五等奖数量：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.fifthprizecount}" name="fifthprizecount" style="width:50px" value="" ></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">五等奖图片：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.fifthprizepic}" id="fifthprizepic" name="fifthprizepic" style="width:250px" value="" >  <a href="###" onclick="gfilePicUpload('fifthprizepic',0,0,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('fifthprizepic')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">六等奖名称：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.sixthprizename}" name="sixthprizename" style="width:250px" value="" ></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">六等奖数量：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.sixthprizecount}" name="sixthprizecount" style="width:50px" value="" ></td>
+</tr>
+<tr style="display:none">
+<th valign="top"><label for="text">六等奖图片：</label></th>
+<td><input type="input" class="form-control" value="{gr-$info.sixthprizepic}" id="sixthprizepic" name="sixthprizepic" style="width:250px" value="" >  <a href="###" onclick="gfilePicUpload('sixthprizepic',600,600,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('sixthprizepic')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td>
+</tr>
+<tr>
+<th></th>
+<td><input type="hidden" value="{gr-$info.id}" name="id" /><button type="submit"  name="button"  class="btn btn-primary" ><i class="mdi-content-save"></i>保存</button>
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+</div>
+
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+<!--底部-->
+</div>
+<include file="Public/footer"/>

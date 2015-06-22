@@ -1,0 +1,50 @@
+<include file="Public/head"/>  
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+  <h4>淘宝天猫店铺配置<span class="FAQ">只需要你填写天猫或淘宝店铺的手机站点地址，简单配置关键词，再在功能管理页面开启此功能，就可以直接通过微信检索店铺内的商品。</span></h4>             
+ </div>
+    <div class=" form"><form method="post"   action="<if condition="$taobao['keyword'] neq ''">{gr-:U('User/Taobao/edit',array('token'=>getToken()))}</if>"  enctype="multipart/form-data" >  
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+              <tbody>
+               <tr>
+                  <th valign="top"><span class="red">*</span><label for="title">关键词:</label></th>
+                  <td>淘宝<input type="text" style="display:none"  name="keyword"  id="title" value="淘宝"   class="form-control" tabindex="1" size="80"></td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span><label for="tag">店铺名称:</label></th>
+                  <td><input type="text"  name="title"  id="title" value="{gr-$taobao.title}"   class="form-control" tabindex="1" size="80"> </td>
+                </tr>
+                 <tr>
+                  <th><span class="red">*</span><label for="tel">店铺封面图片：</label></th>
+                  <td><input type="text"  name="picurl"  id="picurl" value="{gr-$taobao.picurl}"   class="form-control" tabindex="1" size="80">   <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('picurl',700,420,'{gr-$token}')" class="a_upload"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('picurl')"><i class="mdi-action-pageview"></i>预览</a></td>
+                </tr>
+                <tr>
+                  <th><span class="red">*</span><label for="tel">店铺地址：</label></th>
+                  <td><input type="text"  name="homeurl"  id="homeurl" value="{gr-$taobao.homeurl}"   class="form-control" tabindex="1" size="80"> 请填写天猫或淘宝的店铺地址</td>
+                </tr>
+                <tr>
+                  <th valign="top"></th>
+                  <td>例如：天猫3G店铺地址通常为：<a href="http://beilimy.m.tmall.com/" target="_blank">http://beilimy.m.tmall.com/</a>　 淘宝的3G店铺地址为：<a href="http://shop104008058.m.taobao.com/" target="_blank">http://shop104008058.m.taobao.com/</a><br />    
+                  	</td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td><button type="submit" name="appidsubmit" value="true" class="btnGreen vm" ><strong>保存</strong></button></td>
+                </tr>
+              </tbody>
+            </table>
+</form>
+            </div>
+            </div>        <div class="clearfix"></div>
+      </div>
+    </div>
+ 
+  </div>
+   
+  
+  <!--底部-->
+  	</div>
+<include file="Public/footer"/>  
+ 

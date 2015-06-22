@@ -1,0 +1,68 @@
+<include file="Public/head"/>
+
+<script src="__JS__/date/WdatePicker.js"></script>
+
+<script>
+    window.onload=function(){
+        document.forms[0].reset();
+        placeFo();
+    }
+    function placeFo(){
+        document.forms[0].elements[0].focus();
+    }
+</script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<include file="School/menu"/>
+
+          <div class="righttitle">
+              <h4 >当前位置：微学校 >> 课程安排</h4>
+              <div class="clearfix"></div>
+          </div>
+          <div class="cLineD">
+
+ </div>
+          <div class="">
+            <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <thead>
+                <tr>
+                <th>姓名</th>
+                <th>班级</th>
+                <th>科目</th>
+                <th>周天</th>
+                <th>时段</th>
+                <th >操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+<volist id="list" name="market">
+                <tr>
+                  <td>{gr-$list['tname']}</td>
+                  <td>{gr-$list['bj_name']}</td>
+                  <td>{gr-$list['km_name']}</td>
+                  <td>{gr-$list['xq_name']}</td>
+                  <td>{gr-$list['sd_name']}</td>
+                  <td>
+<a  class="btn btn-warning btn-sm" href="{gr-:U('School/assess_course',array('token'=>$token,'id'=>$list['id'],'tid'=>$list['tid'],'type'=>'edit'))}"><i class="mdi-editor-mode-edit"></i>编辑</a> &nbsp;&nbsp;
+<a  class="btn btn-warning btn-sm" href="{gr-:U('School/del_item',array('token'=>$token,'id'=>$list['id'],'deltype'=>'curriculum'))}" onclick="return(confirm('确定要删除吗？'))"  title="删除"><i class="mdi-action-delete"></i>删除</a>
+                 </td>
+                </tr>
+</volist>
+              </tbody>
+            </table>
+          </div>
+          <div >
+            <div class="pageNavigator right">
+                <div class="pages">{gr-$page}</div>
+              </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+<include file="Public/footer"/>

@@ -1,0 +1,39 @@
+<include file="Public/head"/>
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+
+
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+          <div class="righttitle"><h4>分享设置</h4></div>
+
+<include file="Share:header"/>
+
+          <div class="bg-warning tip">在下面设置分享一次可以获取多少积分，分数会加在会员卡里面</div>
+          <form method="post" action="">
+          <div class=" form">
+            <table class="table" >
+              <tbody>
+  
+              		<tr> 
+        <th align="right">分数</th> 
+        <td><input type="text" name="score" value="{gr-$record.score}" class="form-control" style="width:200px;" /> 每次分享可以获取多少积分</td> 
+       </tr> 
+              		<tr> 
+        <th align="right">次数</th> 
+        <td><input type="text" name="daylimit" value="{gr-$record.daylimit}" class="form-control" style="width:200px;" /> 每个人每天分享赚积分的最大次数，超过这个数字后分享也不会获取积分</td> 
+       </tr> 
+
+<tr>
+	<th></th>
+	<td><button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>　<a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a></td>
+</tr>
+ </tbody>
+</table>
+            
+          </div>
+          </form>
+          
+        </div>
+<include file="Public/footer"/>

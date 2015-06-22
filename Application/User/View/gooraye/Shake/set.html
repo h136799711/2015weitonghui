@@ -1,0 +1,148 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 " >  
+<div class="righttitle"><h4>摇一摇设置</h4><a href="javascript:history.go(-1);"  class="btn btn-primary" data-top ><i class="mdi-content-reply"></i>返回</a></div> 
+<div class="">
+<form class="form" method="post" enctype="multipart/form-data" >
+<table style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <thead>
+<tr>
+  <th valign="top"><label for="acttitle">活动名称：</label></th>
+  <td><input type="input" class="form-control" id="title"  name="title" style="width:500px"  value="{gr-$info.title}" >    </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <th valign="top"><label for="acttitle">关键词：</label></th>
+  <td><input type="input" class="form-control" id="keyword"  name="keyword" style="width:500px"  value="{gr-$info.keyword}" >    </td>
+  <td>&nbsp;</td>
+</tr>
+ <tr> 
+        <th>图文回复图片：</th>
+        <td><input type="text" name="thumb" value="{gr-$info.thumb}" class="form-control" id="thumb" style="width:400px;" />  <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('thumb',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('thumb')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td> 
+       </tr>
+<tr style="display:none"> 
+        <th><span class="red"></span>简介：</th> 
+        <td><textarea name="intro" class="form-control" style="width:400px;height:80px;">{gr-$info.intro}</textarea></td> 
+       </tr>
+<tr style="display:none">
+  <th valign="top">类型：</th>
+  <td><label for="radio1"><input id="radio1" class="radio" type="radio" name="shaketype" value="1"  <eq name="info.shaketype" value="1">checked="checked"</eq> /> 以手机竖直中轴线垂直地面的为临界点，左右摇省力</label><br /><label for="radio2"><input class="radio" id="radio2" type="radio" name="shaketype" value="2" <eq name="info.shaketype" value="2">checked="checked"</eq> /> 以手机摇晃时达到一定的加速度值为一次来计算，较费力，但不用考虑方向</label></td>
+</tr>
+<tr>
+  <th valign="top">状态：</th>
+  <td><label for="radio3"><input id="radio3" class="radio" type="radio" name="isopen" value="1"  <eq name="info.isopen" value="1">checked="checked"</eq> /> 开启</label><br /><label for="radio4"><input class="radio" id="radio4" type="radio" name="isopen" value="0" <eq name="info.isopen" value="0">checked="checked"</eq> /> 关闭</label></td>
+</tr>
+<tr style="display:none;">
+  <th valign="top">活动开始：</th>
+  <td><label for="radio5">
+    <input id="radio5" class="radio" type="radio" name="isact" value="1"  <eq name="info.isact" value="1">checked="checked"</eq> /> 开始</label><br /><label for="radio6"><input class="radio" id="radio6" type="radio" name="isact" value="0" checked="checked" <eq name="info.isact" value="0">checked="checked"</eq> /> 关闭</label></td>
+</tr>
+</thead>
+  <tbody>
+<tr  style="display:none">
+  <th valign="top"><label for="text">手机端传输间隔：</label></th>
+  <td><input type="input" class="form-control" id="clienttime"  name="clienttime" style="width:50px" value="{gr-$info.clienttime}" >  数字越大大屏幕上更新的越慢!
+ 
+
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr> 
+<tr  style="display:none">
+  <th valign="top"><label for="text">大屏幕页面传输间隔：</label></th>
+  <td><input type="input" class="form-control" id="showtime"  name="showtime" style="width:50px" value="{gr-$info.showtime}" >  数字越大大屏幕上更新的越慢!
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+<tr>
+  <th valign="top"><label for="text">游戏开始倒数计时：</label></th>
+  <td><input type="input" class="form-control" id="starttime"  name="starttime" style="width:50px" value="{gr-$info.starttime}" > 
+ 
+
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+<tr  style="display:none">
+  <th valign="top"><label for="text">摇晃时间：</label></th>
+  <td><input type="input" class="form-control" id="usetime"  name="usetime" style="width:50px" value="{gr-$info.usetime}" > 秒  每个用户只能摇约定秒数，尽量设置时间长一点。
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+<tr>
+  <th valign="top"><label for="text">最多次数：</label></th>
+  <td><input type="input" class="form-control" id="endshake"  name="endshake" style="width:50px" value="{gr-$info.endshake}" > 下  第一个用户达到这个数字时活动就停止。
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+<tr>
+  <th valign="top"><label for="text">大屏幕页面展示人数：</label></th>
+  <td><input type="input" class="form-control" id="shownum"  name="shownum" style="width:100px" value="{gr-$info.shownum}" >  摇晃成绩在大屏幕上显示最前面的人数
+ 
+
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+<tr>
+  <th valign="top"><label for="text">大屏幕背景：</label></th>
+  <td><input type="input" class="form-control" id="background" value="{gr-$info.background}" name="background" style="width:250px" value="{gr-$info.background}" > <script src="__STATIC__/gfile.js"></script><a href="###"  onclick="chooseFile('background','background')" class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="gfilePicUpload('background',1500,1000,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('background')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> 
+ 
+<input type="hidden" name="id" value="{gr-$info.id}" />
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+
+<tr>
+  <th valign="top"><label for="text">大屏幕背景音乐：</label></th>
+  <td><input type="input" class="form-control" id="backgroundmusic" value="{gr-$info.backgroundmusic}" name="backgroundmusic" style="width:250px" value="" >  <a href="###" onclick="chooseFile('backgroundmusic','music')" class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a> 定义大屏幕背景音乐，为URL地址
+ 
+
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+<tr  style="display:none;">
+  <th valign="top"><label for="text">客户端起始音效：</label></th>
+  <td><input type="input" class="form-control" id="music" value="{gr-$info.music}" name="music" style="width:250px" value="" > <a href="###" onclick="chooseFile('music','music')" class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a> 提醒用户开始摇一摇的音效效果
+ 
+
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+<tr>
+  <th valign="top"><label for="text">二维码图片地址：</label></th>
+  <td><input type="input" class="form-control" id="qrcode" value="{gr-$info.qrcode}" name="qrcode" style="width:250px" value="" >  <a href="###" onclick="chooseFile('qrcode','my')" class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="gfilePicUpload('qrcode',1500,1000,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;&nbsp;&nbsp;<a href="###" onclick="viewImg('qrcode')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> 大屏幕显示的二维码
+ 
+
+</td>
+  <td rowspan="2" valign="top"></td>
+</tr>
+<tr style="display:none;"> 
+        <th><span class="red"></span>规则说明：</th> 
+        <td><textarea name="rule" class="form-control" style="width:400px;height:80px;">{gr-$info.rule}</textarea></td> 
+       </tr>    
+<tr> 
+        <th><span class="red"></span>活动介绍：</th> 
+        <td><textarea name="info" class="form-control" style="width:400px;height:80px;">{gr-$info.info}</textarea></td> 
+       </tr>
+<tr>
+  <th></th>
+  <td><button type="submit"  name="button"  class="btn btn-primary" ><i class="mdi-content-save"></i>保存</button>　
+  	</td>
+  </tr>
+  </tbody>
+</table>
+  </form>
+
+
+
+  </div> 
+
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div> 
+
+<!--底部-->
+  	</div>
+<include file="Public/footer"/>

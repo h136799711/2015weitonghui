@@ -1,0 +1,46 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<include file="ServiceUser:menu"/>
+          <div class="righttitle">
+              <h4 >微信多客服设置</h4>
+          </div>
+          
+          <div >
+    <div class="alert">
+    <p>微信客服是指微信公众平台自带的多客服系统，只有认证服务号才有此功能。<br>微信客服启用方法，必须满足两个条件：1、有客服处于登录状态；2、下面的人工客服状态处于打开中。这样系统在回答不上来的时候就会切换到客服模式。在客服模式下系统将不再做任何自动回复。<br>如需彻底关闭微信客服：必须让客服全部下线，并且在下面关掉客服状态</p>
+    </div>
+</div>
+          
+       
+          <div class="">
+          <div class="">
+<form class="form" method="post" enctype="multipart/form-data" >
+<table style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <thead>
+
+<tr>
+  <th valign="top">开启微信人工客服：</th>
+  <td><label for="radio3"><input id="radio3" class="radio" type="radio" name="transfer_customer_service" value="1"  <eq name="info.transfer_customer_service" value="1">checked="checked"</eq> /> 开启</label>&nbsp;&nbsp;<label for="radio4"><input class="radio" id="radio4" type="radio" name="transfer_customer_service" value="0" <eq name="info.transfer_customer_service" value="0">checked="checked"</eq> /> 关闭</label></td>
+</tr>
+
+<tr>
+  <th></th>
+  <td><button type="submit"  name="button"  class="btn btn-primary" ><i class="mdi-content-save"></i>保存</button>　
+  	</td>
+  </tr>
+  </tbody>
+</table>
+  </form>
+
+
+
+  </div> 
+          </div>
+          <div >
+            <div class="pageNavigator right">
+                 <div class="pages">{gr-$page}</div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>  
+<include file="Public/footer"/>

@@ -1,0 +1,67 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 " >  
+<include file="Router:menu"/>
+ <div class="bg-warning tip">下面填写粉丝上网时回复的图文消息和wifi登陆页使用的图片，如果没有图片就直接保存即可</div>
+<div class="">
+<form class="form" method="post" enctype="multipart/form-data" >
+<table style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <thead>
+  <tr>
+				  <th valign="top"><span class="red">*</span>关键词：</th>
+				  <td>
+					<input type="text" name="keyword" value="{gr-$info.keyword}" class="form-control" style="width:250px;"> 比如：我要上网</td>
+				</tr>
+				<tr>
+					<th width="120">回复标题：</th>
+					<td><input type="text" name="title" value="{gr-$info.title}" class="form-control" style="width:550px;"></td>
+				</tr>
+				
+				<tr>
+					<th>回复图片：</th>
+					<td><input type="text" name="picurl" id="picurl" value="{gr-$info.picurl}" class="form-control" style="width:550px;">   <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('picurl',700,420,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('picurl')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a> 长360 宽200</td>
+				</tr>
+				<tr>
+					<th width="120">回复简介：</th>
+					<td><textarea style="width:560px;height:75px" name="info" id="info" class="form-control">{gr-$info.info}</textarea><br/>最多填写120个字</td>
+				</tr>
+				
+  <tr>
+  <th valign="top"><label for="acttitle">联系QQ：</label></th>
+  <td><input type="input" class="form-control" id="contact_qq"  name="contact_qq" style="width:400px"  value="{gr-$info.contact_qq}" ></td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <th valign="top"><label for="acttitle">欢迎图片文件：</label></th>
+  <td><input type="input" class="form-control" id="welcome_img"  name="welcome_img" style="width:400px"  value="{gr-$info.welcome_img}" >  <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('welcome_img',500,500,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('welcome_img')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>&nbsp;&nbsp;不上传就使用默认的  长606 宽360</td>
+  <td>&nbsp;</td>
+</tr>
+ <tr> 
+        <th>成功图片文件：</th>
+        <td><input type="text" name="other_img" value="{gr-$info.other_img}" class="form-control" id="other_img" style="width:400px;" />  <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('other_img',500,500,'{gr-$token}')"  class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('other_img')"  class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>&nbsp;&nbsp;不上传就使用默认的  长606 宽360</td>
+       </tr>
+<tr>
+  <th></th>
+  <td><button type="submit"  name="button"  class="btn btn-primary" ><i class="mdi-content-save"></i>保存</button>　
+  	</td>
+  </tr>
+  </tbody>
+</table>
+  </form>
+
+
+
+  </div> 
+
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div> 
+
+<!--底部-->
+  	</div>
+<include file="Public/footer"/>

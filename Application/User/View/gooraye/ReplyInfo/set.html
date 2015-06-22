@@ -1,0 +1,88 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4>{gr-$infoType.name}回复配置 </h4><a href="{gr-:U('Store/index',array('token'=>getToken()))}" class="btn btn-primary" data-top><i class="mdi-content-reply"></i>返回</a>
+    </div>
+    <form class="form-horizontal" method="post" action="" target="_top" enctype="multipart/form-data">
+        <input type="hidden" name="keyword" value="{gr-$infoType.keyword}" />
+        <input type="hidden" name="infotype" value="{gr-$infoType.type}" />
+        <input type="hidden" name="token" value="{gr-$token}" />
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">关键词</label>
+            <div class="col-lg-6 col-md-8">
+                {gr-$infoType.keyword} —— 当用户输入该关键词时，将会触发此回复。
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2"><span class="text-warning">*</span>回复标题</label>
+            <div class="col-lg-6 col-md-8">
+                <input type="text" name="title" value="{gr-$set.title}" class="form-control" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">内容介绍</label>
+            <div class="col-lg-6 col-md-8">
+                <textarea rows="4" name="info" id="info" class="form-control">{gr-$set.info}</textarea>
+                <span class="text-warning">最多填写120个字</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">回复图片</label>
+            <div class="col-lg-6 col-md-8">
+                <input type="text" name="picurl" value="{gr-$set.picurl}" id="pic" class="form-control" style="width:550px;"> <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('pic')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>
+                <span class="text-warning"> 推荐图片大小为720x400</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">首页滚动图片1</label>
+            <div class="col-lg-6 col-md-8">
+                <input type="text" name="picurls1" value="{gr-$set.picurls1}" id="pic1" class="form-control" style="width:550px;"><script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic1',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> &nbsp; <a href="###" onclick="viewImg('pic1')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>
+                <span class="text-warning"> 推荐图片大小为720x400</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">首页滚动图片2</label>
+            <div class="col-lg-6 col-md-8">
+                <input type="text" name="picurls2" value="{gr-$set.picurls2}" id="pic2" class="form-control" style="width:550px;"><script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic2',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> &nbsp; <a href="###" onclick="viewImg('pic2')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>
+                <span class="text-warning"> 推荐图片大小为720x400</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">首页滚动图片3</label>
+            <div class="col-lg-6 col-md-8">
+                <input type="text" name="picurls3" value="{gr-$set.picurls3}" id="pic3" class="form-control" style="width:550px;"><script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic3',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> &nbsp; <a href="###" onclick="viewImg('pic3')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a>
+                <span class="text-warning"> 推荐图片大小为720x400</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">外链</label>
+            <div class="col-lg-6 col-md-8">
+                <input name="apiurl" value="{gr-$set.apiurl}" class="form-control" style="width:550px;" type="text">
+            </div>
+        </div>
+        <if condition="$set and ($infoType.type eq 'Dining')">
+        <div class="form-group hide">
+            <label for="" class="control-label col-lg-2 col-md-2">订购方式开关</label>
+            <div class="col-lg-6 col-md-8">
+                <input type="checkbox" name="diningyuding" value="1" <if condition="$set.diningyuding eq 1">checked</if> /> 开启预定<input type="checkbox" name="diningwaimai" value="1" <if condition="$set.diningwaimai eq 1">checked</if> /> 开启外卖
+            </div>
+        </div>
+        <div class="form-group hide">
+            <label for="" class="control-label col-lg-2 col-md-2">订购时限</label>
+            <div class="col-lg-6 col-md-8">
+                <input type="text" id="yudingdays" name="yudingdays" value="{gr-$config.yudingdays}" class="form-control" style="width:100px;" /> 天（可以订购多少天）
+            </div>
+        </div>
+        </if>
+        <div class="form-group">
+            <label for="" class="control-label col-lg-2 col-md-2">&nbsp;</label>
+            <div class="col-lg-6 col-md-8">
+                <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+                <a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="Public/footer"/>

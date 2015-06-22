@@ -1,0 +1,5 @@
+<ul class="nav nav-pills">
+	<volist name="nav" id="vo">
+		<li <if condition="ACTION_NAME eq $vo['name']"></if>><a class="btn btn-primary" href="{gr-:U(CONTROLLER_NAME.'/'.$vo['name'],array('pid'=>6,'level'=>3))}">{gr-$vo['title']}</a></li>
+	</volist>
+</ul>

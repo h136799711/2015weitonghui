@@ -1,0 +1,82 @@
+<include file="Public/head"/>  
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+         
+          <div class="righttitle">
+              <h4 >会员信息</h4>
+                 
+              <div class="clearfix"></div>
+          </div>
+          <div class="cLineD">
+
+ </div>
+          <div class="">
+        
+          <input name="delall"  type="hidden" value="del" />
+           <input name="wxid"  type="hidden" value="{gr-$wxid}" />
+            <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <thead>
+                <tr>
+				 
+				<th>编号</th>
+				<th>微信名</th>
+				<th>真实姓名</th>
+                <th>联系电话</th>
+				<th>QQ号码</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>生日</th>
+				<th>地址</th>
+                <th>领卡时间</th>
+				<th>备注</th>
+				 
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+				
+                <tr>
+                 <td>{gr-$list.id} </td>
+                  <td>{gr-$list.wechaname} </td>
+                  <td>{gr-$list.truename} </td>
+                  <td>{gr-$list.tel} </td>
+                  <td>{gr-$list.qq} </td> 
+				          <td>
+                  <if condition="$list['sex'] eq 1">
+                      男 
+                  <else/>
+                   女
+                  </if>
+                  
+                   </td>
+                  <td>{gr-$list.age} </td>                  
+                  <td>{gr-$list.birthday} </td>
+                  <td>{gr-$list.address} </td>
+                  <td>{gr-$list.getcardtime|date='Y-m-d',###} </td>
+                  <td>{gr-$list.info} </td>
+                  
+                </tr>
+			
+              </tbody>
+            </table>
+         
+          
+          </div>
+            
+
+ 
+ 
+          <div >
+            <div class="pageNavigator right">
+                 <div class="pages"></div>
+              </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+
+  	</div>
+<include file="Public/footer"/>  

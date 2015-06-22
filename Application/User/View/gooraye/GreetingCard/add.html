@@ -1,0 +1,114 @@
+<include file="Public/head"/>
+<script src="__JS__/date/WdatePicker.js"></script>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+ <script src="__STATIC__/gfile.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+          <div class="righttitle"><h4>编辑贺卡</h4><a href="{gr-:U('User/GreetingCard/index')}" class="btn btn-primary" data-top><i class="mdi-content-reply"></i>返回</a></div>
+          <form method="post" action="" enctype="multipart/form-data">
+          <div class=" form">
+            <table class="table" >
+              <tbody>
+               <tr style="display:">
+                  <th>
+                    <label for="title">触发关键词：</label></th>
+                  <td><input type="input" class="form-control" id="keyword" value="{gr-$greeting_card['keyword']}" required="" name="keyword" style="width:380px;"> </td>
+                </tr>
+                <tr>
+                  <th>标题名字
+                    <label for="title">：</label></th>
+                  <td><input type="input" class="form-control" id="name" required="" value="{gr-$greeting_card['title']}" name="title" style="width:380px;"> </td>
+                </tr>
+                <tr style="display:">
+					  <th width="120"><label for="picurl">回复时封面图片：</label></th>
+					  <td><if condition="$greeting_card['picurl'] eq ''"><else/><img id="suicaipic1" src="{gr-$greeting_card['picurl']}" width="200"/><br></if>
+					  <input class="form-control" name="picurl" value="{gr-$greeting_card['picurl']}" id="suicai1" style="width:280px;">
+					  <span class="help-inline">
+						<a href="javascript:void(0)" onclick="gfilePicUpload('suicai1',700,420,'{gr-$token}')" class="btn  btn-inverse btn-small"><i class="mdi-file-file-upload"></i>上传</a>
+						<a href="###" onclick="viewImg('suicai1')" class="btn  btn-inverse btn-small"><i class="mdi-action-pageview"></i>预览</a>
+					  </span>
+					  </td>
+                </tr>
+                <tr>
+                  <th width="120"><label for="bjurl">背景图片：</label></th>
+                  <td><if condition="$greeting_card['bakcground_url'] eq ''"><else/><img id="suicaipic2" src="{gr-$greeting_card['bakcground_url']}" width="200"><br></if>
+                  <input class="form-control" name="bakcground_url" value="{gr-$greeting_card['bakcground_url']}" id="suicai2" style="width:280px;">  
+				  <span class="help-inline">
+					<a href="javascript:void(0)" onclick="gfilePicUpload('suicai2',700,420,'{gr-$token}')" class="btn  btn-inverse btn-small"><i class="mdi-file-file-upload"></i>上传</a>
+					<a href="###" onclick="viewImg('suicai2')" class="btn  btn-inverse btn-small"><i class="mdi-action-pageview"></i>预览</a>
+				 </span>只改变选中模版的背景图!
+</td>
+                </tr>
+                <tr>
+    <th>背景音乐:</th>
+     <td>
+	 
+	 <input class="form-control" name="mp3" value="{gr-$greeting_card['mp3']}" id="suicai3" style="width:300px" onchange="document.getElementById('plmp3').src=this.value"> 
+	 <a href="###" onclick="gfilePicUpload('suicai3',0,0,'{gr-$token}')" class="btn  btn-inverse btn-small"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;<a href="###" onclick="chooseFile('suicai3','music')" class="btn  btn-inverse btn-small"><i class="mdi-toggle-check-box"></i>选择</a><br />
+	 
+	 <audio id="plmp3" src="" preload="none"></audio><font color="#FF0000"></font></td>
+    </tr>
+    <tr>
+	 <th>选择背景动画：</th>
+	  <td>
+		<select class="form-control"  name="style"> 
+			<option value="" <if condition="$greeting_card['style'] eq ''">selected</if>>请选择</option>
+			 <option value="1" <if condition="$greeting_card['style'] eq 1">selected</if>>下落的枫叶</option>
+			 <option value="2" <if condition="$greeting_card['style'] eq 2">selected</if>>飘雪</option>
+			 <option style="display:none" value="3" <if condition="$greeting_card['style'] eq 3">selected</if>>驱驴</option
+			 <option value="4" <if condition="$greeting_card['style'] eq 4">selected</if>>飘玫瑰</option
+			</select> 
+		</td>
+	</tr>
+  <tr></tr>
+  <tr>
+                  <th valign="top">
+					<label for="text">默认文字：</label>
+				  </th>
+                  <td><textarea class="form-control" id="Hfcol-xs-9 col-sm-9  col-md-10 col-lg-10 " name="info" style="width:280px;  height:40px">{gr-$greeting_card['info']}</textarea><font color="#FF0000"></font>
+                    尽量控制在60字左右，生日卡，就写生日祝语。 圣诞卡就圣诞祝语...</td>
+                </tr> 
+				<tr>
+                  <th valign="top">
+					<label for="text">版权信息：</label>
+				  </th>
+                  <td><textarea class="form-control" id="Hfcol-xs-9 col-sm-9  col-md-10 col-lg-10 " name="copy" style="width:280px;  height:40px">{gr-$greeting_card['copy']}</textarea><font color="#FF0000"></font>
+                    尽量控制在10字左右，</td>
+                </tr>
+                                                   
+                 <tr>
+                  <th valign="top"><label for="text">转发时提醒文字：</label></th>
+                  <td><input class="form-control" name="zfname" value="{gr-$greeting_card['zfname']}" id="zfname" style="width:100px;"> 
+                    </td>
+                </tr>
+               <tr style="display:none">
+				   <th>是否显示转发数：</th>
+				   <td>
+						<select class="form-control"  name="status"> 
+							<option value="0">不显示</option>
+							<option value="1">显示</option>
+						</select> 
+				    </td>
+				</tr>
+                <tr>
+                  <th> 
+					<label for="title">默认名字：</label>
+				   </th>
+                  <td><input class="form-control" name="name" value="{gr-$greeting_card['name']}" id="suicai2" style="width:100px;"><font color="#FF0000"></font></td>
+                </tr>
+                <tr> 
+                  <th></th>
+                  <td>
+					<button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>　
+					<a href="" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+				  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+          </form>
+          
+        </div>
+        </div>	
+<include file="Public/footer"/>

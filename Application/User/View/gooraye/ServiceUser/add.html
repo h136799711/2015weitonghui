@@ -1,0 +1,70 @@
+<include file="Public/head"/>
+<script src="__JS__/date/WdatePicker.js"></script>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+ <script src="__STATIC__/gfile.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<style>
+. .control-group {
+margin-bottom: 20px;
+}
+. .control-label {
+text-align: left;
+width: 140px;
+font-weight: bold;
+padding-top: 5px;
+float: left;
+display: block;
+margin-bottom: 5px;
+}
+. .controls {
+margin-left: 160px;
+}
+. .form-actions {
+padding: 19px 20px 20px 160px;
+margin-top: 20px;
+}
+.span4, .span1, .option, .valid, .input-large{
+	background: url(__IMG__/img/px.png) repeat-x scroll 0 0 #FFFFFF;
+    border-color: #848484 #E0E0E0 #E0E0E0 #848484;
+    border-style: solid;
+    border-width: 1px;
+	border-radius: 2px 2px 2px 2px;
+	padding:5px;
+	width: 210px;
+}
+</style>
+<div class="righttitle">
+  <h4>新增工号</h4><a href="{gr-:U('ServiceUser/index')}" class="btn btn-primary" data-top><i class="mdi-content-reply"></i>返回</a>
+ </div> 
+  <div class=" bgfc">
+  <form action="" method="post" class="form-horizontal form-validate" novalidate="novalidate">
+	<div class="control-group">
+		<label for="title" class="control-label">工号呢称：</label>
+		<div class="controls">
+			<input type="text" name="name" id="title" maxlength="10" class="span4" value="{gr-$serviceUser.name}" data-rule-required="true"><span class="maroon">*</span><span class="help-inline">限制在十个字以内</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="userName" class="control-label">登陆帐号：</label>
+		<div class="controls">
+			<input type="text" name="userName" id="userName" class="span4" data-rule-required="true" value="{gr-$serviceUser.userName}"><span class="maroon">*</span><span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="keyword" class="control-label">登陆密码：</label>
+		<div class="controls">
+			<input type="text" name="userPwd" id="keyword" class="span4" data-rule-required="true" value=""><span class="maroon">*<eq name='ACTION_NAME' value="edit">留空则不修改密码</eq></span><span class="help-inline"></span>
+		</div>
+	</div>
+   <div class="form-actions">
+			<button id="bsubmit" type="submit" data-loading-text="提交中..." class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>　<a href="{gr-:U('ServiceUser/index')}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+		</div>
+</form>
+  </div> 
+ 
+  
+        </div>
+		
+<include file="Public/footer"/>

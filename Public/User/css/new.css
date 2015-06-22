@@ -1,0 +1,228 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+body, input, button, select, textarea {
+    font: 12px/1.5 Microsoft YaHei, Helvitica, Verdana, Arial, san-serif;
+}
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #636b89;
+    blr: expression(this.onFocus=this.blur())
+}
+.form-control, .form-control-wrapper .form-control, .form-control-wrapper .form-control.focus, .form-control-wrapper .form-control:focus, .form-control.focus, .form-control:focus, fieldset[disabled] .form-control, fieldset[disabled] .form-control.focus, fieldset[disabled] .form-control:focus{
+     background: #fff; 
+ border-bottom: 0px; 
+}
+
+.changeapp li: hover {
+    background-color: #F0FFDC;
+    border: 1px solid #64C269;
+}
+.changeapp2 li: hover {
+    background-color: #F0FFDC;
+    border: 1px solid #64C269;
+}
+.changeapp li label {
+    display: block;
+    cursor: pointer;
+}
+.changeapp li div {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: -1px;
+    background-color: #F0FFDC;
+    border: 1px solid #64C269;
+    z-index: 999;
+    width: 216px;
+    padding: 5px 10px;
+    border-top: 0;
+}
+.changeapp li: hover div {
+    display: block;
+}
+.sideBar .catalogList ul .nav-header {
+    width: 100%;
+}
+.sideBar {
+    border: 0px;
+}
+.logo {
+    height: 50px;
+    float: left;
+    text-align: center;
+}
+.ewm2 {
+    float: left;
+    position: absolute;
+    left: 50%;
+    margin-left: -75px;
+    top: 0px;
+}
+.ewm2 img: hover {} .IndexFoot {
+    height: 150px;
+    background-color: #4285f4;
+}
+.foot {
+    padding: 20px;
+    margin: 0px auto;
+    font-size: 12px;
+    line-height: 39px;
+    position: relative;
+}
+.foot .foot_page {
+    float: right;
+    color: white;
+}
+.foot .foot_page a {
+    color: white;
+    text-decoration: none;
+}
+#copyright {
+    float: left;
+    text-align: left;
+    font-size: 12px;
+    color: #FFF;
+}
+
+/* alert 重写后的样式 */
+
+.mask {
+    width: 99999px;
+    height: 99999px;
+    background: rgba(85, 85, 85, 0.55);
+    position: absolute;
+    z-index: 999999;
+    top: 0px;
+}
+.goorayealert {
+    display: none;
+    background: #f8f8f8;
+    padding: 15px;
+    top: 100px;
+    width: 460px;
+    position: absolute;
+    left: 50%;
+    z-index: 15;
+    margin-left: -230px;
+}
+.alertcontent {
+    background-color: #fff;
+}
+.close: hover {
+    color: #000;
+}
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    top: -6px;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+    filter: alpha(opacity=20);
+    cursor: pointer;
+    position: relative;
+}
+/* 重写bootstrap样式 */
+
+.top {
+    margin-bottom: 0px;
+}
+.top .navbar-brand img {
+    height: 40px;
+}
+.tip.bg-warning {
+    padding: 15px;
+}
+.form-inline .radio label, .form-inline .checkbox label {
+    padding-left: 40px;
+}
+.btn {
+    padding: 5px 10px;
+}
+
+/* 重定义tab样式 */
+.gr.tabmenu{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.gr.tabmenu i{
+    
+}
+.gr.tabmenu .panel-body{
+    padding: 0px;
+}
+.gr.tabmenu .list-group .list-group-item {
+    padding:0px 0px;    
+}
+.gr.tabmenu .list-group .list-group-item.active {
+    background-color: #81D074;
+}
+.gr.tabmenu .list-group .list-group-item.active a{
+    color:#fff;
+}
+.gr.tabmenu .tab-content .list-group{
+    background-color: #fff;
+}
+.gr.tabmenu .tab-content .list-group-item a{
+    padding: 10px 16px;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.list-group .list-group-item.active:focus, .list-group .list-group-item.active:hover{
+    outline: none;
+}
+.gr.tabmenu .tab-content .list-group-item a:hover{
+    background-color: #A59DEF;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* 表情 */
+
+.biaoqing ul li {
+    float: left;
+    cursor: pointer;
+}
+/* 右侧顶部标题 */
+
+.righttitle {
+    padding: 4px 0px;
+}
+/* 预览微官网手机模拟样式 */
+
+.simulation-iphone {
+    width: 370px;
+    height: 630px;
+}
+.simulation-iphone iframe {
+    overflow-x: hidden;
+    width: 325px;
+    height: 410px;
+    margin-left: 22px;
+    margin-top: 96px;
+}
+/**/
+
+.avator {
+    width: 30px;
+}
+/* tools */
+
+.text-ellipsis {
+    width:100px;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+}
+.pull-inline{
+    display: inline-block;
+}
+
+

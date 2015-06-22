@@ -1,0 +1,56 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 " >
+    <div class="righttitle">
+        <h4>摇一摇</h4>
+    </div>
+    <div class="cLineC" style="line-height: 32px;">
+        <a href="{gr-:U('Shake/add')}" class="btn btn-primary" > <i class="mdi-content-add"></i>添加活动</a>
+    </div>
+
+    <div class=" form">
+        <div class="bdrcontent ">
+            <div id="div_ptype">
+                <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th style=" width:180px;">活动名称</th>
+                            <th style=" width:100px;">状态</th>
+                            <th style=" width:150px;" class="norightborder">操作</th>
+                        </tr>
+                    </thead>
+                    <volist name="info" id="actinfo">
+                    <tr>
+                        <td>{gr-$actinfo.title}</td>
+                        <td>
+                            <if condition="$actinfo['isopen'] eq 0">
+                            <span style="color:red">关闭中</span>
+                            <else /><span style="color:green">开启中</span>
+                            </if>
+                        </td>
+                        <td class="norightborder">
+                            <if condition="$actinfo['isopen'] eq 0">
+                            <else />
+                            <a target="_blank" href="{gr-:U('Shake/screen',array('id'=>$actinfo['id'],'token'=>getToken()))}" class="btn btn-warning btn-sm"><i class="mdi-device-dvr"></i>大屏幕</a>
+                            </if>
+                            <a class="btn btn-warning btn-sm" href="{gr-:U('Shake/edit',array('id'=>$actinfo['id'],'token'=>getToken()))}" ><i class="mdi-editor-mode-edit"></i>编辑</a>
+                            <a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Shake/del',array('token'=>$token,'id'=>$actinfo['id']))}');"><i class="mdi-action-delete"></i>删除</a>
+                        </td>
+                        </volist>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="footactions" style="padding-left:10px">
+            <div class="pages">{gr-$page}</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+<!--底部-->
+</div>
+<include file="Public/footer"/>

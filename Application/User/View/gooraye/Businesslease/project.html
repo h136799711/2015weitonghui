@@ -1,0 +1,90 @@
+<include file="Public/head"/>
+<include file="Businesslease:lease_menu"/>
+<!-- <script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script> -->
+
+ <style>
+.cLine {
+    overflow: hidden;
+    padding: 5px 0;
+  color:#000000;
+}
+.alert {
+padding: 8px 35px 0 10px;
+text-shadow: none;
+-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+background-color: #f9edbe;
+border: 1px solid #f0c36d;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+color: #333333;
+margin-top: 5px;
+}
+.alert p {
+margin: 0 0 10px;
+display: block;
+}
+.alert .bold{
+font-weight:bold;
+}
+ </style>
+
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+  <div class="righttitle">
+    <h4>设置租赁公司相关内容</h4>
+    <div >
+    <div class="alert">
+    <p><span class="bold">使用方法：</span>
+   <strong><font color='red'>设置租赁公司相关内容,注意：第一次使用，请点击添加租赁公司等相关设置，并点击保存 </font></strong>
+    </p>
+    </div>
+   </div>
+</div>
+
+  <div class="cLineC" style="line-height: 32px;"> <a href="{gr-:U('Businesslease/project_add',array('token'=>$token,'type'=>$type))}" class="btn btn-primary">添加租赁类型</a>　 </div>
+  <div class=" form">
+    <div class="bdrcontent ">
+      <div id="div_ptype">
+        <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+          <thead>
+            <tr>
+              <th style=" width:100px;">租赁类型名称</th>
+              <th style=" width:100px;">所属分店</th>
+              <th style=" width:100px;">套餐</th>
+              <th style=" width:100px;">服务范围</th>
+              <th style=" width:100px;">排序</th>
+              <th style=" width:100px;">图片</th>
+              <th style=" width:120px;">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+              <volist name="busines_second" id="vo">
+                <tr>
+                    <td>{gr-$vo.name}</td>
+                    <td>{gr-$vo.0}</td>
+                    <td>{gr-$vo.learntime}</td>
+                    <td>{gr-$vo.datatype}</td>
+                    <td>{gr-$vo.sort}</td>
+                    <td><div class="cateimg"><img src="{gr-$vo.picurl}" class="cateimg_small"></div></td>
+                    <td>
+              <a href="{gr-:U('Businesslease/project_add',array('sid'=>$vo['sid'],'type'=>$vo['type']))}" class="btn btn-warning btn-sm" ><i class="mdi-editor-mode-edit"></i>编辑</a>
+              <a href="{gr-:U('Businesslease/project_del',array('sid'=>$vo['sid'],'type'=>$vo['type']))}" onclick="return(confirm('确定要删除吗？'))" class="btn btn-warning btn-sm" ><i class="mdi-action-delete"></i>删除</a>
+                    </td>
+                </tr>
+              </volist>
+          </tbody>
+         </table>
+      </div>
+    </div>
+    <div class="footactions" style="padding-left:10px">
+      <div class="pages"></div>
+    </div>
+  </div>
+
+</div>
+
+<include file="Public/footer"/>

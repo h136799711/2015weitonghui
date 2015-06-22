@@ -1,0 +1,52 @@
+<extend name="template/base"  />
+<block name="bodyIncludes" >
+<include file="Site:public" />
+<div id="artlist">
+    <form id="myform" action="{gr-:U('Site/insert')}" method="post">
+        <table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+            <tr>
+                <td  height="48" align="right"><strong>表单令牌：</strong></td>
+                <td><input type="radio" name="TOKEN_ON" value="true" <php>if(C('TOKEN_ON')==='true') echo checked;</php> />开启
+                <input type="radio" name="TOKEN_ON" value="false" <php>if(C('TOKEN_ON')==='false') echo checked;</php> />关闭
+            </td>
+        </tr>
+        <tr>
+            <td  height="48" align="right"><strong>令牌验证字段名：</strong></td>
+            <td><input type="text" name="TOKEN_NAME" value="{gr-:C('TOKEN_NAME')}" class="form-control empty" size="45" /><span>一般不超过80个字符</span>
+        </td>
+    </tr>
+    <tr>
+        <td  height="48" align="right"><strong>令牌验证加密：</strong></td>
+        <td><input type="text" name="TOKEN_TYPE" value="{gr-:C('TOKEN_TYPE')}" class="form-control empty" size="45" /><span>例:md5</span></td>
+    </tr>
+    <tr>
+        <td  height="48" align="right"><strong>令牌错误重置：</strong></td>
+        <td><input type="radio" name="TOKEN_RESET" value="true" <php>if(C('TOKEN_RESET')==='true') echo checked;</php> />开启
+        <input type="radio" name="TOKEN_RESET" value="false" <php>if(C('TOKEN_RESET')==='false') echo checked;</php> />关闭
+    </td>
+</tr>
+<tr>
+    <td height="48" align="right"><strong>字段验证：</strong></td>
+    <td><input type="radio" name="DB_FIELDTYPE_CHECK" value="true" <php>if(C('DB_FIELDTYPE_CHECK')==='true') echo checked;</php> />开启
+    <input type="radio" name="DB_FIELDTYPE_CHECK" value="false" <php>if(C('DB_FIELDTYPE_CHECK')==='false') echo checked;</php> />关闭
+</td>
+</tr>
+<tr>
+<td  height="48" align="right"><strong>参数过滤：</strong></td>
+<td><input type="text" name="VAR_FILTERS" value="{gr-:C('VAR_FILTERS')}" class="form-control empty" size="45" /><span>例如:trim</span>
+</tr>
+<input type="hidden" name="files" value="safe.php" />
+<tr>
+<td height="48" colspan="2">
+    <div id="addkey"></div>
+    <div style="padding-left:100px;">
+        <input type="submit" value="保存" />
+    </div>
+</td>
+</tr>
+</form>
+</table><br />
+<br />
+<br />
+</div>
+</block>

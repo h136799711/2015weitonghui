@@ -1,0 +1,152 @@
+<include file="Public/head"/>
+<!-- <link rel="stylesheet" href="__CSS__/diymen/tipswindown.css" type="text/css" media="all" />
+<script type="text/javascript" src="__CSS__/diymen/tipswindown.js"></script> -->
+<script type="text/javascript">
+$(function() {
+    $("#iframe1").click(function(){
+        showmodal("添加菜单","{gr-:C('site_url')}{gr-:U('User/Diymen/class_add')}");
+        // tipsWindown("添加菜单","iframe:{gr-:C('site_url')}{gr-:U('User/Diymen/class_add')}","760","480","true","","true","leotheme");
+    });
+
+});
+function showmodal(title,src){
+    $("#myModalLabel").text(title);
+    
+    $("#myFrame").attr("src",src);
+    
+    // $("#myModal .ajaxcontent").html("");
+    
+    // $.ajax({url:src,before:function(){
+    //         $("#myModal .loading").show();
+    // }}).always(function(){ $("#myModal .loading").hide(); })
+    // .done(function(data){
+    //     $("#myModal .ajaxcontent").html(data);
+    // }).fail(function(){
+    //     $("#myModal .ajaxcontent").html("载入失败！");
+    // });
+
+    $("#myModal").modal('show');
+    
+}
+</script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <!-- Modal Start -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <div class="loading"><img src="__CSS__/loading.gif" alt="loading"></div>
+                    <div class="ajaxcontent">
+                        
+                    </div> -->
+                    <iframe id="myFrame" src="" frameborder="0" style="width:100%;height: 640px;">
+                        
+                    </iframe>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- MOdal -->
+    <div class="righttitle">
+        <h1 class="text-warning">注意：1级菜单最多只能开启3个，2级子菜单最多开启5个，未认证订阅号无法创建自定义菜单！</h1>
+    </div>
+    <div >
+        <form enctype="multipart/form-data" action="" class="form-horizontal" method="post">
+            <div class="form-group">
+                <label for="" class="control-label col-lg-2 col-md-2">AppId</label>
+                <div class="col-lg-5 col-md-6">
+                    <input type="text" size="20" tabindex="1" class="form-control" value="{gr-$diymen.appid}" id="appid" name="appid">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-lg-2 col-md-2">
+                    AppSecret
+                </label>
+                <div class="col-lg-5 col-md-6">
+                    <input type="text" size="20" tabindex="2" class="form-control" value="{gr-$diymen.appsecret}" id="appsecret" name="appsecret">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-lg-2 col-md-2">
+                    &nbsp;
+                </label>
+                <div class="col-lg-5 col-md-6">
+                    <button class="btn btn-primary btn-small" value="true" name="appidsubmit" type="submit"><i class="mdi-content-save"></i>保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <form enctype="multipart/form-data" action="" method="post"><input type="hidden" value="" name="anchor">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="table table-condensed table-bordered table-striped">
+        <thead>
+            <tr>
+                <th style=" width:60px;">显示顺序</th>
+                <th style=" width:220px;">主菜单名称</th>
+                <th style=" width:170px;">关联关键词</th>
+                <th>外链URL</th>
+                <th class="norightborder" style=" width:160px;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist id="class" name="class">
+            <tr class="hover">
+                <td class="td25">
+                    <span>{gr-$class.sort}</span>
+                </td>
+                <td>
+                    <div>
+                        <span>{gr-$class.title}</span>
+                    </div>
+                </td>
+                <td><span>{gr-$class.keyword}</span></td>
+                <td><span><if condition="$class['url'] eq false">无链接地址<else/>{gr-$class.url}</if></span></td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href='javascript:showmodal("修改菜单","{gr-:C('site_url')}{gr-:U('Diymen/class_edit',array('id'=>$class['id']))}");' title="修改主菜单"><i class="mdi-editor-mode-edit"></i>修改</a>
+                    <a class="btn btn-warning btn-sm " href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Diymen/class_del',array('id'=>$class['id']))}');"><i class="mdi-action-delete"></i>删除</a>
+                </td>
+            </tr>
+            <volist id="class1" name="class['class']">
+            <tr class="td29">
+                <td class="td25" >
+                    <span>{gr-$class1.sort}</span>
+                </td>
+                <td >
+                    <div class="board">
+                        <span>{gr-$class1.title}</span>
+                    </div>
+                </td>
+                <td >
+                    <span>{gr-$class1.keyword}</span>
+                </td>
+                <td><span><if condition="$class1['url'] eq false">无链接地址<else/>{gr-$class1.url}</if></span></td>
+                <td >
+                    <a class="btn btn-warning btn-sm" href='javascript:showmodal("修改菜单","{gr-:C('site_url')}{gr-:U('Diymen/class_edit',array('id'=>$class['id']))}");' ><i class="mdi-editor-mode-edit"></i>修改</a>
+                <a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Diymen/class_del',array('id'=>$class1['id']))}');"><i class="mdi-action-delete"></i>删除</a></td>
+            </tr>
+            </volist>
+            </volist>
+            <tr class="hover">
+                <td class="td25" colspan="5">
+                    <if condition="$class neq false">
+                    <a class="btn btn-primary btn-lg" onclick="drop_confirm('自定义菜单最多勾选3个，每个菜单的子菜单最多5个，请确认!', '{gr-:U('Diymen/class_send',array())}');" title=""><i class="mdi-notification-sync"></i>生成自定义菜单</a>
+                    </if>
+                    <a class="btn btn-primary" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Diymen/delete')}');"><i class="mdi-action-delete"></i>清空菜单</a>
+                    <button data-top class="btn btn-primary" id="iframe1" type="button"><i class="mdi-content-add"></i>添加一个菜单</button>
+                    <div class="bg-warning">
+                        官方说明：修改后，需要重新关注，或者最迟隔天才会看到修改后的效果！<br>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+</div>
+<include file="Public/footer"/>

@@ -1,0 +1,115 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle"><h4>编辑文章分类</h4><a href="javascript:history.go(-1);"  class="btn btn-primary" data-top ><i class="mdi-content-reply"></i>返回</a></div>
+    <div class="">
+        <form class="form" method="post"   action="{gr-:U('Classify/upsave')}"  target="_top" enctype="multipart/form-data" >
+            <table style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+                <thead>
+                    <if condition="$fid neq 0">
+                    <tr>
+                        <th valign="top"><label for="keyword">上级分类名称：</label></th>
+                        <td>{gr-$thisClassify.name}<input type="hidden" name="fid" value="{gr-$fid}" /></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </if>
+                    <tr>
+                        <th valign="top"><label for="keyword">分类名称：</label></th>
+                        <td><input type="input" class="form-control" id="keyword" value="{gr-$info.name}" name="name" style="width:500px" ><br />
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody><input type="hidden" name="id" value="{gr-$info.id}"/>
+            <tr>
+                <th valign="top"><label for="keyword">分类描述：</label></th>
+                <td><input type="input" class="form-control" id="keyword" value="{gr-$info.info}" name="info" style="width:500px" ><br />
+            30个字简短分类描述，可为空   </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <th valign="top"><label for="keyword">分类图片：</label></th>
+            <td><input type="input" class="form-control" id="img" value="{gr-$info.img}" name="img" style="width:500px" >  <script src="__STATIC__/gfile.js?2013"></script><a href="###" onclick="chooseFile('img','icon')" class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a> <a href="###" onclick="gfilePicUpload('img',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('img')" class="btn btn-warning btn-sm"><i class="mdi-action-pageview"></i>预览</a></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <th valign="top"><label for="url">外链网站或活动 ：</label></th>
+            <td><input type="input" class="form-control" id="url" value="{gr-$info.url}" name="url" style="width:300px" > <a href="###" onclick="addLink('url',0)" class="btn btn-warning btn-sm"><i class="mdi-social-group-add"></i>从功能库添加</a><br />
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <th valign="top"><label for="keyword">排序：</label></th>
+        <td><input type="input" class="form-control" id="keyword" value="{gr-$info.sorts}" name="sorts" style="width:500px" ><br />
+    </td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <th valign="top"><label for="keyword">是否显示：</label></th>
+    <td>
+        <div class="radio radio-primary">
+            <label>
+              <input type="radio"  id="keyword" value="1" name="status" <eq name="info.status" value="1"> checked</eq> />是
+            </label>
+        </div>
+        <div class="radio radio-primary">
+            <label>
+                <input type="radio" id="keyword" value="0" name="status"  <eq name="info.status" value="0"> checked</eq> />否
+            </label>
+        </div>
+    </td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <th valign="top"><label for="keyword">分类页模板：</label></th>
+    <td>
+        <input type="text" id="selecttpl" class="form-control" value="已选择模板{gr-$info.tpid}" disabled size="40"  />
+        <a class="btn btn-warning btn-sm" onclick="chooseTpl('tpid','selecttpl',1)"><i class="mdi-toggle-check-box"></i>选择模板</a>
+        <a class="btn btn-warning btn-sm" onclick="viewTpl()"><i class="mdi-action-pageview"></i>预览</a>
+        <script>
+                            function viewTpl(){
+                            var tid = $('#tpid').val();
+                            chooseTpl(tid,'',2);
+                            }
+        </script>
+        <input type="hidden" class="form-control" id="tpid" value="{gr-$info.tpid}" name="tpid" style="width:250px">
+    </td>
+    <td>
+        &nbsp;
+    </td>
+</tr>
+<tr>
+    <th valign="top"><label for="keyword">内容页模板：</label></th>
+    <td>
+        <input type="text" id="selectconttpl" class="form-control" value="已选择模板{gr-$info.conttpid}" disabled size="40"  />
+        <a class="btn btn-warning btn-sm" onclick="chooseTpl('conttpid','selectconttpl',3)"><i class="mdi-toggle-check-box"></i>选择模板</a>
+        <a class="btn btn-warning btn-sm" onclick="viewTpl2()"><i class="mdi-action-pageview"></i>预览</a>
+        <input type="hidden" class="form-control" value="{gr-$info.conttpid}" id="conttpid" name="conttpid" style="width:250px">
+        <script>
+                            function viewTpl2(){
+                            var tid = $('#conttpid').val();
+                            chooseTpl(tid,'',4);
+                            }
+        </script>
+    </td>
+    <td>
+        &nbsp;
+    </td>
+</tr>
+<tr>
+    <td colspan="3" align="center">
+    </td>
+</tr>
+<tr>
+    <th></th>
+    <td><button type="submit"  name="button"  class="btn btn-primary" ><i class="mdi-content-save"></i>保存</button>
+        <div class="clearfix"></div>
+    </td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+</div>
+<include file="Public/footer"/>

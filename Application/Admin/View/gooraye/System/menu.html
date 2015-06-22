@@ -1,0 +1,14 @@
+<extend name="template/base"  />
+
+<block name="title">
+    <title>左侧导航</title>
+</block>
+<block name="bodyIncludes">
+<div class="">
+    <ul class="list-group">
+        <volist name="nav" id="vo">
+        <li class="list-group-item text-center"><a  class="btn btn-primary" href="{gr-:U($vo['name'].'/index',array('pid'=>$vo['id'],'level'=>3))}" target="main" >{gr-$vo['title']}</a></li>
+        </volist>
+    </ul>
+</div>
+</block>   

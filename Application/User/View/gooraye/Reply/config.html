@@ -1,0 +1,49 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4>留言板配置 </h4><a href="javascript:history.go(-1);" class="btn btn-primary" data-top><i class="mdi-content-reply"></i>返回</a>
+    </div>
+
+    <div class=" bgfc" style="margin-top:10px;">
+        <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">
+            <table class="table" >
+                <tbody>
+                    <tr>
+                        <th valign="top"><span class="red">*</span>关键词：</th>
+                        <td>
+                        <span class="red">留言 —— 当用户输入该关键词时，将会触发此回复。</span></td>
+                    </tr>
+                    <tr>
+                        <th width="120"><span class="red">*</span>图文回复标题：</th>
+                        <td><input type="text" name="title" value="{gr-$set.title}" class="form-control" style="width:550px;"></td>
+                    </tr>
+                    <tr>
+                        <th width="120">图文回复介绍：</th>
+                        <td><textarea style="width:560px;height:75px" name="info" id="info" class="form-control">{gr-$set.info}</textarea><br/>最多填写120个字</td>
+                    </tr>
+                    <tr>
+                        <th>图文回复图片：</th>
+                        <td><input type="text" name="picurl" value="{gr-$set.picurl}" id="pic" class="form-control" style="width:550px;"> <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" class="btn btn-warning btn-sm" onclick="viewImg('pic')"><i class="mdi-action-pageview"></i>预览</a>   &nbsp; 大小为720x400</td>
+                    </tr>
+                    <tr>
+                        <th>需要审核：</th>
+                        <td><label><input type="checkbox" name="needcheck" value="1" <if condition="$set.needcheck eq 1">checked</if> /> 需要审核</label></td>
+                    </tr>
+                    <th>&nbsp;</th>
+                    <td>
+                        <input type="hidden" name="infotype" value="message" />
+                        <input type="hidden" name="token" value="{gr-$token}" />
+                        <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+                        <a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+</div>
+<include file="Public/footer"/>

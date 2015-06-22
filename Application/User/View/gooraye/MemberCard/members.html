@@ -1,0 +1,116 @@
+<include file="Public/head"/>
+<script src="__JS__/date/WdatePicker.js"></script>  
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+         
+          <div class="righttitle">
+              <h4 >当前位置：<a href="{gr-:U('MemberCard/index',array('token'=>$token))}">会员卡</a> >> {gr-:htmlspecialchars_decode($thisCard['cardname'])}会员管理</h4>
+                 
+              <div class="clearfix"></div>
+          </div>
+          <div class="cLineD">
+查询资料[仅支持按照会员卡号查询]
+	<form method="post" action="">
+		<input size="80" value="" name="searchkey" class="form-control">
+		<button type="submit" name="appidsubmit" value="true" class="btnGreen vm" ><strong>查询</strong></button>
+	</form>
+ </div>
+          <div class="">
+           <div class="bg-warning tip">注意:在每行的输入框里可以通过输入消费金额（可以填写负数）来增减会员积分</div>
+
+         
+          <input name="delall"  type="hidden" value="del" />
+           <input name="wxid"  type="hidden" value="{gr-$wxid}" />
+            <table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+              <thead>
+                <tr>
+				<th>卡号</th>
+				<th>微信名</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>生日</th>
+        <th>联系电话</th>
+				<th>QQ号码</th> 
+        <th>领卡时间</th>
+        <th>积分</th>
+        <th>消费总额(元)</th>
+        <th>消费金额(元)</th> 
+        <th class="norightborder">添加</th>              
+				<th >操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+
+				 <volist id="list" name="members">
+                <tr>
+                  <td>{gr-$list.number}</td>
+                  <td>{gr-$list.wechaname}</td>
+                  <td>{gr-$list.truename}</td>
+                  <td><if condition="$list['sex'] eq 1">男</if><if condition="$list['sex'] eq 2">女</if></td>
+                  <td>{gr-$list.bornyear}-{gr-$list.bornmonth}-{gr-$list.bornday}</td>
+                  <td>{gr-$list.tel}</td>
+                  <td>{gr-$list.qq}</td> 
+                  <td>
+                   <if condition="$list['getcardtime'] gt 0">
+                        {gr-$list.getcardtime|date='Y-m-d',###}
+                    <else/>
+                    无时间记录
+                    </if>                      
+                  </td>
+                  <td>{gr-$list.total_score}</td> 
+                  <td>{gr-$list.expensetotal}</td> 
+
+ <form method="post"  action="{gr-:U('User/MemberCard/memberExpense',array('token'=>getToken(),'id'=>$thisCard['id']))}" >
+                  <td>
+                  <input type="text" name="money" value="0" class="form-control" style="width:40px;">
+                  <input type="hidden" name="wecha_id" value="{gr-$list.wecha_id}">
+                   </td>
+                   <td>  <button type="submit" style="cursor:pointer" class="btn btn-warning btn-sm">设置</button></td>
+</form>
+                  <td class="norightborder">			
+
+				                <a href="{gr-:U('User/MemberCard/member',array('token'=>getToken(),'id'=>$thisCard['id'],'itemid'=>$list['id']))} " class="btn btn-warning btn-sm">消费记录</a> 
+
+                        <a href="{gr-:U('User/MemberCard/signrecords',array('token'=>getToken(),'id'=>$thisCard['id'],'itemid'=>$list['id']))}" class="btn btn-warning btn-sm">签到记录</a>  
+                        
+                        <a href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('User/MemberCard/member_del',array('token'=>getToken(),'id'=>$thisCard['id'],'itemid'=>$list['id']))}');" class="btn btn-warning btn-sm"><i class="mdi-action-delete"></i>删除</a> 
+                  </td>
+                </tr>
+				</volist>
+
+
+              </tbody>
+            </table>
+          
+
+          </div>
+            
+
+ 
+ 
+          <div >
+            <div class="pageNavigator right">
+                <div class="pages">{gr-$page}</div>
+              </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+function checkAll(form, name) {
+for(var i = 0; i < form.elements.length; i++) {
+var e = form.elements[i];
+if(e.name.match(name)) {
+e.checked = form.elements['chkall'].checked;
+}
+}
+}
+  </script>
+  <!--底部-->
+  	</div>
+<include file="Public/footer"/>  

@@ -1,0 +1,65 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html >
+<html >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <title>微通汇3.1.0-后台登录</title>
+        <script type="text/javascript" src="/Public/static/jquery-1.9.1.js"></script>
+        
+        <style type="text/css">
+        body,div,p,ul,li,a{
+        margin:0px;
+        padding:0px;
+        }
+        body{background-repeat:no-repeat; background-position:center top;}
+        .loginbody{position: absolute;
+        width: 1030px;height: 474px;margin-top: 100px;
+        margin-left: -515px;left: 50%;}
+        .newimgbox{background:url(/Public/Home/images/loginbg01.png) no-repeat; float:left; width:621px; height:474px; padding:4px 30px 4px 4px;}
+        .loginbox{background:url(/Public/Home/images/loginbg02.png) no-repeat; margin: 0 auto; width:380px; height:474px;}
+        .logintop{margin:0px 30px; padding:20px 0 25px; line-height:160%; border-bottom:1px dashed #ccc}
+        .logintop h1{font-size:22px; color:#0781c7;}
+        .logintop p{font-size:14px; color:#999;}
+        .login_table{padding-top:20px;}
+        .login_table div{margin:20px auto;}
+        .login_name{background:url(/Public/Home/images/login_name.jpg) no-repeat; width:317px; height:57px;}
+        .login_pw{background:url(/Public/Home/images/login_pw.jpg) no-repeat; width:317px; height:57px;}
+        .login_jz{line-height:30px; font-size:12px; color:#666;width:300px; height:30px; line-height:30px;}
+        .login_input{margin:9px 5px 8px 60px; height:40px; line-height:40px; padding:0; border:none; width:250px; font-size:14px;}
+        .login_input:focus{outline: 2px solid #ADE3FD; 	}
+        .login_button{width:317px; height:57px;}
+        .input_button{background-color:#7890F0; width:317px; height:50px; color:#fff; border:none; font-size:20px; cursor:pointer; border-radius:3px;}
+        body{
+        background-image:url(/Public/Home/images/2.jpg);
+        }
+        </style>
+    </head>
+    <body>
+        <div class="loginbody">
+
+            <div class="loginbox">
+                <div class="logintop">
+                    <h1>微通汇3.1.0后台登陆</h1>
+                </div>
+                <form action="<?php echo U('Users/checklogin');?>" method="post">
+                    <div class="login_table">
+                        <div class="login_name"><input name="username" class="login_input" placeholder="请输入您的用户名" type="text" value="<?php echo I('name');?>"/></div>
+                        <div class="login_pw"><input  name="password" class="login_input" placeholder="请输入密码" type="password" /></div>
+                        <div class="login_button"><input type="submit" class="input_button" value="登 录" />
+                    </div>
+                    <div class="login_button">联系电话：0575-89974522</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="
+        position: absolute;    bottom: 30px;    left: 50%;  margin-left: -250px;">@2013-<?php echo date('Y',time()) ?> 古睿(Gooraye)版权所有 <a href="http://www.miitbeian.gov.cn/" style="
+        text-decoration: none;
+    ">浙ICP备14015469号</a>  <a href="http://zhanzhang.anquan.org/physical/report/?domain=weitonghui.com" name="Jnxt4k3bnmf2K9GeFJUmJov6r8j0vWHcZPDFW6Bd9DheYSeqhI"><img height="47" src="http://zhanzhang.anquan.org/static/common/images/zhanzhang.png"alt="安全联盟站长平台" /></a></div>
+</body>
+<div style="display:none;clear:both">
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd6b559642c60919cb7118b032863a4f8' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+</html>

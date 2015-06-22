@@ -1,0 +1,48 @@
+*{margin:0;padding:0;list-style:none;outline:0;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+input,img,i,em,label,div{vertical-align:middle;font-style:normal}
+html{font-size:10px}
+body{background:#f0f0f0;font-family:Verdana,arial;font-size:16px;color:#333}a{color:#333;text-decoration:none}
+.m-body{min-width:320px;max-width:640px;margin:0 auto;overflow:hidden}
+/*head*/
+.m-hd{height:45px;overflow:hidden}
+.m-hd .uc{text-indent:-99px;width:28px;height:28px;overflow:hidden;float:right;margin:8px 1rem 0 0;background:url(img/uclicon.png) no-repeat;background-size:100%}
+.m-hd .uc.in{background-position:0 100%}
+/*menu m-act-desk.png*/
+.menu{border-bottom:.1rem solid #dcdcdc;-webkit-box-shadow:0 -.1rem #fff inset;display:-webkit-box}
+.menu a{display:block;-webkit-box-flex:1;text-align:center;width:100%;padding:1rem 0;font-size:1.2rem;color:#666;position:relative}
+.menu a i{display:block;width:90%;height:3rem;clear:both;margin:0 auto .5rem}
+.menu a:nth-child(1) i{background:url(img/m-act-cat.png) no-repeat center;background-size:auto 80%}
+.menu a:nth-child(2) i{background:url(img/m-act-cart.png) no-repeat center;background-size:auto 84%}
+.menu a:nth-child(3) i{background:url(img/m-act-wuliu.png) no-repeat center;background-size:auto 82%}
+.menu a:nth-child(4) i{height:28px;margin-top:.2rem;background:url(img/uclicon.png) no-repeat center 0;background-size:28px auto}
+.menu a.in:nth-child(4) i{background-position:center 100%}
+.menu a:after{content:'';display:block;height:40%;position:absolute;right:0;top:20%;border-right:1px solid #d7d7d7}
+.menu a:last-child:after{border:0}
+
+.box{
+	width:45%;
+	box-sizing:border-box;
+	padding-left: 8%;
+	margin: 5px 5px 0px 0px;
+	float: left;
+	display: -webkit-box;
+}
+.box .img{
+	width:60px;
+	height: 60px;
+	display: -webkit-box;
+}
+.box .desc{
+	display: -webkit-box;
+	line-height: 60px;
+	margin-left: 10px;
+	font-family: '微软雅黑',arial,georgia,verdana,helvetica,sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.box .img img{
+	width:60px;
+	height: 60px;
+}
+

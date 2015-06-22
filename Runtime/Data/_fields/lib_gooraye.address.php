@@ -1,0 +1,1 @@
+a:6:{i:0;s:2:"id";i:1;s:11:"create_time";i:2;s:7:"ucharid";i:3;s:13:"detailaddress";s:3:"_pk";s:2:"id";s:5:"_type";a:4:{s:2:"id";s:16:"int(10) unsigned";s:11:"create_time";s:16:"int(10) unsigned";s:7:"ucharid";s:11:"varchar(48)";s:13:"detailaddress";s:12:"varchar(256)";}}

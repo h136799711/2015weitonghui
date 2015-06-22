@@ -1,0 +1,79 @@
+<include file="Public/head"/>  
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+     <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+<h4 >订单类型信息 ({gr-$page}) </h4>
+<div class="searchbar right hide">
+<a href="{gr-:U('Host/index',array('token'=>$token))}" class="btnGreen vm"><i class="mdi-content-reply"></i>返回</a>
+</div>
+<div class="clearfix"></div>
+</div>
+<div >
+<div class="pageNavigator left"> <a href="{gr-:U('Host/list_add',array('token'=>$token,'hid'=>$_GET['id']))}" title="新增订单类型" class="btn btn-primary"><i class="mdi-content-add"></i>新增订单类型 </a> </div>
+<div class="clearfix"></div>
+</div>
+<div class="">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select">选择</th>
+<th width="160">订单类型</th>
+<th width="70">原价</th>
+<th width="80">优惠价</th>
+<th>简要说明</th>
+ 
+<th width="100" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="li" id="list"> 
+<tr>
+<td><input type="checkbox" name="del_id[]" value="285" class="checkitem"></td>
+<td>{gr-$list.type}</td>
+<td>{gr-$list.price}</td>
+<td>{gr-$list.yhprice}</td>
+<td>{gr-$list.info}</td>
+ 
+<td colspan="10" class="norightborder">  <a  class="btn btn-warning btn-sm" href="{gr-:U('Host/list_edit',array('id'=>$list['id'],'token'=>$token))}"><i class="mdi-editor-mode-edit"></i>编辑</a> 
+<a href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('Host/list_del',array('id'=>$list['id'],'token'=>$token))}');"  class="btn btn-warning btn-sm"  class="btn btn-warning btn-sm" ><i class="mdi-action-delete"></i>删除</a>
+
+</td>
+
+</tr>
+</volist>
+
+</tbody>
+</table>
+</form>
+<script>
+   function checkvotethis() {
+var aa=document.getElementsByName('del_id[]');
+var mnum = aa.length;
+j=0;
+for(i=0;i<mnum;i++){
+if(aa[i].checked){
+j++;
+}
+}
+if(j>0) {
+document.getElementById('info').submit();
+} else {
+alert('未选中任何文章或回复！')
+}
+}
+
+   </script> 
+</div>
+<div >
+<div class="pageNavigator right">
+<div class="pages">{gr-$page}</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<include file="Public/footer"/>

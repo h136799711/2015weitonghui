@@ -1,0 +1,37 @@
+<include file="Public/head"/>
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+          <div class="righttitle"><h4>设置粉丝分组</h4><a href="javascript:history.go(-1);"  class="btn btn-primary" data-top ><i class="mdi-content-reply"></i>返回</a></div>
+         
+          <form method="post"   action=""  enctype="multipart/form-data" >
+          <div class=" form">
+            <table class="table" >
+                          <tr>
+                  <th valign="top"><label for="pic">名称：</label></th>
+                  <td><input class="form-control"  name="name" id="name" value="{gr-$thisGroup['name']}" style="width:200px;"  />
+</td>
+                </tr>
+                <tr>
+                  <th valign="top"><label for="info">简介：</label></th>
+                  <td><textarea name="intro" id="intro" class="form-control"  rows="5" style="width:490px;height:80px">{gr-$thisGroup['intro']}</textarea></td>
+                </tr>  
+                
+                <tr>
+                  <th></th>
+                  <td><if condition="$thisGroup"><input type="hidden" name="id" value="{gr-$thisGroup['id']}" /></if><input type="submit" value="保存" name="sbmt" class="btn btn-primary"></td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+          </form>
+          
+        </div>     
+ 
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div> 
+<!--底部-->
+  	</div>
+<include file="Public/footer"/>

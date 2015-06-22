@@ -1,0 +1,43 @@
+ <include file="Public/head" /> 
+
+<input type="hidden" id="catUrl" value="{gr-:U('Product/ajaxCatOptions',array('token'=>$token))}" />
+  <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 "> 
+   <div class="righttitle"> 
+    <h4>桌台设置</h4> 
+    <a href="{gr-:U('Product/tables',array('token'=>$token,'dining'=>$isDining))}" class="btn btn-primary btn-sm" data-top><i class="mdi-content-reply"></i>返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{gr-$set.id}" />
+</if>
+<input type="hidden" name="discount" id="discount" value="{gr-$set.id}" />
+    <div class=" bgfc"> 
+     <table class="table" > 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td><input type="text" name="name" value="{gr-$set.name}" class="form-control" style="width:400px;" /></td> 
+       </tr> 
+      <tr> 
+        <th><span class="red">*</span>介绍：</th>
+        <td><input type="text" name="intro" value="{gr-$set.intro}" class="form-control" style="width:400px;" /></td> 
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>顺序：</th> 
+        <td><input type="text" name="taxis" value="{gr-$set.taxis}" class="form-control" style="width:400px;" /></td> 
+       </tr>
+        <tr> 
+       
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <input type="hidden" name="id" value="{gr-$set.id}" />
+       <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button> &nbsp; <a href="{gr-:U('Product/tables',array('token'=>$token))}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public/footer" />

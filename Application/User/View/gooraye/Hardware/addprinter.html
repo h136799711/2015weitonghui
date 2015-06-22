@@ -1,0 +1,75 @@
+<include file="Public/head"/>  
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<div class="righttitle">
+<h4 >打印机</h4>
+
+
+</div>
+
+<div class="">
+<form method="post"  action="" id="info" >
+<table style=" margin:20px 0 0 0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+  <tbody>
+	<tr>
+	  <th valign="top"><span class="red">*</span><label for="keyword">打印机名称：</label></th>
+	  <td>
+	  	<input type="input" placeholder="请输入打印机名称" class="form-control" id="keyword" value="微打印机" name="name" style="width:600px"><p>注明：名称可任意取，只要您能知道是哪台机子。</p>
+	  </td>
+	</tr>
+	<tr>
+	  <th valign="top"><span class="red">*</span><label for="Title">打印机标识：</label></th>
+	  <td><input type="input" class="form-control" id="Title" value="" name="printerid" style="width:600px"> <p>注明：在打印机底部,IMEI后的一串数字，</p>
+	                  </td>
+	</tr>
+	<notempty name="branchs">
+		<tr>
+		  <th valign="top"><span class="red">*</span><label for="Title">所属门店：</label></th>
+		  <td>
+		  	<select class="form-control"  name="cid">
+		  		<volist name="branchs" id="vo">
+		  			<option value="{gr-$vo.id}">{gr-$vo.name}</option>
+		  		</volist>
+		  	</select>
+		   </td>
+		</tr>
+	</notempty>
+
+	<tr> 
+        <th><span class="red">*</span>打印机位置：</th> 
+        <td>经度 <input type="text" id="longitude" name="longitude" size="14" class="form-control" value="0"> 纬度 <input type="text" name="latitude" size="14" id="latitude" class="form-control" value="0"> <a href="###" onclick="setlatlng($('#longitude').val(),$('#latitude').val())" class="btn btn-warning btn-sm"><i class="mdi-maps-pin-drop"></i>在地图中查看/设置</a></td> 
+       </tr>
+	
+
+  	<tr>
+  		<td>
+		  	<button type="submit" name="button" class="btn  btn-inverse"><i class="mdi-content-save"></i>保存</button>　
+		  	<a href="javascript:back(-1);" class="btn  btn-inverse"><i class="mdi-navigation-cancel"></i>取消</a> 
+		</td>
+	</tr>
+  </tbody>
+</table>
+
+</form>
+
+</div>
+
+</div>
+      <script type="text/javascript">
+      	function setlatlng(longitude,latitude){
+	art.dialog.data('longitude', longitude);
+	art.dialog.data('latitude', latitude);
+
+	art.dialog.open("{gr-:U('User/Map/setLatLng',array('token'=>getToken()))}",{lock:false,title:'设置经纬度',width:900,height:400,resize:true,resize:true,yesText:'关闭',background: '#000',opacity: 0.87});
+	}
+
+      </script>
+
+<include file="Public/footer"/>
+      </div>
+    </div>
+  </div> 
+
+

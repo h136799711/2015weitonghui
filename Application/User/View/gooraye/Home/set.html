@@ -1,0 +1,77 @@
+<include file="Public/head"/>
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__STATIC__/audioplayer/inc/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="__STATIC__/audioplayer/inc/jquery.mb.miniPlayer.js"></script>
+<link rel="stylesheet" type="text/css" href="__STATIC__/audioplayer/css/miniplayer.css" title="style" media="screen"/>
+<script type="text/javascript">
+        $(function () {
+            $(".audio").mb_miniPlayer({
+                width: 200,
+                inLine: false,
+                onEnd: playNext
+            });
+            function playNext(player) {
+                var players = $(".audio");
+                document.playerIDX = player.idx + 1 <= players.length - 1 ? player.idx + 1 : 0;
+                players.eq(document.playerIDX).mb_miniPlayer_play();
+            }
+        });
+</script>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+    <div class="righttitle">
+        <h4>首页回复配置 </h4>
+    </div>
+    <div class=" bgfc">
+        <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">
+            <table class="table" >
+                <tbody>
+                    <tr>
+                        <th valign="top"><span class="red">*</span>关键词：</th>
+                        <td>
+                        <span class="red">首页 或者 home —— 当用户输入该关键词时，将会触发此回复。</span></td>
+                    </tr>
+                    <tr>
+                        <th width="120">回复标题：</th>
+                        <td><input type="text" name="title" value="{gr-$home.title}" class="form-control" style="width:550px;"></td>
+                    </tr>
+                    <tr>
+                        <th width="120">内容介绍：</th>
+                        <td><textarea style="width:560px;height:75px" name="info" id="info" class="form-control">{gr-$home.info}</textarea><br/>最多填写120个字</td>
+                    </tr>
+                    <tr>
+                        <th>回复图片：</th>
+                        <td><input type="text" name="picurl" id="picurl" value="{gr-$home.picurl}" class="form-control" style="width:550px;">   <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('picurl',700,420,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>
+                         <a href="###" class="btn btn-warning btn-sm" onclick="viewImg('picurl')"><i class="mdi-action-pageview"></i>预览</a></td>
+                    </tr>
+                    <tr>
+                        <th>3G网站背景：</th>
+                        <td><input type="hidden" name="homeurl" id="homeurl" value="{gr-$home.homeurl}" class="px " style="width:550px;"><a class="btn btn-warning btn-sm" href="{gr-:U('User/Flash/index',array('token'=>$token,'tip'=>2))}">请在首页背景图中设置</a></td>
+                    </tr>
+                    <tr>
+                        <th>背景音乐：</th>
+                        <td>
+                            <table><tr><if condition="$home.musicurl neq ''"><td><a style="width:120px;float:left" id="musicurl_src" class="audio {skin:'blue'}" href="{gr-$home.musicurl}">音乐播放</a></td></if><td> <input class="form-control" name="musicurl" value="{gr-$home.musicurl}" id="musicurl" style="width:200px;float:left" onchange="$('#musicurl_src').attr('href',this.value"> <a href="###" onclick="gfilePicUpload('musicurl',0,0,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a>&nbsp;<a href="###" onclick="chooseFile('musicurl','music')"  class="btn btn-warning btn-sm"><i class="mdi-toggle-check-box"></i>选择</a></td></tr></table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>公司Logo：</th>
+                        <td><input type="text" name="logo" id="logo" value="{gr-$home.logo}" class="form-control" style="width:550px;">  <a href="###" onclick="gfilePicUpload('logo',1500,1000,'{gr-$token}')" class="btn btn-warning btn-sm"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" class="btn btn-warning btn-sm" onclick="viewImg('logo')"><i class="mdi-action-pageview"></i>预览</a><br/> </td>
+                    </tr>
+                   <tr>
+                        <th>外链：</th>
+                        <td><input type="text" name="apiurl" value="{gr-$home.apiurl}" class="form-control" style="width:550px;"><br/> 外链例如：http://www.baidu.com </td>
+                    </tr>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <td>
+                            <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button>
+                            <a href="javascript:history.go(-1);" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<include file="Public/footer"/>

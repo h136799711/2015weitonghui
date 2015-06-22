@@ -1,0 +1,50 @@
+<include file="Public/head"/>
+<!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+
+
+<script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+<include file="Router:menu"/>
+        
+
+
+          <div class="bg-warning tip">共有{gr-$pageinfo.total}人在线</div>
+
+         <div class=" form">
+<div class="bdrcontent ">
+<div id="div_ptype">
+<table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<thead>
+<tr>
+<th style=" width:180px;">MAC地址</th>
+<th style=" width:100px;">IP</th>
+<th style=" width:100px;">下行</th>  
+<th style=" width:100px;">上行</th>             
+<th style=" width:150px;" class="norightborder">连接时间</th>
+</tr>
+</thead>
+<volist name="list" id="actinfo">
+<tr>
+<td>{gr-$actinfo.mac}</td>
+<td>{gr-$actinfo.ip}</td>
+    <td><?php echo ($actinfo['in_come']/1024).'kb';?></td>
+    <td><?php echo ($actinfo['out_go']/1024).'kb';?></td>
+<td class="norightborder">
+<?php date('Y-m-d H:i:s',$actinfo['created_at']);?>
+</td>
+</volist>
+</tr>
+
+</table>
+
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{gr-$page}</div>
+</div>
+          </div>
+          
+        </div>
+<include file="Public/footer"/>

@@ -1,0 +1,62 @@
+<include file="Public/head"/>
+<div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
+
+<div class="righttitle">
+<if condition="$tip eq 1">
+  <h4>幻灯片管理 <span class="FAQ">3G网站头部幻灯片。</span></h4>
+<else/>
+  <h4>背景图管理 <span class="FAQ">3G网站背景图。</span></h4>
+</if>
+ </div>
+         <div class="cLineC" style="line-height: 32px;">
+ <a href="{gr-:U('Flash/add',array('tip'=>$tip))}" class="btn btn-primary" ><i class="mdi-content-add"></i><if condition="$tip eq 1">添加幻灯片<else/>添加背景图</if></a> 
+</div>
+ 
+ <div class=" form">
+
+<div class="bdrcontent ">
+<div id="div_ptype">
+<table class="table table-condensed table-bordered table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<thead>
+<tr>
+                   
+                   <th style=" width:120px;"><if condition="$tip eq 1">幻灯片描述<else/>背景图描述</if></th>
+
+<th style=" width:240px;"><if condition="$tip eq 1">幻灯片图片外链地址<else/>背景图图片外链地址</if> </th>
+                        <th ><if condition="$tip eq 1">幻灯片外链地址<else/>背景图外链地址</if></th>
+
+                        <th style=" width:200px;" class="norightborder">操作</th>
+</tr>
+</thead>
+<volist name="info" id="vo">
+<tr>
+
+<td>{gr-$vo.info}</td>
+<td><img src="{gr-$vo.img}" alt="图片" class=" thumbnail" style="width:160px;height:120px;"></td>
+<td>{gr-$vo.url}</td>
+<td >
+	<a class="btn btn-warning btn-sm"  href="{gr-:U('Wap/Index/flash',array('token'=>getToken(),'tip'=>$tip))}"><i class="mdi-action-visibility"></i>查看</a>
+	<a class="btn btn-warning btn-sm"  href="{gr-:U('Flash/edit',array('id'=>$vo['id'],'tip'=>$tip))}"><i class="mdi-editor-mode-edit"></i>编辑</a>
+	<a class="btn btn-warning btn-sm"  href="javascript:drop_confirm('您确定要删除吗?', \'{gr-:U('Flash/del',array('id'=>$vo['id'],'tip'=>$tip))}\');"><i class="mdi-action-delete"></i>删除</a>
+</td>
+</tr>
+</volist>
+               
+  </table>
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{gr-$page}</div>
+</div>
+          </div>
+  
+        </div>
+   
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div> 
+  <!--底部-->
+  	</div>
+
+<include file="Public/footer"/>

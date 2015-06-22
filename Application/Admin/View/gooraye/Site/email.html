@@ -1,0 +1,68 @@
+<extend name="template/base"  />
+<block name="bodyIncludes" >
+<include file="Site/public" />
+<div id="artlist">
+        <form id="myform" action="{gr-:U('Site/insert')}" method="post">
+    <table class="table table-condensed table-bordered table-striped"  width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+            <tr>
+                <td  height="48" align="right">邮箱发送方式：</td>
+                <td><input type="radio" name="email" value="true" <php>if(C('email')==='true')echo checked;</php> />SMTP函数发送<input type="radio" name="email" value="false" <php>if(C('email')==='false')echo checked;</php> />mail模块发送</td>
+            </tr>
+            <tr>
+                <td  height="48" align="right"><strong>邮件服务器：</strong></td>
+                <td><input type="text" name="email_server" value="{gr-:C('email_server')}" class="form-control empty" size="45" /><span></span>
+            </td>
+        </tr>
+        <tr>
+            <td  height="48" align="right"><strong>服务器端口：</strong></td>
+            <td><input type="text" name="email_port" value="{gr-:C('email_port')}" class="form-control empty" size="45" /><span></span>
+        </td>
+    </tr>
+    <!--<tr>
+                                        <td  height="48" align="right"><strong>发件人地址：</strong></td>
+                                        <td><input type="text" name="email_form" value="{gr-:C('email_form')}" class="form-control empty" size="45" /><span>一般不超过80个字符</span>
+    </tr>-->
+    <tr>
+        <td  height="48" align="right"><strong> 用户名：</strong></td>
+        <td><input type="text" name="email_user" value="{gr-:C('email_user')}" class="form-control empty" size="45" /><span></span>
+    </td>
+</tr>
+<tr>
+    <td  height="48" align="right"><strong>密  码：</strong></td>
+    <td><input type="text" name="email_pwd" value="{gr-:C('email_pwd')}" class="form-control empty" size="45" /><span></span>
+</td>
+</tr>
+<!--<tr>
+                                <td  height="48" align="right"><strong>注册邮件发送标题：</strong></td>
+                                <td><textarea  type="text" name="reg_email_title" class="form-control empty" style="width:450px;height:60px;margin:5px 0 5px 0;" />{gr-:C('reg_email_title')}</textarea><span>一般不超过100个字符</span>
+                                </tr>
+                                <tr>
+                                                <td  height="48" align="right"><strong>注册邮件发送主题：</strong></td>
+                                                <td><textarea  type="text" name="reg_email_content" class="form-control empty" style="width:450px;height:60px;margin:5px 0 5px 0;" />{gr-:C('reg_email_content')}</textarea><span>一般不超过200个字符</span>
+    </tr>-->
+    <tr>
+        <td  height="48" align="right"><strong>密码找回标题：</strong></td>
+        <td><textarea  type="text" name="pwd_email_title" class="form-control empty" style="width:450px;height:60px;margin:5px 0 5px 0;" />{gr-:C('pwd_email_title')}</textarea><span></span>
+        </td>
+    </tr>
+    <tr>
+        <td  height="48" align="right"><strong>密码找回主题：</strong></td>
+        <td><textarea    name="pwd_email_content" class="form-control empty" rows="5" />{gr-:C('pwd_email_content')}</textarea><span></span>
+        </td>
+    </tr>
+    <input type="hidden" name="files" value="email.php" />
+    <tr>
+        <td height="48" colspan="2">
+            <div id="addkey"></div>
+            <div style="padding-left:100px;">
+                <input type="submit" class="btn btn-primary" value="保存" />
+            </div>
+        </td>
+    </tr>
+</form>
+</table>
+<br />
+<br />
+<br />
+</div>
+</block>

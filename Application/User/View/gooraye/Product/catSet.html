@@ -1,0 +1,41 @@
+ <include file="Public/head" /> 
+ <script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
+  <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 "> 
+   <div class="righttitle"> 
+    <h4><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>设置</h4> 
+    <a href="{gr-:U('Product/cats',array('token'=>$token,'parentid'=>$parentid,'dining'=>$isDining))}" class="btn btn-primary btn-sm" data-top><i class="mdi-content-reply"></i>返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <input type="hidden" name="id" value="{gr-$set.id}" /> 
+     
+    <div class=" bgfc"> 
+     <table class="table" > 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td><input type="text" name="name" value="{gr-$set.name}" class="form-control" style="width:400px;" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>Logo地址：</th> 
+        <td><input type="text" name="logourl" value="{gr-$set.logourl}" id="pic" class="form-control" style="width:400px;" />  <script src="__STATIC__/gfile.js"></script><a href="###" onclick="gfilePicUpload('pic',700,420,'{gr-$token}')" class="a_upload"><i class="mdi-file-file-upload"></i>上传</a> <a href="###" onclick="viewImg('pic')"><i class="mdi-action-pageview"></i>预览</a></td> 
+       </tr>
+       
+        <tr> 
+        <th><span class="red">*</span>简介：</th> 
+        <td><textarea name="des" class="form-control" style="width:400px;height:80px;">{gr-$set.des}</textarea></td> 
+       </tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <if condition="$isDining neq 1"><input type="hidden" value="0" name="dining" /><else/><input type="hidden" value="1" name="dining" /></if>
+       <input type="hidden" value="{gr-:$parentid}" name="parentid" />
+       <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button> &nbsp; <a href="{gr-:U('Product/cats',array('token'=>$token))}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+  <include file="Public/footer" />

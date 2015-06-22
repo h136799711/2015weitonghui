@@ -1,0 +1,109 @@
+ <include file="Public/head" /> 
+ <!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
+ <link rel="stylesheet" href="__STATIC__/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="__STATIC__/kindeditor/plugins/code/prettify.css" />
+<script src="__STATIC__/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="__STATIC__/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script src="__JS__/date/WdatePicker.js"></script>
+<script type="text/javascript" src="__JS__/formCheck/formcheck.js"> </script>
+<script>
+
+var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#col-xs-9 col-sm-9  col-md-10 col-lg-10 ', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : true,
+uploadJson : '{gr-:U("User/GFile/kindedtiropic")}',
+items : [
+'source','undo','clearhtml','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'image','link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut']
+});
+
+});
+
+function inputtypeChange(){
+	if($('#inputtype').attr('value')=='select'){
+		$('#troptions').css("display","");
+	}else{
+		$('#troptions').css("display","none");
+	}
+}
+function regexChange(){
+	$('#regex').attr('value',$('#regexSelect').attr('value'))
+}
+</script>
+
+  <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 "> 
+   <div class="righttitle"> 
+    <h4>“{gr-$thisForm['name']}”输入项设置</h4> 
+    <a href="{gr-:U('Selfform/inputs',array('token'=>$token,'id'=>$thisForm['id']))}" class="btn btn-primary btn-sm" data-top><i class="mdi-content-reply"></i>返回</a> 
+   </div> 
+   
+
+   <form class="form" method="post" id="form" action=""> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{gr-$set.id}" />
+</if>
+<input type="hidden" name="formid" value="{gr-$thisForm['id']}" />
+    <div class=" bgfc"> 
+     <table class="table" > 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>显示名称：</th>
+        <td><input type="text" id="displayname" name="displayname" value="{gr-$set.displayname}" class="form-control" style="width:400px;" /></td> 
+       </tr> 
+        <tr> 
+        <th><span class="red">*</span>字段名称：</th>
+        <td><input type="text" id="fieldname" name="fieldname" value="{gr-$set.fieldname}" class="form-control" style="width:400px;" /> <span style="color:red">注意字段名称不能是a</span></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>输入类型：</th>
+        <td><select class="form-control"  name="inputtype" id="inputtype" onchange="inputtypeChange()">{gr-$inputTypeOptions}</select></td> 
+       </tr>
+       <tr id="troptions"<if condition="$set['inputtype'] neq select"> style="display:none"</if>> 
+        <th><span class="red"></span>选项：</th>
+        <td><input type="text" id="options" name="options" value="{gr-$set.options}" class="form-control" style="width:400px;" /> 下拉列表的各个选项，多个选项用“|”隔开</td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>是否必填：</th>
+        <td><select class="form-control"  name="require" id="require">{gr-$requireOptions}</select></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>输入限制：</th>
+        <td><select class="form-control"  name="regexSelect" id="regexSelect" onchange="regexChange()">{gr-$regexOptions}</select> <input type="text" name="regex" id="regex" value="{gr-$set.regex}" class="form-control" style="width:400px;" /> 可以自己编写正则表达式</td> 
+       </tr>
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>排序：</th>
+        <td><input type="text" name="taxis" id="taxis" value="{gr-$set.taxis}" class="form-control" style="width:400px;" /></td> 
+       </tr>
+       <tr> 
+        <th><span class="red"></span>错误提示：</th> 
+        <td><input type="text" name="errortip" id="errortip" value="{gr-$set.errortip}" class="form-control" style="width:400px;" /> 输入错误时的提示内容</td> 
+       </tr>
+
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="button" class="btn btn-primary"><i class="mdi-content-save"></i>保存</button> &nbsp; <a href="{gr-:U('Selfform/inputs',array('token'=>$token,'id'=>$thisForm['id']))}" class="btn btn-primary"><i class="mdi-navigation-cancel"></i>取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+  </div> 
+<script language="javascript">
+$(function(){
+
+	$("#form").valid([
+	{ name:"displayname",simple:"显示名称",require:true},
+	{ name:"fieldname",type:"eng",simple:"字段名称",require:true},
+	{ name:"inputtype",simple:"输入类型",require:true}	
+	],true,true);
+
+})
+</script>
+  <include file="Public/footer" />
