@@ -15,7 +15,7 @@ class ReplyController extends WapController{
     public $sepTime;
     public $wecha_id;
     public function _initialize(){
-        parent::__construct();
+    		parent::_initialize();
         $this->token=I('get.token');
         $this->reply_info_model=M('reply_info');
 		$thisInfoConfig = $this->reply_info_model->where(array('infotype'=>'message','token'=>$this->token))->find();
@@ -32,6 +32,7 @@ class ReplyController extends WapController{
         $this->assign('token',$this->token);
     } 
      public function index(){ //显示数据
+     	
          $leave_model =M("leave");  
          if(IS_GET){
             $where = array("token"=>$this->token,'checked'=>1);
@@ -51,7 +52,9 @@ class ReplyController extends WapController{
             $this->assign('res',$res);// 赋值数据集
             $this->assign('page',$show);// 赋值分页输出
             $this->display(); // 输出模板
-        } 
+        }else{
+			$this->error("非法请求!");
+        }
      }
     public function leave(){//留言信息插入处理
         $leave_model =M("leave");
@@ -69,33 +72,23 @@ class ReplyController extends WapController{
         $lasttime = $leave_model->where(array("token"=>$this->token))->getField("max(time)");//获得准备数据 是否与数据库中数据留言是同一人
         $timeres = time() - $lasttime;   
         if($timeres < $this->sepTime){
-            $this->ajaxReturn("","您已留言,请60秒以后再留言",0);
+        		
+            $this->error("您已留言,请60秒以后再留言");
             exit;
         }else{
-            $res = $leave_model->add($msgarr); 
-            //echo $res;exit;
+            $res = $leave_model->add($msgarr);
             if($res){
-            	Sms::sendSms($this->token,'留言板有新的留言');
                 $msgarr['id']=$res;
                 if($msgarr['checked'] == 1){
                     $msgarr['time'] =date("Y-m-d H:i:s",$msgarr['time']);
-                    $data['data'] =$msgarr;
-                    $data['info'] ="留言成功";
-                    $data['status'] = 1;
-                    $this->ajaxReturn($data);
+                    $this->success($msgarr);
                     exit;
                 }else{
-                    $data['data'] =$msgarr;
-                    $data['info'] ="留言成功,正在审核中";
-                    $data['status'] = 2;
-                    $this->ajaxReturn($data);
+                    $this->error("留言成功,正在审核中");
                     exit;
                 }
             }else{
-                $data['data'] ="";
-                $data['info'] ="留言失败";
-                $data['status'] = 0;
-                $this->ajaxReturn($data);
+                $this->error("留言失败");
                 exit;
             }
         }
@@ -118,7 +111,7 @@ class ReplyController extends WapController{
           $leave_model =M("leave");
           $thisMessage=$leave_model->where(array('id'=>intval($message_id)))->find();
           if (!$thisMessage){
-          	$this->ajaxReturn("","留言不存在",0);
+          		$this->ajaxReturn(array('status'=>false,'info'=>"留言不存在"));
                 exit;
           }
          //
@@ -128,7 +121,7 @@ class ReplyController extends WapController{
             $lasttime = $reply_model->where(array('message_id'=>$message_id))->getField("max(time)");//获得准备数据 是否与数据库中数据留言是同一人
             $timeres = time() - $lasttime;
             if($timeres < $this->sepTime){
-                $this->ajaxReturn("","你已回复，请60秒以后再回复",0);
+          		$this->ajaxReturn(array('status'=>false,'info'=>"你已回复，请60秒以后再回复"));
                 exit;
             }else{
                 $res = $reply_model->add($replyarr); 
@@ -136,23 +129,17 @@ class ReplyController extends WapController{
                     $replyarr['id']=$res;
                     if($replyarr['checked'] == 1){
                         $replyarr['time'] =date("Y-m-d H:i:s",$replyarr['time']);
-                        $data['data'] =$replyarr;
-                        $data['info'] ="回复成功";
-                        $data['status'] = 1;
-                        $this->ajaxReturn($data);
+		          		$this->ajaxReturn(array('status'=>true,'info'=>$replyarr));
                         exit;
                     }else{
-                        $data['data'] =$replyarr;
-                        $data['info'] ="回复成功,正在审核中";
-                        $data['status'] = 2;
-                        $this->ajaxReturn($data);
+		          		$this->ajaxReturn(array('status'=>false,'info'=>"回复成功,正在审核中"));
                         exit;
                     }
                 }else{
                     $data['data'] ="";
                     $data['info'] ="回复失败";
                     $data['status'] = 0;
-                    $this->ajaxReturn($data);
+		          	$this->ajaxReturn(array('status'=>false,'info'=>"回复失败"));
                     exit;
                 }  
             }

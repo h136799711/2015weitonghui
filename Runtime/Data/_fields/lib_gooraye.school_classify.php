@@ -1,1 +1,0 @@
-a:7:{i:0;s:3:"sid";i:1;s:5:"sname";i:2;s:5:"ssort";i:3;s:5:"token";i:4;s:4:"type";s:3:"_pk";s:3:"sid";s:5:"_type";a:5:{s:3:"sid";s:7:"int(11)";s:5:"sname";s:11:"varchar(50)";s:5:"ssort";s:6:"int(5)";s:5:"token";s:11:"varchar(50)";s:4:"type";s:8:"char(20)";}}

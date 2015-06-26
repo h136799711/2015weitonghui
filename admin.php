@@ -9,7 +9,7 @@
 
 if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 
-
+define('PROJECT_NAME', "2015weitonghui");
 /**
  * 系统调试设置
  * 项目正式部署后请设置为false
@@ -22,16 +22,25 @@ define('APP_DEBUG', false );
  * 安全期间，建议安装调试完成后移动到非WEB目录
  */
 define ( 'APP_PATH', './Application/' );
+define('BIND_MODULE','Admin');
 
+
+// 运行时文件
+define("RUNTIME_PATH","../../Runtime/".PROJECT_NAME."/");
+
+// 框架目录
+define("THINK_PATH",realpath("../../thinkphp/weitonghui/").'/');
+// 加载
+require "../../thinkphp/weitonghui/ThinkPHP.php";
 
 /**
  * 缓存目录设置
  * 此目录必须可写，建议移动到非WEB目录
  */
-define ( 'RUNTIME_PATH', './Runtime/' );
-define('BIND_MODULE','Admin');
+//define ( 'RUNTIME_PATH', './Runtime/' );
+
 /**
  * 引入核心入口
  * ThinkPHP亦可移动到WEB以外的目录
  */
-require './ThinkPHP/ThinkPHP.php';
+//require './ThinkPHP/ThinkPHP.php';

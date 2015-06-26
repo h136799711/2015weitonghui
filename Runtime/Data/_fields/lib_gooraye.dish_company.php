@@ -1,1 +1,0 @@
-a:7:{i:0;s:2:"id";i:1;s:3:"cid";i:2;s:10:"istakeaway";i:3;s:5:"price";i:4;s:9:"payonline";s:3:"_pk";s:2:"id";s:5:"_type";a:5:{s:2:"id";s:16:"int(10) unsigned";s:3:"cid";s:16:"int(10) unsigned";s:10:"istakeaway";s:19:"tinyint(1) unsigned";s:5:"price";s:5:"float";s:9:"payonline";s:19:"tinyint(1) unsigned";}}

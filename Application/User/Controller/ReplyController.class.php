@@ -217,10 +217,10 @@ class ReplyController extends UserController{
 	}
 	public function replyChk(){//回复内容多项审核
 		$reply_model = M("reply");
-		//$id = intval($_GET['id']);
+		$msgid = intval($_GET['msgid']);
+
 		$id = $_GET['chk_value'];
 		$id = explode(",",$id);
-		//$result =array($id);
 		foreach($id as $val){
 			$res = $reply_model->where(array("id"=>intval($val)))->setField("checked",1);
 			if($res){
@@ -229,21 +229,24 @@ class ReplyController extends UserController{
 				$result = 0;
 			}
 		}
-		echo "审核成功";
+		
+		$this->success("审核成功",U('User/Reply/reply',array('msgid'=>$msgid,'token'=>$this->token))) ;
+//		echo "";
 	}
 	public function replyChked(){//回复内容单项审核
 		$reply_model = M("reply");
 		$id = I('get.id');
+		$msgid = intval($_GET['msgid']);
 		// echo $id;exit;
 		$checked = $reply_model->where(array("id"=>intval($id)))->getField("checked");
 		if($checked == 1){
-			$this->success("已审核",U('User/Reply/index',array('wecha_id'=>$this->wecha_id,'token'=>$this->token)));
+			$this->success("已审核",U('User/Reply/index',array('msgid'=>$msgid,'wecha_id'=>$this->wecha_id,'token'=>$this->token)));
 		}else{
 			$res = $reply_model->where(array("id"=>$id))->setField("checked",1);
 			if($res){
-				$this->success("审核成功",U('User/Reply/reply',array('wecha_id'=>$this->wecha_id,'token'=>$this->token)));
+				$this->success("审核成功",U('User/Reply/reply',array('msgid'=>$msgid,'wecha_id'=>$this->wecha_id,'token'=>$this->token)));
 			}else{
-				$this->error("审核失败",U('User/Reply/reply',array('wecha_id'=>$this->wecha_id,'token'=>$this->token)));
+				$this->error("审核失败",U('User/Reply/reply',array('msgid'=>$msgid,'wecha_id'=>$this->wecha_id,'token'=>$this->token)));
 			}
 		}
 	}

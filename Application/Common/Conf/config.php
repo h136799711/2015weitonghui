@@ -16,8 +16,8 @@ return array(
 	// 'URL_PATHINFO_DEPR'		=> '/',
 	// 'URL_HTML_SUFFIX'		=>'',			//伪静态后缀
 	
-	'SESSION_PREFIX'  => 'weitonghui_'
-    	
-
+	'SESSION_PREFIX'  => 'weitonghui_',
+	
+	'SHOW_RUN_TIME'=>true,
 );
 ?>

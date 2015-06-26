@@ -1,169 +1,217 @@
-<include file="Public/head"/>
+<include file="Public/head" />
 <!-- <link rel="stylesheet" type="text/css" href="__CSS__/cymain.css" /> -->
 <script src="__STATIC__/artDialog/jquery.artDialog.js?skin=default"></script>
 <script src="__STATIC__/artDialog/plugins/iframeTools.js"></script>
 <!--弹出层样式-->
 <style type="text/css">
-body,h2{margin:0;padding:0;}
-#faqbg{background-color:#666666;position:absolute;z-index:99;left:0;top:0;display:none;width:100%;height:1000px;opacity:0.5;filter:alpha(opacity=50);-moz-opacity:0.5;}
-#faqdiv{position:absolute;width:600px;left:50%;top:50%;margin-left:-300px;height:auto;z-index:100;background-color:#fff;border:1px #8FA4F5 solid;padding:1px;}
-#faqdiv h2{height:25px;font-size:14px;background-color:#BABABA;position:relative;padding-left:10px;line-height:25px;}
-#faqdiv h2 a{position:absolute;right:5px;font-size:12px;color:#FF0000;}
-#faqdiv .form{padding:10px;}
+	body,
+	h2 {
+		margin: 0;
+		padding: 0;
+	}
+	#faqbg {
+		background-color: #666666;
+		position: absolute;
+		z-index: 99;
+		left: 0;
+		top: 0;
+		display: none;
+		width: 100%;
+		height: 1000px;
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+		-moz-opacity: 0.5;
+	}
+	#faqdiv {
+		position: absolute;
+		width: 600px;
+		left: 50%;
+		top: 50%;
+		margin-left: -300px;
+		height: auto;
+		z-index: 100;
+		background-color: #fff;
+		border: 1px #8FA4F5 solid;
+		padding: 1px;
+	}
+	#faqdiv h2 {
+		height: 25px;
+		font-size: 14px;
+		background-color: #BABABA;
+		position: relative;
+		padding-left: 10px;
+		line-height: 25px;
+	}
+	#faqdiv h2 a {
+		position: absolute;
+		right: 5px;
+		font-size: 12px;
+		color: #FF0000;
+	}
+	#faqdiv .form {
+		padding: 10px;
+	}
 </style>
 <script>
-//弹出层js start
-$(function(){
-$(".but").click(function(){
-            var messageid = $(this).attr("messageid");
-//var str = "这里是信息内容，这里是信息内容！";
-$(".form").html(messageid);
-$("#faqbg").css({display:"block",height:$(document).height()});
-var yscroll =document.documentElement.scrollTop;
-$("#faqdiv").css("top","100px");
-$("#faqdiv").css("display","block");
-document.documentElement.scrollTop=0;
-});
-$(".close").click(function(){
-$("#faqbg").css("display","none");
-$("#faqdiv").css("display","none");
-});
-})
-//弹出层end
-$(document).ready(function(){
-    $("#selected").click(function () {//反选
-        $("input[name='items']").each(function(){
-            if (this.checked) {
-                this.checked = false;
-            }
-            else {
-                this.checked = true;
-            }
-        });
-    });
-    
-    $("#checked").click(function(){
-        var chk_value =[];
-        var token = $("#tokened").val();
-            $('input[name="items"]:checked').each(function(){
-                chk_value.push($(this).val());
-        });
-        if(chk_value.length==0){
-            alert("你还未选择要操作的项！");
-            return;
-        }
-        $.ajax({
-            type:"get",
-            url:"{gr-:U('User/Reply/checkMany')}?token="+token+"&chk_value="+chk_value,
-            success:function(result){
-                $("input[name='items']").each(function(){
-            if (this.checked) {
-                this.checked = false;
-            }
-        });
-                alert(result);
-                window.location.reload();
-            }
-        });
-    });
-    $("#replyed").click(function(){
-    
-        var chk_value =[];
-        var wecha_id =$("#wecha_id").val();
-        //alert(wecha_id);exit;
-        var checked =$("#needCheck").val();
-        var token = $("#tokened").val();
-            $('input[name="items"]:checked').each(function(){
-                chk_value.push($(this).val());
-        });
-        if(chk_value.length==0){
-            alert("你还未选择要操作的项！");
-            return;
-        }else{
-            location.href="{gr-:U('User/Reply/add')}"+"?chk_value="+chk_value+"&token="+token+"&wecha_id="+wecha_id+"&checked="+checked;
-            return;
-        }
-    
-    });
-    
-})
-$(document).on("click","#del",function(){
-    var chk_value =[];
-    var token = $("#tokened").val();
-        $('input[name="items"]:checked').each(function(){
-            chk_value.push($(this).val());
-    });
-    if(chk_value.length==0){
-        alert("你还未选择要操作的项！");
-        return;
-    }
-    $.ajax({
-        type:"get",
-        url:"{gr-:U('User/Reply/del')}?token="+token+"&chk_value="+chk_value,
-        success:function(result){
-            $("input[name='items']").each(function(){
-            if (this.checked) {
-                this.checked = false;
-            }
-        });
-            alert(result);
-            window.location.reload();
-        }
-    });
-});
+	//弹出层js start
+	$(function() {
+			$(".but").click(function() {
+				var messageid = $(this).attr("messageid");
+				//var str = "这里是信息内容，这里是信息内容！";
+				$(".form").html(messageid);
+				$("#faqbg").css({
+					display: "block",
+					height: $(document).height()
+				});
+				var yscroll = document.documentElement.scrollTop;
+				$("#faqdiv").css("top", "100px");
+				$("#faqdiv").css("display", "block");
+				document.documentElement.scrollTop = 0;
+			});
+			$(".close").click(function() {
+				$("#faqbg").css("display", "none");
+				$("#faqdiv").css("display", "none");
+			});
+		})
+		//弹出层end
+	$(document).ready(function() {
+		$("#selected").click(function() { //反选
+			$("input[name='items']").each(function() {
+				if (this.checked) {
+					this.checked = false;
+				} else {
+					this.checked = true;
+				}
+			});
+		});
+		$("#checked").click(function() {
+			var chk_value = [];
+			var token = $("#tokened").val();
+			$('input[name="items"]:checked').each(function() {
+				chk_value.push($(this).val());
+			});
+			if (chk_value.length == 0) {
+				alert("你还未选择要操作的项！");
+				return;
+			}
+			$.ajax({
+				type: "get",
+				url: "{gr-:U('User/Reply/checkMany')}?token=" + token + "&chk_value=" + chk_value,
+				success: function(result) {
+					$("input[name='items']").each(function() {
+						if (this.checked) {
+							this.checked = false;
+						}
+					});
+					alert(result);
+					window.location.reload();
+				}
+			});
+		});
+		$("#replyed").click(function() {
+			var chk_value = [];
+			var wecha_id = $("#wecha_id").val();
+			//alert(wecha_id);exit;
+			var checked = $("#needCheck").val();
+			var token = $("#tokened").val();
+			$('input[name="items"]:checked').each(function() {
+				chk_value.push($(this).val());
+			});
+			if (chk_value.length == 0) {
+				alert("你还未选择要操作的项！");
+				return;
+			} else {
+				location.href = "{gr-:U('User/Reply/add')}" + "?chk_value=" + chk_value + "&token=" + token + "&wecha_id=" + wecha_id + "&checked=" + checked;
+				return;
+			}
+		});
+	})
+	$(document).on("click", "#del", function() {
+		var chk_value = [];
+		var token = $("#tokened").val();
+		$('input[name="items"]:checked').each(function() {
+			chk_value.push($(this).val());
+		});
+		if (chk_value.length == 0) {
+			alert("你还未选择要操作的项！");
+			return;
+		}
+		$.ajax({
+			type: "get",
+			url: "{gr-:U('User/Reply/del')}?token=" + token + "&chk_value=" + chk_value,
+			success: function(result) {
+				$("input[name='items']").each(function() {
+					if (this.checked) {
+						this.checked = false;
+					}
+				});
+				alert(result);
+				window.location.reload();
+			}
+		});
+	});
 </script>
 <div class="col-xs-9 col-sm-9  col-md-10 col-lg-10 ">
-    <div class="righttitle">
-        <h4 >留言表单  <input type="text" name="tokened" id="tokened" value="{gr-$token}" style="display:none;"></h4>
-        <div class="searchbar right hide">
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div >
-        <span> <a href="#" title="选中审核" class="btn btn-primary" id="checked"><i class="mdi-image-edit"></i>选中审核</a></span>
-        <span> <a href="#" title="选中回复" class="btn btn-primary" id="replyed"><i class="mdi-content-reply"></i>选中回复</a></span>
-        <span> <a href="#" title="选中删除" class="btn btn-primary" id="del"><i class="mdi-action-delete"></i>选中删除</a></span>
-        <span> <a href="{gr-:U('User/Reply/config')}" title="留言板配置" class="btn btn-primary"><i class="mdi-action-settings"></i>留言板配置</a></span>
-    </div>
-    <form method="post" action="" id="info">
-        <input name="wecha_id" type="hidden" id="wecha_id" value="{gr-$wecha_id}">
-        <input name="checked" type="hidden" id="needCheck" value="{gr-$needCheck}">
-        <table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
-            <thead>
-                <tr>
-                    <th class="select"><input type="button" value="全选" name="button" id="selected" ></th>
-                    <th width="130">昵称</th>
-                    <th width="130">留言内容</th>
-                    <th width="170">查看回复</th>
-                    <th width="130">留言时间</th>
-                    <th width="130" class="norightborder">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr></tr>
-            <volist name="res" id="item">
-            <tr >
-                <td id="playlist"><input type="checkbox" name="items" value="{gr-$item.id}"  class="checkitem"></td>
-                <td>{gr-$item.name}</td>
-                <td><a href="###" onclick="art.dialog({col-xs-9 col-sm-9  col-md-10 col-lg-10 : '{gr-$item.message}',width:300,height:200,resize:true,yesText:'关闭',background: '#000',opacity: 0.45});" class="btn btn-warning btn-sm">查看留言 <if condition="$item['checked'] neq 1"> <font style="color:white;font-size:12px;">(未审核)</font><else/>
+	<div class="righttitle">
+		<h4>留言表单  <input type="text" name="tokened" id="tokened" value="{gr-$token}" style="display:none;"></h4>
+		<div class="searchbar right hide">
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div>
+		<span> <a href="#" title="选中审核" class="btn btn-primary" id="checked"><i class="mdi-image-edit"></i>选中审核</a></span>
+		<span> <a href="#" title="选中回复" class="btn btn-primary" id="replyed"><i class="mdi-content-reply"></i>选中回复</a></span>
+		<span> <a href="#" title="选中删除" class="btn btn-primary" id="del"><i class="mdi-action-delete"></i>选中删除</a></span>
+		<span> <a href="{gr-:U('User/Reply/config')}" title="留言板配置" class="btn btn-primary"><i class="mdi-action-settings"></i>留言板配置</a></span>
+	</div>
+	<form method="post" action="" id="info">
+		<input name="wecha_id" type="hidden" id="wecha_id" value="{gr-$wecha_id}">
+		<input name="checked" type="hidden" id="needCheck" value="{gr-$needCheck}">
+		<table class="table table-condensed table-bordered table-striped" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<thead>
+				<tr>
+					<th class="select">
+						<input type="button" value="全选" name="button" id="selected">
+					</th>
+					<th width="130">昵称</th>
+					<th width="130">留言内容</th>
+					<th width="170">查看回复</th>
+					<th width="130">留言时间</th>
+					<th width="130" class="norightborder">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr></tr>
+				<volist name="res" id="item">
+					<tr>
+						<td id="playlist">
+							<input type="checkbox" name="items" value="{gr-$item.id}" class="checkitem">
+						</td>
+						<td>{gr-$item.name}</td>
+						<td><a href="###" onclick="art.dialog({content : '{gr-$item.message}',width:300,height:200,resize:true,yesText:'关闭',background: '#000',opacity: 0.45});" class="btn btn-warning btn-sm">查看留言 <if condition="$item['checked'] neq 1"> <font style="color:white;font-size:12px;">(未审核)</font><else/>
+
                     <font ></font>  </if>
-                </a></td>
-                <td><a class="btn btn-warning btn-sm" href="{gr-:U('User/Reply/reply',array('msgid'=>$item['id'],'token'=>$token,'wecha_id'=>$wecha_id))}">查看回复<font color="#fff">(共<font color="white">{gr-$item.count}</font>条回复/<font style="color:white">{gr-$item.chkcount}</font>条新回复)</font></a></td>
-                <td>{gr-$item.time|date="Y-m-d H:i:s",###}</td>
-                <td class="norightborder">
-                    <if condition="$item['checked'] neq '1'"><a class="btn btn-warning btn-sm" href="{gr-:U('User/Reply/checkOne',array('chk_value'=>$item['id'],'token'=>$token))}">审核</a></if>
-                    <!--    &nbsp;&nbsp;<a href="#" messageid="{gr-$item.id}" class="replyeded">回复</a>-->
-                &nbsp;&nbsp;<a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('User/Reply/deled',array('chk_value'=>$item['id'],'token'=>$token))}');"><i class="mdi-action-delete"></i>删除</a></td>
-            </tr>
-            </volist>
-        </tbody>
-    </table>
-</form>
+
+                </a>
+						</td>
+						<td><a class="btn btn-warning btn-sm" href="{gr-:U('User/Reply/reply',array('msgid'=>$item['id'],'token'=>$token,'wecha_id'=>$wecha_id))}">查看回复<font color="#fff">(共<font color="white">{gr-$item.count}</font>条回复/<font style="color:white">{gr-$item.chkcount}</font>条新回复)</font></a>
+						</td>
+						<td>{gr-$item.time|date="Y-m-d H:i:s",###}</td>
+						<td class="norightborder">
+							<if condition="$item['checked'] neq '1'"><a class="btn btn-warning btn-sm" href="{gr-:U('User/Reply/checkOne',array('chk_value'=>$item['id'],'token'=>$token))}">审核</a>
+							</if>
+							&nbsp;&nbsp;<a class="btn btn-warning btn-sm" href="javascript:drop_confirm('您确定要删除吗?', '{gr-:U('User/Reply/deled',array('chk_value'=>$item['id'],'token'=>$token))}');"><i class="mdi-action-delete"></i>删除</a>
+						</td>
+					</tr>
+				</volist>
+			</tbody>
+		</table>
+	</form>
 </div>
-<div >
-<div class="pageNavigator right">
-    <div class="pages">{gr-$page}</div>
+<div>
+	<div class="pageNavigator right">
+		<div class="pages">{gr-$page}</div>
+	</div>
+	<div class="clearfix"></div>
 </div>
-<div class="clearfix"></div>
-</div>
-<include file="Public/footer"/>
+<include file="Public/footer" />

@@ -1,1 +1,0 @@
-a:9:{i:0;s:2:"id";i:1;s:5:"token";i:2;s:7:"news_id";i:3;s:6:"pre_id";i:4;s:10:"usedcar_id";i:5;s:8:"album_id";i:6;s:10:"company_id";s:3:"_pk";s:2:"id";s:5:"_type";a:7:{s:2:"id";s:7:"int(11)";s:5:"token";s:11:"varchar(50)";s:7:"news_id";s:7:"int(11)";s:6:"pre_id";s:7:"int(11)";s:10:"usedcar_id";s:7:"int(11)";s:8:"album_id";s:7:"int(11)";s:10:"company_id";s:7:"int(11)";}}
