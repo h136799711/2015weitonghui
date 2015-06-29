@@ -23,12 +23,12 @@ function changeDisplayMode(){
 <FRAMESET 
 id=mainframes border=false frameSpacing=0 rows=84,* frameBorder=0 
 scrolling="yes"><FRAME name=top 
-src="admin.php?m=manage&c=background&a=frameTop" scrolling=no><FRAMESET 
+src="/Other/cms/manage/admin.php?m=manage&c=background&a=frameTop" scrolling=no><FRAMESET 
 id=bottomframes border=false frameSpacing=0 frameBorder=0 cols=181,7,* 
 scrolling="yes"><FRAME name=left marginWidth=0 marginHeight=0 
-src="admin.php?m=manage&c=background&a=frameLeft" 
+src="/Other/cms/manage/admin.php?m=manage&c=background&a=frameLeft" 
 noResize><FRAME id=separator name=separator
 src="frameSeparator.htm" noResize 
 scrolling=no>
-<FRAME id="rightFrame" name=right src="admin.php?m=manage&c=background&a=home"></FRAMESET></FRAMESET><noframes></noframes>
+<FRAME id="rightFrame" name=right src="/Other/cms/manage/admin.php?m=manage&c=background&a=home"></FRAMESET></FRAMESET><noframes></noframes>
 </html>

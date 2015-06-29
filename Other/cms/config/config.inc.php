@@ -20,5 +20,5 @@ define('DB_CHARSET','utf8');
 define('CHARSET','utf-8');
 define('TABLE_PREFIX',$dbConfig['DB_PREFIX']);
 define('MANAGE_DIR','manage');
-define('JHCMS_URL','');
+define('JHCMS_URL','http://new.weitonghui.com/Other/cms/');
 ?>

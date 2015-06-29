@@ -1,6 +1,6 @@
 <?php
 return array (
-  'debug' => '0',
+  'debug' => '1',
   'gzip' => '1',
   'cron' => '1',
   'statisticCode' => 'dG9uZ2ppd2FuZ3poYW5z',

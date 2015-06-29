@@ -136,7 +136,7 @@ class IndexController extends WapController
         $tpldata['color_id'] = intval(0);
         
         //获取模板信息
-        include ('./ThinkPHP/Library/Org/index.Tpl.php');
+        include (THINK_PATH.'Library/Org/index.Tpl.php');
         
         foreach ($tpl as $k => $v) {
             if ($v['tpltypeid'] == $tpldata['tpltypeid']) {
@@ -227,7 +227,7 @@ class IndexController extends WapController
         $tpldata['color_id'] = intval($tpldata['color_id']);
         
         //获取模板信息
-        include ('./ThinkPHP/Library/Org/index.Tpl.php');
+        include (THINK_PATH.'Library/Org/index.Tpl.php');
         
         foreach ($tpl as $k => $v) {
             if ($v['tpltypeid'] == $tpldata['tpltypeid']) {
@@ -287,7 +287,7 @@ class IndexController extends WapController
         $tpldata['color_id'] = intval($tpldata['color_id']);
         
         //获取模板信息
-        include ('./ThinkPHP/Library/Org/index.Tpl.php');
+        include (THINK_PATH.'Library/Org/index.Tpl.php');
         foreach ($tpl as $k => $v) {
             if ($v['tpltypeid'] == $info['tpid']) {
                 $tplinfo = $v;
@@ -465,7 +465,7 @@ class IndexController extends WapController
         $tplinfo = D('Wxuser')->where("token = '$token'")->find();
         
         //获取模板
-        include ('./ThinkPHP/Library/Org/cont.Tpl.php');
+        include (THINK_PATH.'/Library/Org/cont.Tpl.php');
         foreach ($contTpl as $k => $v) {
             if ($v['tpltypeid'] == $classinfo['conttpid']) {
                 $tpldata = $v;

@@ -9,10 +9,11 @@ class background extends manage {
 	}
 	public function home() {
 		if (!$this->site){
-			header('Location:?m=config&c=config&a=site');
+			
+			header('Location:'.JHCMS_URL.'manage/admin.php?m=config&c=config&a=site');
 		}
 		if (!$this->site['template']){
-			header('Location:?m=template&c=m_template&a=selectTemplate');
+			header('Location:'.JHCMS_URL.'manage/admin.php?m=template&c=m_template&a=selectTemplate');
 		}
 		//
 		include $this->showManageTpl('home');

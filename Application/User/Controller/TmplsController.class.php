@@ -25,7 +25,7 @@ class TmplsController extends UserController {
         
 
 		
-		include('./ThinkPHP/Library/Org/index.Tpl.php');
+		include(THINK_PATH.'Library/Org/index.Tpl.php');
 		
 		foreach($tpl as $k=>$v){
 			$sort[$k] = $v['sort'];
@@ -45,7 +45,7 @@ class TmplsController extends UserController {
         $gets = I('get.style');
         $db = M('Wxuser');
 		
-		include('./ThinkPHP/Library/Org/index.Tpl.php');
+		include(THINK_PATH.'/Library/Org/index.Tpl.php');
 		
 		foreach ($tpl as $k=>$v){
 		

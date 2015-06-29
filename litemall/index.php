@@ -28,6 +28,11 @@ define('APP_PATH',  './Application/');
  */
 define ( 'RUNTIME_PATH', './Runtime/' );
 
-require '../ThinkPHP/ThinkPHP.php';
+// 框架目录
+define("THINK_PATH",realpath("../../thinkphp/weitonghui/").'/');
+// 加载
+require "../../thinkphp/weitonghui/ThinkPHP.php";
+
+//require '../ThinkPHP/ThinkPHP.php';
 
 ?>

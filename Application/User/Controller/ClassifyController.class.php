@@ -38,8 +38,8 @@ class ClassifyController extends UserController{
 	}
 	//	
 	public function add(){
-		include('./ThinkPHP/Library/Org/index.Tpl.php');
-		include('./ThinkPHP/Library/Org/cont.Tpl.php');
+		include(THINK_PATH.'Library/Org/index.Tpl.php');
+		include(THINK_PATH.'Library/Org/cont.Tpl.php');
 
 		$this->assign('tpl',$tpl);
 		$this->assign('contTpl',$contTpl);
@@ -49,8 +49,8 @@ class ClassifyController extends UserController{
 	public function edit(){
 		$id=I('get.id','intval');
 		$info=M('Classify')->find($id);
-		include('./ThinkPHP/Library/Org/index.Tpl.php');
-		include('./ThinkPHP/Library/Org/cont.Tpl.php');
+		include(THINK_PATH.'Library/Org/index.Tpl.php');
+		include(THINK_PATH.'Library/Org/cont.Tpl.php');
 		
 		foreach($tpl as $k=>$v){
 			if($v['tpltypeid'] == $info['tpid']){
@@ -115,8 +115,8 @@ class ClassifyController extends UserController{
 	
 	public function chooseTpl(){
 	
-		include('./ThinkPHP/Library/Org/index.Tpl.php');
-		include('./ThinkPHP/Library/Org/cont.Tpl.php');
+		include(THINK_PATH.'Library/Org/index.Tpl.php');
+		include(THINK_PATH.'Library/Org/cont.Tpl.php');
 		$tpl = array_reverse($tpl);
 		$contTpl = array_reverse($contTpl);
 		$tpid = I('get.tpid','intval');
