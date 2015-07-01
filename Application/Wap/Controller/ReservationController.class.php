@@ -109,11 +109,11 @@ class ReservationController extends BaseController{
         $da['token']      = strval(I('get.token'));
         $da['wecha_id']   = strval(I('post.wecha_id'));
         $da['rid']        = (int)I('post.rid');
-        $da['truename']   = strval($this->_post("truename"));
-        $da['dateline']   = strval($this->_post("dateline"));
-        $da['timepart']   = strval($this->_post("timepart"));
-        $da['info']       = strval($this->_post("info"));
-        $da['tel']        = strval($this->_post("tel"));
+        $da['truename']   = strval(I("post.truename"));
+        $da['dateline']   = strval(I("post.dateline"));
+        $da['timepart']   = strval(I("post.timepart"));
+        $da['info']       = strval(I("post.info"));
+        $da['tel']        = strval(I("post.tel"));
         $da['type']       = strval(I('post.type'));
         //$da['fieldsigle'] =I('post.fieldsigle');
         $da['housetype']  = I('post.housetype');
@@ -121,7 +121,7 @@ class ReservationController extends BaseController{
         $das['id']        = (int)I('post.id');
 
         if($da['type'] =='maintain'){
-            $da['carnum']   = strval($this->_post("carnum"));
+            $da['carnum']   = strval(I("post.carnum"));
             $da['km']       = (int)I('post.km');
         }
         $book   =   M('Reservebook');

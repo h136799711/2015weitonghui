@@ -165,11 +165,11 @@ class CarController extends WapController{
         $da['token']      = strval(I('get.token'));
         $da['wecha_id']   = strval(I('post.wecha_id'));
         $da['rid']        = (int)I('post.rid');
-        $da['truename']   = strval($this->_post("truename"));
-        $da['dateline']   = strval($this->_post("dateline"));
-        $da['timepart']   = strval($this->_post("timepart"));
-        $da['info']       = strval($this->_post("info"));
-        $da['tel']        = strval($this->_post("tel"));
+        $da['truename']   = strval(I("truename"));
+        $da['dateline']   = strval(I("dateline"));
+        $da['timepart']   = strval(I("timepart"));
+        $da['info']       = strval(I("info"));
+        $da['tel']        = strval(I("tel"));
         $da['type']       = strval(I('post.type'));
         $da['housetype']  = I('post.housetype');
         $da['choose']  = I('post.choose');
@@ -177,7 +177,7 @@ class CarController extends WapController{
         $das['id']        = (int)I('post.id');
 
         if($da['type'] =='maintain'){
-            $da['carnum']   = strval($this->_post("carnum"));
+            $da['carnum']   = strval(I("carnum"));
             $da['km']       = (int)I('post.km');
         }
 
@@ -241,18 +241,18 @@ class CarController extends WapController{
             //$das['token']      = strval(I('get.token'));
             $das['wecha_id']   = strval(I('post.wecha_id'));
             //$da['rid']        = (int)I('post.rid');
-            $da['truename']   = strval($this->_post("truename"));
-            $da['tel']        = strval($this->_post("tel"));
-            $da['dateline']   = strval($this->_post("dateline"));
-            $da['timepart']   = strval($this->_post("timepart"));
-            $da['info']       = strval($this->_post("info"));
+            $da['truename']   = strval(I("truename"));
+            $da['tel']        = strval(I("tel"));
+            $da['dateline']   = strval(I("dateline"));
+            $da['timepart']   = strval(I("timepart"));
+            $da['info']       = strval(I("info"));
             $da['type']       = strval(I('post.booktype'));
             $da['housetype']  = I('post.housetype');
             $da['choose']     = I('post.choose');
             $da['booktime']   = time();
             $das['id']        = (int)I('post.mid');
             if($da['type'] =='maintain'){
-                $da['carnum']   = strval($this->_post("carnum"));
+                $da['carnum']   = strval(I("carnum"));
                 $da['km']       = (int)I('post.km');
             }
             $t_book   =   M('Reservebook');
