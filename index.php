@@ -15,7 +15,7 @@ define('PROJECT_NAME', "2015weitonghui");
  * 系统调试设置
  * 项目正式部署后请设置为false
  */
-define('APP_DEBUG', true);
+define('APP_DEBUG', false);
 
 /**
  * 应用目录设置

@@ -29,8 +29,8 @@ class ArticleModel extends Model{
 	}
 	
 	function saveimg(){
-		$id=$this->_post('id','intval');
-		$imgs=$this->_post('imgs','trim');
+		$id=I('post.id','intval');
+		$imgs=I('post.imgs','trim');
 		$img=$this->field('imgs')->find($id);
 		if(strcmp($imgs,$img['imgs'])!==0&&$imgs!=false&&$img['imgs']!=false){
 			$original_img = explode(',',$img['imgs']);
