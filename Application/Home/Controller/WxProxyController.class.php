@@ -151,10 +151,14 @@ class WxProxyController extends Controller
             $data['Content'] = $data['Recognition'];
             $this->data['Content'] = $data['Recognition'];
         }
-        
+
+        // 当前粉丝的openid
+        if (strtolower($data['Content']) == 'who') {
+            return array('来自微通汇！', 'text');
+        }
         // 当前粉丝的openid
         if (strtolower($data['Content']) == 'id') {
-            return array($this->data['FromUserName'], 'text');
+            return array('来自NEW.weitonghui.com'.$this->data['FromUserName'], 'text');
         }
         
         //==微上墙模块==========================================
