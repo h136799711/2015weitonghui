@@ -13,12 +13,12 @@ class LoginController extends Controller {
 
 	public function index() {
 		// $this->redirect ( "Public/login" );
-		redirect('/a/gai/index.php');
+//        $this->display("Public:login");
 	}
 	
 	public function login() {
 		// dump('login');
-		redirect('/a/gai/index.php');
+		redirect(SITE_URL.'/index.php');
 		// $result = R ( "Api/Api/login", array (
 		// 		$_POST ["username"],
 		// 		$_POST ["password"] 
@@ -33,7 +33,7 @@ class LoginController extends Controller {
 	}
 	
 	public function logout() {
-		$this->success ( '已注销登录！', '/a/gai/index.php');
+		$this->success ( '已注销登录！',  SITE_URL.'/index.php');
 		// unset ( $_SESSION ["wadmin"] );
 		// $this->success ( '已注销登录！', U ( "Admin/Login/index" ) );
 	}

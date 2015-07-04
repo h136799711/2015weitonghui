@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // +----------------------------------------------------------------------
 // | OneThink [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
@@ -30,14 +30,3 @@ define("RUNTIME_PATH","../../Runtime/".PROJECT_NAME."/");
 define("THINK_PATH",realpath("../../thinkphp/weitonghui/").'/');
 // 加载
 require "../../thinkphp/weitonghui/ThinkPHP.php";
-
-/**
- * 缓存目录设置
- * 此目录必须可写，建议移动到非WEB目录
- */
-//define ( 'RUNTIME_PATH', './Runtime/' );
-/**
- * 引入核心入口
- * ThinkPHP亦可移动到WEB以外的目录
- */
-//require './ThinkPHP/ThinkPHP.php';
