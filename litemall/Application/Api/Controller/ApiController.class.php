@@ -134,7 +134,7 @@ class ApiController extends Controller {
 	}
 	public function addgood($data) {
 
-		$data['time'] = time();
+		$data['time'] = date('Y-m-d H:i:s',time());
 		if ($data["id"]) {
 			$result = M ( "Good" )->save($data);
 		}else{
