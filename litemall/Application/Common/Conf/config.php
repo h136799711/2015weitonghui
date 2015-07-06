@@ -16,8 +16,8 @@ return array(
 
 	//微信服务号APPID
 	'WX_SITEURL'=>'http://new.weitonghui.com/',
-	'WX_APPID'=>'wx58aea38c0796394d',
-	'WX_APPSECRET'=>'3e1404c970566df55d7314ecfe9ff437',
+	'WX_APPID'=>'wx5f75a875d7bb9c28',
+	'WX_APPSECRET'=>'818dec3ac3c3ba43e4ca018f4fd77553',
 	'WX_PAYURL'=>'http://new.weitonghui.com/index.php/Wap/Weixin/unionpay',
 	'WX_PAYNOTIFYURL'=>'http://new.weitonghui.com/litemall/index.php/App/Wxpay/notify',
 );

@@ -107,4 +107,6 @@ function displayDir($str) {
     }
     return $files;
 }
-?>
+function isWeixin(){
+    return true;
+}

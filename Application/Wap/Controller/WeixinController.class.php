@@ -25,6 +25,9 @@ class WeixinController extends BaseController
         
         $this->token = I('get.token');
         $this->wecha_id = I('get.wecha_id');
+        if(empty($this->token)){
+            $this->error("缺失Token参数!");
+        }
         if (!$this->token) {            
             //
             $product_cart_model = M('ProductCart');
@@ -39,6 +42,9 @@ class WeixinController extends BaseController
         //读取支付宝配置
         $pay_config_db = M('AlipayConfig');
         $this->payConfig = $pay_config_db->where(array('token' => $this->token))->find();
+        if(is_null($this->payConfig)){
+            $this->error("微信支付配置读取失败!");
+        }
     }
     
     /**
