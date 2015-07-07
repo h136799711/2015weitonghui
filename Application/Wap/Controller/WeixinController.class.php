@@ -315,7 +315,7 @@ class WeixinController extends BaseController
         $from = $from ? $from : 'Groupon';
         $from = $from != 'groupon' ? $from : 'Groupon';
         $returnUrl = U('Wap/' . $from . '/payReturn', array('token' => $_GET['token'], 'wecha_id' => $_GET['wecha_id'], 'orderid' => $_GET['single_orderid']));
-        
+//        dump($jsApiParameters);
         $this->assign("url", $jsApiParameters);
         $this->assign('returnUrl', $returnUrl);
         $this->display();
