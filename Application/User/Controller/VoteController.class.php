@@ -79,10 +79,10 @@ class VoteController extends UserController{
             $_POST['statdate']=strtotime(I('post.statdate'));
             $_POST['enddate']=strtotime(I('post.enddate'));
             $_POST['cknums'] = I('post.cknums');
-            $_POST['display'] = $this->_post("display");
-            $_POST['info'] = strip_tags($this->_post("info"));
-            $_POST['picurl'] = $this->_post("picurl");
-            $_POST['title'] = $this->_post("title");
+            $_POST['display'] = I("post.display");
+            $_POST['info'] = strip_tags(I("info"));
+            $_POST['picurl'] = I("picurl");
+            $_POST['title'] = I("title");
             $_POST['keyword'] = I('post.keyword');
 
             if($_POST['enddate']<$_POST['statdate']){
@@ -201,10 +201,10 @@ class VoteController extends UserController{
             $_POST['statdate']=strtotime(I('post.statdate'));
             $_POST['enddate']=strtotime(I('post.enddate'));
             $_POST['cknums'] = (int)I('post.cknums');
-            $_POST['display'] = $this->_post("display");
-            $_POST['info'] = strip_tags($this->_post("info"));
-            $_POST['picurl'] = $this->_post("picurl");
-            $_POST['title'] = $this->_post("title");
+            $_POST['display'] = I("post.display");
+            $_POST['info'] = strip_tags(I("post.info"));
+            $_POST['picurl'] = I("post.picurl");
+            $_POST['title'] = I("post.title");
              if($_POST['enddate']<$_POST['statdate']){
                 $this->error('结束时间不能小于开始时间!');
                 exit;
