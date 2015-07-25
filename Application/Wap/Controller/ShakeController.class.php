@@ -24,6 +24,7 @@ class ShakeController extends BaseController{
 		$this->assign('wecha_id',$this->wecha_id);
 		$this->shake_model=M('Shake');
 		$this->savedTops = 10;
+
 	}
 
 	// public function index(){
@@ -99,12 +100,16 @@ public function index(){
         // $this->show();
         // exit();
         $user = M('Shake_user')->where($map)->find();
+        $wxuser = M('Wxuser')->where(array('token'=>$token))->find();
         if($user){
             redirect(C('site_url').U('Wap/Shake/index',array('token'=>$token,'wecha_id'=>$wecha_id,'id'=>$shakeid)));
         }else{
             import("Org.OAuth2");
-            $oauth2 = new \OAuth2();
-            var_dump($oauth2);
+            if($wxuser){
+                $oauth2 = new \OAuth2($wxuser['appid'],$wxuser['appsecret']);
+            }else{
+                $oauth2 = new \OAuth2();
+            }
             redirect($oauth2->getLink(C('site_url').U('Home/Index/oauth2' , array('token' => $this -> token,'shakeid'=>$shakeid )),'shake'));
         }
     }
